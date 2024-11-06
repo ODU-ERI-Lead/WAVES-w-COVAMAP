@@ -12,9 +12,9 @@ public class KeepFrameFeature : ScriptableRendererFeature
     class CopyFramePass : ScriptableRenderPass
     {
         private RenderTargetIdentifier source { get; set; }
-        private RenderTargetHandle destination { get; set; }
+        private RTHandle destination { get; set; }
 
-        public void Setup(RenderTargetIdentifier source, RenderTargetHandle destination)
+        public void Setup(RenderTargetIdentifier source, RTHandle destination)
         {
             this.source = source;
             this.destination = destination;
@@ -36,10 +36,10 @@ public class KeepFrameFeature : ScriptableRendererFeature
         {
             cmd.ReleaseTemporaryRT(destination.id);
 
-            if (destination != RenderTargetHandle.CameraTarget)
+            if (destination != RTHandle.CameraTarget)
             {
                 cmd.ReleaseTemporaryRT(destination.id);
-                destination = RenderTargetHandle.CameraTarget;
+                destination = RTHandle.CameraTarget;
             }
         }
     }
@@ -48,10 +48,10 @@ public class KeepFrameFeature : ScriptableRendererFeature
     class DrawOldFramePass : ScriptableRenderPass
     {
         private Material m_DrawOldFrameMaterial;
-        private RenderTargetHandle m_handle;
+        private RTHandle m_handle;
         private string m_textureName;
 
-        public void Setup(Material drawOldFrameMaterial, RenderTargetHandle handle, string textureName)
+        public void Setup(Material drawOldFrameMaterial, RTHandle handle, string textureName)
         {
             m_DrawOldFrameMaterial = drawOldFrameMaterial;
             m_handle = handle;
@@ -93,7 +93,7 @@ public class KeepFrameFeature : ScriptableRendererFeature
     private CopyFramePass m_CopyFrame;
     private DrawOldFramePass m_DrawOldFame;
 
-    private RenderTargetHandle m_OldFrameHandle;
+    private RTHandle m_OldFrameHandle;
 
     public Settings settings = new Settings();
 
