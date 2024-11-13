@@ -16,17 +16,17 @@ public class TimerForHazardViewing : MonoBehaviour
     {
         if (DontDestroy.LevelChoice == "Easy")
         {
-            timeStart = 20.0f;
+            timeStart = 30.0f;
         }
 
         else if (DontDestroy.LevelChoice == "Medium")
         {
-            timeStart = 15.0f;
+            timeStart = 20.0f;
         }
 
         else if (DontDestroy.LevelChoice == "Hard")
         {
-            DontDestroy.timeLeft = 5.0f;
+            DontDestroy.timeLeft = 10.0f;
         }
 
         Time.timeScale = 1;
@@ -40,7 +40,8 @@ public class TimerForHazardViewing : MonoBehaviour
         if(timeLeftToView<=0)
         {
             print("time is up!!!!!");
-            SceneManager.LoadScene("HazardsChecklist");
+            SceneManager.LoadScene("ScoreboardHazards");
+            //SceneManager.LoadScene("HazardsChecklist"); old code line
         }
     }
 }

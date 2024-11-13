@@ -136,7 +136,8 @@ public class ButtonControls : MonoBehaviour
 
     public void AboutNextButtonHazards() ///also used on scoreboard 
     {
-        SceneManager.LoadScene("Hazards");
+        SceneManager.LoadScene("animation test");
+        //SceneManager.LoadScene("Hazards");
         Debug.Log("Game Loaded");
     }
 
