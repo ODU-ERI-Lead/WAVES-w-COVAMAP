@@ -16,17 +16,17 @@ public class TimerForHazardViewing : MonoBehaviour
     {
         if (DontDestroy.LevelChoice == "Easy")
         {
-            timeStart = 30.0f;
+            timeStart = 35.0f;
         }
 
         else if (DontDestroy.LevelChoice == "Medium")
         {
-            timeStart = 20.0f;
+            timeStart = 25.0f;
         }
 
         else if (DontDestroy.LevelChoice == "Hard")
         {
-            DontDestroy.timeLeft = 10.0f;
+            DontDestroy.timeLeft = 15.0f;
         }
 
         Time.timeScale = 1;

@@ -642,7 +642,7 @@ MonoBehaviour:
     m_FontSize: 25
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 20
+    m_MinSize: 1
     m_MaxSize: 35
     m_Alignment: 3
     m_AlignByGeometry: 1
@@ -650,7 +650,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: PPE place holder text info ...
+  m_Text: Personal protective Equipment (PPE) is essestial in minimizing Workplace
+    injuries and Illness in the following, you will be tasked with preparing for
+    your next work order. Do so by choosing the proper PPE for your work assignment.
 --- !u!222 &1049701696
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1205,7 +1207,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
