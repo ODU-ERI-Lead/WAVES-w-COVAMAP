@@ -1,8 +1,9 @@
 using UnityEngine;
-using UnityEngine.UI.Text;
+using UnityEngine.UI;
+//using UnityEngine.UI.text;
 //using UnityEngine.TextMeshPro;
-//using TMPro;
-//using IEnumerator;
+using TMPro;
+using System.Collections;
 
 public class TextDisplayTrigger : MonoBehaviour
  {
