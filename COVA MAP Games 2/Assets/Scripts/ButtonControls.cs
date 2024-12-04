@@ -124,7 +124,8 @@ public class ButtonControls : MonoBehaviour
     //Press the next button to start the game.
     public void AboutNextButton()
     {
-        SceneManager.LoadScene("PPE");
+        //SceneManager.LoadScene("PPE");
+        SceneManager.LoadScene("PPE Animated intro");
         Debug.Log("PPE Loaded");
     }
 

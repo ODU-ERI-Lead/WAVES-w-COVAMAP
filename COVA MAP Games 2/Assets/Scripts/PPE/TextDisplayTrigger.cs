@@ -7,43 +7,60 @@ using System.Collections;
 
 public class TextDisplayTrigger : MonoBehaviour
  {
-    public TextMeshProUGUI[] textAssets; // Array of TextMeshPro or Text components
-    public float displayDuration = 1f;   // Duration for each text to be displayed
+    public TextMeshProUGUI[] textAssets;  // Array of TextMeshPro or Text components
+    public Image[] imageAssets;          // Array of Image components
+    public float displayDuration = 1f;    // Duration for each text to be displayed
     public float delayBetweenText = 0.2f; // Delay between each text display
 
-    private bool isTriggered = false; // Whether the collider has been triggered
-    private int currentTextIndex = 0; // Track which text is being displayed
+    private int currentTextIndex = 0;     // Track which text is being displayed
 
-    private void OnTriggerEnter(Collider other)
+    private void Start()
     {
-        // Check if the triggering object has a specific tag or condition
-        if (other.CompareTag("Player")) // Modify with your tag or condition
+        // Ensure all text and images are hidden at the start
+        foreach (var text in textAssets)
         {
-            isTriggered = true;
-            currentTextIndex = 0;
-            StartCoroutine(DisplayTextSequence());
+            text.gameObject.SetActive(false);
         }
+
+        foreach (var image in imageAssets)
+        {
+            image.gameObject.SetActive(false);
+        }
+
+        // Start the display sequence as soon as the scene is loaded
+        StartCoroutine(DisplayTextSequence());
     }
 
     private IEnumerator DisplayTextSequence()
     {
-        while (isTriggered && currentTextIndex < textAssets.Length)
+        while (currentTextIndex < textAssets.Length)
         {
             // Display the current text
             textAssets[currentTextIndex].gameObject.SetActive(true);
-            
-            // Wait for the duration before hiding it
+
+            // Display the corresponding image (if exists)
+            if (currentTextIndex < imageAssets.Length)
+            {
+                imageAssets[currentTextIndex].gameObject.SetActive(true);
+            }
+
+            // Wait for the duration before hiding the text and image
             yield return new WaitForSeconds(displayDuration);
 
             // Hide the current text
             textAssets[currentTextIndex].gameObject.SetActive(false);
+
+            // Hide the image (if it exists)
+            if (currentTextIndex < imageAssets.Length)
+            {
+                imageAssets[currentTextIndex].gameObject.SetActive(false);
+            }
 
             // Move to the next text and wait before showing it
             currentTextIndex++;
             yield return new WaitForSeconds(delayBetweenText);
         }
 
-        // Optionally, reset or stop the sequence if needed
-        isTriggered = false;
+        // Optionally reset or stop the sequence if needed
     }
 }
