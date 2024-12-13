@@ -3,7 +3,37 @@ guid: 892c0432ba0b6894c910ef96544baed1
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bodyMat
+    second: {fileID: 2100000, guid: 55f00096f6160464b8c19641ce6dcce6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: glovesMat
+    second: {fileID: 2100000, guid: 380b74f848185a84da5bc77f6d5f4576, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: gogglesMat
+    second: {fileID: 2100000, guid: 60fff533fdf1cc748bc46b57e60c5ecd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hatMat
+    second: {fileID: 2100000, guid: ef9737a5d81efc942982dd8b626b0b52, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hearingProtectionMat
+    second: {fileID: 2100000, guid: 94e764344e4ed214297405a01caf4407, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: shoesMat
+    second: {fileID: 2100000, guid: c5a002ef334d8ea4babdc37d2e2d5eb2, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
