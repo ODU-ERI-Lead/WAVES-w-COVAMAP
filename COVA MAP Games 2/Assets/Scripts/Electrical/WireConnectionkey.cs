@@ -13,6 +13,7 @@ public class WireConnectionkey : MonoBehaviour
         public List<int> connections;
 
     }
+    
 
     public List<WireConnection> wireConnections = new List<WireConnection>();
 

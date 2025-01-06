@@ -6,4 +6,7 @@ public class WireType : MonoBehaviour
 {
     public int TheWireType = 0;
 
+
+
+
 }
