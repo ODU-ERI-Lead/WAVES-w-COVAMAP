@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class WireBundleManager : MonoBehaviour
 {
-   public enum WireType
+   public enum WireMaterialType
    {
     white,
     black,
@@ -14,7 +14,7 @@ public class WireBundleManager : MonoBehaviour
    [System.Serializable]
    public class Wire
    {
-    public WireType wireType;
+    public WireMaterialType wireType;
     public Color wireColor; //visual color representation
     public Sprite wireSprite; //determine unqiue object id for sprites cause multiple white and black wires
    }

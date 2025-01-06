@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using static IWireGroup;
+
 
 
 
@@ -9,7 +11,7 @@ public class WireConnectionkey : MonoBehaviour
     [Serializable]
     public class WireConnection
     {
-        public int WireType;
+        public int wireType;
         public List<int> connections;
 
     }
