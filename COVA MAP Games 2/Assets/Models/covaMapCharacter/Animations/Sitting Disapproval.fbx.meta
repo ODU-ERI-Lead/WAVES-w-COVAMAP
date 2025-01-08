@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 118ac4a1e49ecea4aa2233889965d625
+guid: b2423fc685525614fb17b50327295c11
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -13,7 +13,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: glovesMat
-    second: {fileID: 2100000, guid: 380b74f848185a84da5bc77f6d5f4576, type: 2}
+    second: {fileID: 2100000, guid: 5a5607a3267a97c478a9e35a14dd7e5b, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
