@@ -145,7 +145,7 @@ public class ButtonControls : MonoBehaviour
 
     public void AboutNextButtonElectrical() ///also used on scoreboard 
     {
-        SceneManager.LoadScene("Electrical");
+        SceneManager.LoadScene("ElectricalAnimatedIntro");
         Debug.Log("Game Loaded");
     }
 
