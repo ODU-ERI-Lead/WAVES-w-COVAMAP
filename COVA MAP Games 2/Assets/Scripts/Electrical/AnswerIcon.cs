@@ -25,6 +25,7 @@ public class AnswerIcon : MonoBehaviour
         // Optionally, hide the feedback after a delay
         Invoke("HideFeedback", 2f); // Hide after 2 seconds
     }
+    // Code needed for activation based on different scenarios
 
     // Hide both sprites
     private void HideFeedback()
