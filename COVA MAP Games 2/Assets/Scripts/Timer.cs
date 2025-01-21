@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using UnityEngine.Playables;
+using UnityEngine.UIElements;
+using Image = UnityEngine.UI.Image;
 
 public class Timer : MonoBehaviour
 
@@ -11,6 +14,7 @@ public class Timer : MonoBehaviour
     public Text text;   //Timer text.
     public float time = 0.0f;
     //public float timeLeft = 0.0f;
+    public PlayableDirector playableDirector;
 
     //Referencing other scripts.
     public CheckAnswersPPE CheckAnswersPPEScript;  
@@ -37,11 +41,31 @@ public class Timer : MonoBehaviour
     int timeSecond;
     int lastTimeSecond;
 
+    private bool timelineFinished = false; //delays timer until timeline finishes
+    private bool timerStarted = false;
 
 
 
     public void Start()
     {
+        // Ensure timeline is playing when the game starts
+        if (playableDirector != null)
+        {
+            playableDirector.Play();
+            timelineFinished = false;  // Make sure the timeline is not finished at the start
+        }
+        // Set UI elements to be inactive initially
+        NextButtonPanel.SetActive(false);
+        CheckButtonPanel.SetActive(false);
+        foreach (GameObject button in LeftRightButtons)
+        {
+            button.SetActive(false);
+        }
+
+        // Wait until timeline finishes before activating the timer
+        StartCoroutine(WaitForTimelineFinish());
+
+
         time = 20.0f;
         
         if (DontDestroy.GameChoice=="Electrical")
@@ -167,8 +191,57 @@ public class Timer : MonoBehaviour
 
     bool Checked = false;  //Bool need to use as a condition to stop the update method.
 
+    // Coroutine that waits for the timeline to finish before starting the timer
+    private IEnumerator WaitForTimelineFinish()
+    {
+        // Wait until the timeline is finished playing
+        while (playableDirector != null && playableDirector.state == PlayState.Playing)
+        {
+            yield return null; // Wait until next frame
+        }
+
+        // Once the timeline finishes, enable timer and UI elements
+        timerStarted = true;
+        ActivateUIElements();
+    }
+    private void ActivateUIElements()
+    {
+        // Start the timer and activate UI components
+        NextButtonPanel.SetActive(true);
+        CheckButtonPanel.SetActive(true);
+        foreach (GameObject button in LeftRightButtons)
+        {
+            button.SetActive(true);
+        }
+
+        // Set the game time
+        if (DontDestroy.GameChoice == "Electrical")
+        {
+            time = 10.0f;
+        }
+        else
+        {
+            time = 20.0f;
+        }
+    }
+
+
+
+
     public void Update()  //Timer counts down in seconds.
-    { 
+    {
+        if (!timerStarted)
+        {
+            return; // If the timer is not started yet, do nothing
+        }
+
+        // Decrement the timer
+        DontDestroy.timeLeft -= Time.deltaTime;
+
+        // Update the timer UI
+        timeSecond = Mathf.CeilToInt(DontDestroy.timeLeft);
+        text.text = "" + timeSecond;
+
 
         if (Time.timeSinceLevelLoad > 0.1f && DontDestroy.GameChoice == "Hazards")
         {
