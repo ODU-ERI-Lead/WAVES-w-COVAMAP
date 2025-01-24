@@ -203,6 +203,7 @@ public class Timer : MonoBehaviour
         // Once the timeline finishes, enable timer and UI elements
         timerStarted = true;
         ActivateUIElements();
+        StartTimer();
     }
     private void ActivateUIElements()
     {
@@ -224,30 +225,45 @@ public class Timer : MonoBehaviour
             time = 20.0f;
         }
 
-        switch (DontDestroy.GameChoice)
-        {
-            case "Electrical":
-            time = DontDestroy.LevelChoice == "easy" ? 50.0f :
-            //insert medium and hard 
-            ;
-            case "Hazards":
-            
-
-            
-        }
+       
     }
 
     private void StartTimer()
     {
         timerStarted = true;
         //activate ui componenets based on game
-        if DontDestroy.GameChoice == "Hazards"
+        if (DontDestroy.GameChoice == "Hazards" || DontDestroy.GameChoice == "Valves" || DontDestroy.GameChoice == "PPE" || DontDestroy.GameChoice == "Electrical" )
         {
             NextButtonPanel.SetActive(false);
             CheckButtonPanel.SetActive(true);
 
         }
+        if (DontDestroy.GameChoice == "PPE")
+        {
+            foreach (GameObject button in LeftRightButtons)
+            { 
+                button.SetActive(true); 
+            }
+        }
+        switch (DontDestroy.GameChoice)
+        {
+            case "Electrical":
+                time = DontDestroy.LevelChoice == "Easy" ? 50.0f :
+                        DontDestroy.LevelChoice == "Medium" ? 40.0f : 30.0f;
+                        //DontDestroy.LevelChoice == "Hard" ? 30.0f:
+                break;
+
+            case "Hazards":
+                time = DontDestroy.LevelChoice == "Easy" ? 30.0f :
+                    DontDestroy.LevelChoice == "Medium" ? 25.0f : 20.0f;
+                    //DontDestroy.LevelChoice == "Hard" ? 20.0f ;
+                    break ;
+
+
+
+        }
     }
+
 
 
 
