@@ -223,6 +223,30 @@ public class Timer : MonoBehaviour
         {
             time = 20.0f;
         }
+
+        switch (DontDestroy.GameChoice)
+        {
+            case "Electrical":
+            time = DontDestroy.LevelChoice == "easy" ? 50.0f :
+            //insert medium and hard 
+            ;
+            case "Hazards":
+            
+
+            
+        }
+    }
+
+    private void StartTimer()
+    {
+        timerStarted = true;
+        //activate ui componenets based on game
+        if DontDestroy.GameChoice == "Hazards"
+        {
+            NextButtonPanel.SetActive(false);
+            CheckButtonPanel.SetActive(true);
+
+        }
     }
 
 
