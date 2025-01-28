@@ -44,7 +44,27 @@ public class Timer : MonoBehaviour
     private bool timelineFinished = false; //delays timer until timeline finishes
     private bool timerStarted = false;
 
+    private static Dictionary<string, int> sceneVisitCount = new Dictionary<string, int>();
 
+
+    public void VisitScene(string sceneName)
+    {
+        if (sceneVisitCount.ContainsKey(sceneName))
+        {
+            sceneVisitCount[sceneName] = 0;
+        }
+
+        sceneVisitCount[sceneName]++;
+
+       // if (sceneVisitCount[sceneName] = 1)
+      //  {
+         //   playTimeline(sceneName);
+       // }
+      //  else 
+       // {
+          //  StartTimer(sceneName);
+       // }
+    }
 
     public void Start()
     {

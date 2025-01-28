@@ -68,5 +68,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Electrical/ElectricalAnimatedIntro.unity
     guid: 460e38af2fea14a05b8b98c0d63821fd
+  - enabled: 1
+    path: Assets/Scenes/PPE/PPE Animated Intro.unity
+    guid: 0e037406a2f0ea8449356f0b9494e5e7
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

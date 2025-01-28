@@ -7,6 +7,9 @@ using UnityEngine.UI;
 public class ScoreHazards : MonoBehaviour
 {
     public Text GetScoreText;
+    private int totalScenariosCompleted;
+    //private int FinaltotalScore;
+    public int FinalTotalScore { get; private set; }
 
     public static class DontDestroyHazardScore
     {
@@ -21,7 +24,9 @@ public class ScoreHazards : MonoBehaviour
         print("GETTING HERE!!!!!!!!!");
         int maxScore = 100;
         int FinaltotalScore = 1100;
-        //int totalScenarios = 11;
+        int totalScenarios = 11;
+        int totalScenariosCompleted = 0;
+
         if (DontDestroy.LevelChoice == "Easy")
         {
             DontDestroy.Score = DontDestroy.NumberCorrect * maxScore / 12;
@@ -54,6 +59,16 @@ public class ScoreHazards : MonoBehaviour
         else
         {
             Debug.LogError("Score text reference not assigned!");
+        }
+
+        if (totalScenariosCompleted == 11)
+        {
+            GetScoreText.text = "FinalScore" + DontDestroy.Score + "/" + (FinalTotalScore * DontDestroy.NumberCorrect);
+        }
+        else
+        {
+            Debug.LogError("no valid final score");
+
         }
     }
 
