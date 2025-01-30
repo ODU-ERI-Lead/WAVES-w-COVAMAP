@@ -357,7 +357,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Congratulations on completing this Scenario Succesfully !!
+  m_Text: Congratulations on completing this scenario succesfully !!
 --- !u!222 &163331423
 CanvasRenderer:
   m_ObjectHideFlags: 0
