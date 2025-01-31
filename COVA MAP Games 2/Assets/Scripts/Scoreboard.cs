@@ -11,6 +11,7 @@ public class Scoreboard : MonoBehaviour
     //PPE
     public Text CongratsText;
     public Text FailText;
+    public ScoreManager ScoreManager;
 
     //Valves
     public Text FailOutOfTimeText;
@@ -300,5 +301,6 @@ public class Scoreboard : MonoBehaviour
         TimeBonusGameObject.gameObject.SetActive(false);
         ScoreText.GetComponent<Text>().text = "Your Score: " + TotalScoreWithTimeBonus;
         print("end delay");
+        //ScoreManager.instance.AddScore(DontDestroy.Score + TimeBonus, 500);  // Adding to the global score
     }
 }

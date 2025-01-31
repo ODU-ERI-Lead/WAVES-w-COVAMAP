@@ -22,7 +22,8 @@ public class ScoringPPE : MonoBehaviour
             DontDestroy.Score = DontDestroy.NumberCorrect * 5 + (CheckAnswersPPEScript.NumberTimesChecked - 1) * (-3);
             Debug.Log(DontDestroy.Score);
             text.text = "Score: " + DontDestroy.Score;
-            if(DontDestroy.NumberCorrect == 9 || DontDestroy.timeLeft < 0)   //If all 9 are correct, then go directly to the Scoreboard.
+           // ScoreManager.instance.AddScore(DontDestroy.Score, 500);  // Total possible score (could be dynamic)
+            if (DontDestroy.NumberCorrect == 9 || DontDestroy.timeLeft < 0)   //If all 9 are correct, then go directly to the Scoreboard.
             {
                 SceneManager.LoadScene("Scoreboard");
             }
@@ -32,7 +33,8 @@ public class ScoringPPE : MonoBehaviour
             DontDestroy.Score = DontDestroy.NumberCorrect * 5 + (CheckAnswersPPEScript.NumberTimesChecked - 1) * (-3);
             Debug.Log(DontDestroy.Score);
             text.text = "Score: " + DontDestroy.Score;
-            if(DontDestroy.NumberCorrect == 9 || DontDestroy.timeLeft < 0)   //If all 9 are correct, then go directly to the Scoreboard.
+            //ScoreManager.instance.AddScore(DontDestroy.Score, 500);  // Total possible score (could be dynamic)
+            if (DontDestroy.NumberCorrect == 9 || DontDestroy.timeLeft < 0)   //If all 9 are correct, then go directly to the Scoreboard.
             {
                 SceneManager.LoadScene("Scoreboard");
             }
@@ -43,7 +45,8 @@ public class ScoringPPE : MonoBehaviour
             DontDestroy.Score = DontDestroy.NumberCorrect * 5 + (CheckAnswersPPEScript.NumberTimesChecked - 1) * (-3);
             Debug.Log(DontDestroy.Score);
             text.text = "Score: " + DontDestroy.Score;
-            if(DontDestroy.NumberCorrect == 9 || DontDestroy.timeLeft < 0)   //If all 9 are correct, then go directly to the Scoreboard.
+           // ScoreManager.instance.AddScore(DontDestroy.Score, 500);  // Total possible score (could be dynamic)
+            if (DontDestroy.NumberCorrect == 9 || DontDestroy.timeLeft < 0)   //If all 9 are correct, then go directly to the Scoreboard.
             {
                 SceneManager.LoadScene("Scoreboard");
             }

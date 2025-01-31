@@ -2200,6 +2200,7 @@ GameObject:
   m_Component:
   - component: {fileID: 330256906}
   - component: {fileID: 330256905}
+  - component: {fileID: 330256907}
   m_Layer: 0
   m_Name: ScoringScript
   m_TagString: Untagged
@@ -2237,6 +2238,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &330256907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330256904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f234a90d3c3cdc44cba930ed6c22d20f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreboard: {fileID: 0}
+  ScoringPPE: {fileID: 0}
+  scoreText: {fileID: 1250820800}
+  scoreFractionText: {fileID: 0}
 --- !u!1 &417449641
 GameObject:
   m_ObjectHideFlags: 0
@@ -8721,7 +8738,7 @@ PrefabInstance:
     - target: {fileID: -3107824568456337282, guid: bfe5f2fd72733784a9250ef4ade37227, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 721c0f25916904b70a8c6246a872a153, type: 2}
+      objectReference: {fileID: 2100000, guid: c5a002ef334d8ea4babdc37d2e2d5eb2, type: 2}
     - target: {fileID: -3016725172910498923, guid: bfe5f2fd72733784a9250ef4ade37227, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -11839,7 +11856,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000030517578, y: 15.673004}
+  m_AnchoredPosition: {x: 0, y: 15.673004}
   m_SizeDelta: {x: 0.00054932, y: -251.346}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1916866472
