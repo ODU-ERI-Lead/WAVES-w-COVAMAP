@@ -301,6 +301,6 @@ public class Scoreboard : MonoBehaviour
         TimeBonusGameObject.gameObject.SetActive(false);
         ScoreText.GetComponent<Text>().text = "Your Score: " + TotalScoreWithTimeBonus;
         print("end delay");
-        //ScoreManager.instance.AddScore(DontDestroy.Score + TimeBonus, 500);  // Adding to the global score
+        
     }
 }

@@ -12,8 +12,8 @@ public class Timer : MonoBehaviour
 
 {
     public Text text;   //Timer text.
-    public float time = 0.0f;
-    //public float timeLeft = 0.0f;
+    public float time = 60.0f;
+    public float timeLeft = 60.0f;
     public PlayableDirector playableDirector;
 
     //Referencing other scripts.

@@ -13,8 +13,9 @@ public class ScoreManager : MonoBehaviour
 
     public Text scoreFractionText;
 
-    private int totalScore = (GetScoreWithBonus); //GetScoreWithBonus ; remove zero
+    private int totalScore = 0; //(GetScoreWithBonus); //GetScoreWithBonus ; remove zero
     private int totalPossibleScore = 500;
+    public static int sceneCount = 0; // Keep track of how many scenes have been loaded
 
     public static int GetScoreWithBonus { get; private set; }
 
@@ -40,14 +41,31 @@ public class ScoreManager : MonoBehaviour
     {
         totalScore += score;  // Add score to the total score
         totalPossibleScore += possibleScore;  // Add possible score to the total possible score
+                                              // Increment the scene count
+        sceneCount++;
+
+        // Update UI if it's the 5th round or beyond
+        if (sceneCount >= 5)
+        {
+            scoreFractionText.text = "Score: " + totalScore + " / " + totalPossibleScore;
+        }
+        else
+        {
+            scoreFractionText.text = "Score: " + totalScore;  // Before 5th round, just show score
+        }
+        ScoreManager.instance.AddScore(DontDestroy.Score + GetScoreWithBonus, 500);  // Adding to the global score
         UpdateScoreUI();
     }
 
     public void UpdateScoreUI()
     {
+        // Log the values to ensure they are being correctly set
+        Debug.Log("Total Score: " + totalScore);
+        Debug.Log("Total Possible Score: " + totalPossibleScore);
         // Update the UI text with both the total score and the fraction
         scoreText.text = "Total Score: " + totalScore.ToString();
-        scoreFractionText.text = "Score / Possible: " + totalScore + " / " + totalPossibleScore;
+        scoreFractionText.text = "Score / Possible: " + totalScore.ToString("0") + " / " + totalPossibleScore.ToString("0");
+        Canvas.ForceUpdateCanvases();
     }
 
     public int GetTotalScore(int score)

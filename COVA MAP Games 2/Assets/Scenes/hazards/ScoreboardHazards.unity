@@ -232,7 +232,7 @@ Transform:
   m_GameObject: {fileID: 208289278}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 43.948, y: 44.999, z: -446}
+  m_LocalPosition: {x: 43.948, y: 44.999, z: -449.8}
   m_LocalScale: {x: 28.845253, y: 28.845253, z: 28.845253}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -282,7 +282,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 996f4d742e7cccd499b8c7401e8a74fb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 245e206bc3cd13f43a51852b789df831, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2621,7 +2621,7 @@ Transform:
   m_GameObject: {fileID: 1802545194}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 43, y: 48, z: -441}
+  m_LocalPosition: {x: 43, y: 48, z: -405.1}
   m_LocalScale: {x: 29.065876, y: 29.065876, z: 29.065876}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3235,6 +3235,7 @@ MonoBehaviour:
   ScoreText: {fileID: 839524076}
   CongratsText: {fileID: 219849477}
   FailText: {fileID: 577656842}
+  ScoreManager: {fileID: 0}
   FailOutOfTimeText: {fileID: 0}
   FailDirectionsText: {fileID: 0}
   FailTooManyTriesText: {fileID: 0}

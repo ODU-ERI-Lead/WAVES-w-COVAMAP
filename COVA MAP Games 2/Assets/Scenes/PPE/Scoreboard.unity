@@ -868,7 +868,7 @@ MonoBehaviour:
   ScoreText: {fileID: 1572534162}
   CongratsText: {fileID: 163331422}
   FailText: {fileID: 1886382542}
-  ScoreManager: {fileID: 0}
+  ScoreManager: {fileID: 1331019416}
   FailOutOfTimeText: {fileID: 0}
   FailDirectionsText: {fileID: 0}
   FailTooManyTriesText: {fileID: 0}
@@ -1587,7 +1587,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 4
     m_MaxSize: 46
-    m_Alignment: 0
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
