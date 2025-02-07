@@ -1,6 +1,10 @@
 using JetBrains.Annotations;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+//using Scoreboard;
+
 
 public class ScoreManager : MonoBehaviour
 {
@@ -13,12 +17,14 @@ public class ScoreManager : MonoBehaviour
 
     public Text scoreFractionText;
 
-    private int totalScore = 0; //(GetScoreWithBonus); //GetScoreWithBonus ; remove zero
+    int totalScore = 0 ; //StartCoroutine(IEnumerator(GetScoreWithBonus)); may remove may need to implement
+    //int Roundscore = StartCoroutine(GetScoreWithBonus());//(GetScoreWithBonus); //GetScoreWithBonus ; remove zero
     private int totalPossibleScore = 500;
     public static int sceneCount = 0; // Keep track of how many scenes have been loaded
+    //public static Score DontDestroyOnLoad();
+   // public static int GetScoreWithBonus { get; private set; }
 
-    public static int GetScoreWithBonus { get; private set; }
-
+   // public IEnumerator GetScoreWithBonus(); may remove
     void Awake()
     {
         //ensuring only one scoremanager instance
@@ -34,7 +40,9 @@ public class ScoreManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+       // LoadScore();
         UpdateScoreUI();
+        //StartCoroutine IEnumerator GetScoreWithBonus();
     }
 
     public void AddScore(int score, int possibleScore)
@@ -53,8 +61,12 @@ public class ScoreManager : MonoBehaviour
         {
             scoreFractionText.text = "Score: " + totalScore;  // Before 5th round, just show score
         }
-        ScoreManager.instance.AddScore(DontDestroy.Score + GetScoreWithBonus, 500);  // Adding to the global score
+        StartCoroutine(scoreboard.GetScoreWithBonus());
+        //SaveScore(); //scoreboard.GetScoreWithBonus()
+        //ScoreManager.instance.AddScore(DontDestroy.Score + GetScoreWithBonus, 500);  // Adding to the global score
+       // PlayerPrefs.Getint();
         UpdateScoreUI();
+
     }
 
     public void UpdateScoreUI()
@@ -64,7 +76,7 @@ public class ScoreManager : MonoBehaviour
         Debug.Log("Total Possible Score: " + totalPossibleScore);
         // Update the UI text with both the total score and the fraction
         scoreText.text = "Total Score: " + totalScore.ToString();
-        scoreFractionText.text = "Score / Possible: " + totalScore.ToString("0") + " / " + totalPossibleScore.ToString("0");
+        scoreFractionText.text = "Score / Possible: " + totalScore.ToString() + " / " + totalPossibleScore.ToString();
         Canvas.ForceUpdateCanvases();
     }
 
@@ -82,14 +94,22 @@ public class ScoreManager : MonoBehaviour
     {
         PlayerPrefs.SetInt("TotalScore", totalScore);
         PlayerPrefs.SetInt("TotalPossibleScore", totalPossibleScore);
+        PlayerPrefs.Save();
+       // Debug.Log("Score saved: " + totalScore);
     }
 
     public void LoadScore()
     {
         totalScore = PlayerPrefs.GetInt("TotalScore", 100);
         totalPossibleScore = PlayerPrefs.GetInt("TotalPossibleScore", 500);
+        Debug.Log("Loaded Score: " + totalScore);
+        Debug.Log("Loaded Possible Score: " + totalPossibleScore);
         UpdateScoreUI();
     }
-
+    public void SetTotalScore(int score)
+    { 
+        totalScore = score; 
+        UpdateScoreUI() ;  
+    }
 
 }
