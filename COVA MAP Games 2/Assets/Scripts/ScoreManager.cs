@@ -88,7 +88,7 @@ public class ScoreManager : MonoBehaviour
         UpdateScoreUI();
         //StartCoroutine IEnumerator GetScoreWithBonus();
         // clear below if errors
-        if (sceneCount > 5) // change back to 5 if need be
+        if (sceneCount >= 6) // change back to 5 if need be
             {
             ClearSavedScores();
             sceneCount = 0;
@@ -101,22 +101,22 @@ public class ScoreManager : MonoBehaviour
             Debug.Log("scenecount" + sceneCount);
         }
         //may need to add all this "//" below may not:  // Only clear saved scores and reset scene count when it's 5 or more, not immediately at 5
-        //if (sceneCount >= 5 && !PlayerPrefs.HasKey("ResetCompleted"))
-       // {
-            // Mark that the reset has been completed
-          //  PlayerPrefs.SetInt("ResetCompleted", 1);
-          //  PlayerPrefs.Save();
+        if (sceneCount >= 5 && !PlayerPrefs.HasKey("ResetCompleted"))
+        {
+             //Mark that the reset has been completed
+           PlayerPrefs.SetInt("ResetCompleted", 1);
+           PlayerPrefs.Save();
 
-           // ClearSavedScores();  // Clear the saved scores
-          //  sceneCount = 0;  // Reset scene count
-          //  PlayerPrefs.SetInt("SceneLoadCount", sceneCount);  // Save the reset scene count
-           // PlayerPrefs.Save();
+           ClearSavedScores();  // Clear the saved scores
+           sceneCount = 0;  // Reset scene count
+           PlayerPrefs.SetInt("SceneLoadCount", sceneCount);  // Save the reset scene count
+           PlayerPrefs.Save();
 
             // Reset the score
-          //  totalScore = 0;
-           // UpdateScoreUI();
-           // Debug.Log("Scene count reached 5, reset completed.");
-       // }
+            totalScore = 0;
+            UpdateScoreUI();
+            Debug.Log("Scene count reached 5, reset completed.");
+        }
 
     }
 
@@ -156,6 +156,14 @@ public class ScoreManager : MonoBehaviour
         UpdateScoreUI();
 
     }
+    // This method will be triggered when the Quit button is pressed on scene count 5
+    private void OnQuitButtonPressed()
+    {
+        ClearSavedScores();  // Reset the score and scene count when quit is pressed on scene 5
+        Debug.Log("Quit button pressed, scores reset.");
+    }
+
+
     //clear below if not functioning correctly
     public void ClearSavedScores()
     {
