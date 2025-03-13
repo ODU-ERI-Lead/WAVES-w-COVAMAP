@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class AutoStartMainMenu : MonoBehaviour
 {
 #if UNITY_EDITOR
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    //[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     static void Init()
     {
         SceneManager.LoadScene("Intro");

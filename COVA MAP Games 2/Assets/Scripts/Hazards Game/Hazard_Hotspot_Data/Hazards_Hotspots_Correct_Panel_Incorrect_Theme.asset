@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 814c8a5b041eb814c936bfb98799fab4, type: 3}
+  m_Name: Hazards_Hotspots_Correct_Panel_Incorrect_Theme
+  m_EditorClassIdentifier: 
+  UniqueID: SGF6YXJkc19Ib3RzcG90c3xDb3JyZWN0X1BhbmVsX1RoZW1lfDEsMSwxLDE=
+  ThemeLabel: Hazards_Coorect_Theme
+  MainColor: {r: 1, g: 0, b: 0, a: 1}
+  SecondaryColor: {r: 0.015686275, g: 0.30980393, b: 0.5411765, a: 1}
+  TertiaryColor: {r: 0.32156864, g: 0.7372549, b: 0.9411765, a: 1}
+  FontSettings:
+  - {fileID: 11400000, guid: 27ab0e26e37863244b85811a224ccfe7, type: 2}
+  - {fileID: 11400000, guid: 4aa5e2a0a3d49424da66e9f17ad01aaa, type: 2}
+  FontPrimaryColor: {r: 0, g: 0, b: 0, a: 0}
+  FontSecondaryColor: {r: 0, g: 0, b: 0, a: 0}
+  Icon: {fileID: 0}
+  TexIcon: {fileID: 0}
+  BackgroundImage: {fileID: 0}
+  Description: Theme for correct panels

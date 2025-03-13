@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96874af4e2f4e4ebb9e3b2986c3e6347, type: 3}
+  m_Name: Test_Welcome_Convo_3_of_4
+  m_EditorClassIdentifier: 
+  UniqueID: Test_Juan_Welcome_C3_4
+  OriginalLanguage:
+    Language: 2
+    Header: 
+    Text: "Perd\xED parte de mi experimento, estoy buscando un panel solar."
+    AudioText:
+      AudioClip: {fileID: 8300000, guid: ffffc83a99319094caa92b250d5090a7, type: 3}
+      URLAudioType: 0
+      URLReference: 
+  TranslatedLanguage:
+    Language: 1
+    Header: 
+    Text: I misplaced part of my experiment, I am looking for a solar panel.
+    AudioText:
+      AudioClip: {fileID: 8300000, guid: 180a42422c0a23246ab5ca52c8bf2119, type: 3}
+      URLAudioType: 0
+      URLReference: 
+  DialogueEmoState: 1
+  OverallDialogueState: 1
+  DialogueMotionState: 1
+  PossibleUserResponses: []
+  OverlayTaskType: 3
+  OverlayDuration: 3
+  DelayBeforeOverlay: 0
+  MiscData: {fileID: 0}

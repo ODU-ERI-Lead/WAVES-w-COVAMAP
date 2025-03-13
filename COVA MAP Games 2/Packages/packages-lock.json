@@ -7,6 +7,44 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
+    "com.fuzzphyte.dialogue": {
+      "version": "https://github.com/jshull/FP_Dialogue.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.fuzzphyte.utility": "https://github.com/JShull/FP_Utility.git",
+        "com.fuzzphyte.utility.edu": "https://github.com/JShull/FP_Utility_EDU.git",
+        "com.fuzzphyte.ui": "https://github.com/JShull/FP_UI.git",
+        "com.unity.textmeshpro": "3.0.6"
+      },
+      "hash": "79c233fb783eb500b95c3cd5c118795f75bd7faa"
+    },
+    "com.fuzzphyte.ui": {
+      "version": "https://github.com/jshull/FP_UI.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "878788d817fbfec40551c21bf8f7c09dd54395a2"
+    },
+    "com.fuzzphyte.utility": {
+      "version": "https://github.com/jshull/FP_Utility.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.mathematics": "1.2.6",
+        "com.unity.textmeshpro": "3.0.9"
+      },
+      "hash": "f4aa8441ea705ad8d7cf0d4af9626073033c3b70"
+    },
+    "com.fuzzphyte.utility.edu": {
+      "version": "https://github.com/jshull/FP_Utility_EDU.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.fuzzphyte.utility": "https://github.com/JShull/FP_Utility.git"
+      },
+      "hash": "29f62749ef0f032a1a8e3f2ae7c1f8193cec6754"
+    },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
       "depth": 0,
@@ -301,6 +339,14 @@
         "com.unity.modules.jsonserialize": "1.0.0"
       },
       "url": "https://packages.unity.com"
+    },
+    "com.unity.textmeshpro": {
+      "version": "3.0.9",
+      "depth": 1,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.ugui": "2.0.0"
+      }
     },
     "com.unity.timeline": {
       "version": "1.8.7",
