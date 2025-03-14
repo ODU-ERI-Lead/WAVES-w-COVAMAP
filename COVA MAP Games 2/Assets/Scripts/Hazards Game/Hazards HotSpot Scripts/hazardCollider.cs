@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(RectTransform))]
 public class hazardCollider : MonoBehaviour
@@ -8,7 +9,8 @@ public class hazardCollider : MonoBehaviour
     protected RectTransform MyRect;
     public correctHazardMono RightJustified;
     public correctHazardMono LeftJustified;
-
+    public AudioSource Audioclick;
+    public Button Button;
     public float testPos;
     public bool BeenClicked = false;
 
@@ -86,5 +88,11 @@ public class hazardCollider : MonoBehaviour
         theDisplayPanel.OnPopUp.Invoke();
         theDisplayPanel.RunDisplayTimer();
         BeenClicked = true;
+
+        if (BeenClicked = true)
+        {
+           // PlayAudio
+        }
+
     }
 }
