@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+//using UnityEngine.UIElements;
 
 [RequireComponent(typeof(RectTransform))]
 public class hazardCollider : MonoBehaviour
@@ -13,24 +14,26 @@ public class hazardCollider : MonoBehaviour
     public Button Button;
     public float testPos;
     public bool BeenClicked = false;
+    public Image ZoneImage;
 
     public void Awake()
     {
         MyRect = GetComponent<RectTransform>();
+        //Debug.Log($"Hi");
+       // ZoneImage.gameObject.SetActive(false);    this breaks messages and more for some reason
     }
     public void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.LogWarning($"Something hit me");
     }
-    /*
+    
     public void Update()
     {
-        if (Input.GetKey(KeyCode.Space)) 
-        {
-            OnClicked();
-        }
+       //f (Input.GetMouseButtonDown(0))
+       //
+       //   OnClicked();
+       //
     }
-    */
     /// <summary>
     /// Called via our Mouse/Raycast unit/system
     /// </summary>
@@ -87,12 +90,25 @@ public class hazardCollider : MonoBehaviour
         theDisplayPanel.gameObject.SetActive(true);
         theDisplayPanel.OnPopUp.Invoke();
         theDisplayPanel.RunDisplayTimer();
+        //update score points
+        theDisplayPanel.NotifyPoints();
+        ZoneImage.enabled = true;   
         BeenClicked = true;
-
-        if (BeenClicked = true)
+        Debug.Log("Button was clicked in another script, nice!");
+        if (Audioclick != null)
         {
-           // PlayAudio
+            Audioclick.clip = theDisplayPanel.HazardData.OnClickCorrectAudio;
+            Audioclick.Play();
         }
-
+    }
+    public void ImageAlphaSetOne(bool alphaActive)
+    {
+        var curColor = ZoneImage.color;
+        float alpha = 1f;
+        if (!alphaActive)
+        {
+            alpha = 0;
+        }
+        ZoneImage.color = new Color(curColor.r, curColor.g, curColor.b, alpha);
     }
 }

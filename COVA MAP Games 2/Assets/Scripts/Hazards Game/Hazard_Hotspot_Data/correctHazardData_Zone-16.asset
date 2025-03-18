@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e2d37c63e6e2dbe40935c506d18e7814, type: 3}
-  m_Name: correctHazardData_Zone-3
+  m_Name: correctHazardData_Zone-16
   m_EditorClassIdentifier: 
   UniqueID: 
   HeaderText: CORRECT!
   HeaderBackgroundColor: {r: 0.9098039, g: 0.45882353, b: 0.13725491, a: 1}
-  ParagraphText: Inattention and lack of PPE
+  ParagraphText: No Hard hat!
   TextBackgroundColor: {r: 0.015686275, g: 0.30980393, b: 0.5411765, a: 1}
   IconSprite: {fileID: -7191163486456543192, guid: 215687feeab0b7445b4a1cd86c82c2e1, type: 3}
   DisplayTime: 3

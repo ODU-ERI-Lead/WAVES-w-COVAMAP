@@ -14,4 +14,8 @@ public class correctHazardData : FP_Data
     public Sprite IconSprite;
     [Header("Logic")]
     public float DisplayTime;
+    [Header("Value Parameters")]
+    public int HazardCorrectPoints = 1;
+    public AudioClip OnClickCorrectAudio;
+    public int CanvasLevel;
 }

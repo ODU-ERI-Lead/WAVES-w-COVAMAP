@@ -24,7 +24,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "878788d817fbfec40551c21bf8f7c09dd54395a2"
+      "hash": "b3d0f0e079976ea116faf918ef3450fa3e373d7b"
     },
     "com.fuzzphyte.utility": {
       "version": "https://github.com/jshull/FP_Utility.git",
@@ -34,7 +34,7 @@
         "com.unity.mathematics": "1.2.6",
         "com.unity.textmeshpro": "3.0.9"
       },
-      "hash": "f4aa8441ea705ad8d7cf0d4af9626073033c3b70"
+      "hash": "e1d6678eeb08179aaa150fd627d9daabf55915a2"
     },
     "com.fuzzphyte.utility.edu": {
       "version": "https://github.com/jshull/FP_Utility_EDU.git",

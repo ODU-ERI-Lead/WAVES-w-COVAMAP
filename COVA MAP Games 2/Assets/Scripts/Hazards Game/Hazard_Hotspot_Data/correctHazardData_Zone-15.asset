@@ -17,5 +17,5 @@ MonoBehaviour:
   HeaderBackgroundColor: {r: 0.9098039, g: 0.45882353, b: 0.13725491, a: 1}
   ParagraphText: No hard hat
   TextBackgroundColor: {r: 0.015686275, g: 0.30980393, b: 0.5411765, a: 1}
-  IconSprite: {fileID: 7780953735995972703, guid: 215687feeab0b7445b4a1cd86c82c2e1, type: 3}
-  DisplayTime: 5
+  IconSprite: {fileID: -7191163486456543192, guid: 215687feeab0b7445b4a1cd86c82c2e1, type: 3}
+  DisplayTime: 3
