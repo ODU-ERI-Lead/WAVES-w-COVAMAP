@@ -16,7 +16,10 @@ public class InfoPanelScript : MonoBehaviour
         if (Input.GetKey(KeyCode.Space) && Infopanel.activeSelf == true)
         {
             Infopanel.SetActive(false);
-            HazardhotspotGameManager.Instance.Initialize(false, gamedata);
+            var hazardManager = (HazardhotspotGameManager)HazardhotspotGameManager.Instance;
+            hazardManager.Initialize(false, gamedata);
+
+            hazardManager.RenderScoreSetup(hazardManager.ScoreDisplaySystemOne);
         }
     }
 }

@@ -12,18 +12,30 @@ public class HazardhotspotGameManager :FPSystemBase<HazardhotspotData>
     public bool OverrideHazardPoints = false;
     [SerializeField]
     protected int totalPoints=0;
-    public FractionText ScoreDisplaySystem;
+   
     public List<correctHazardMono> AllHotSpotExplainations = new List<correctHazardMono>();
     public Canvas CanvasLevelZeroParent;
+    public FractionText ScoreDisplaySystemOne;
     //level zero data is coming in from InfoPanelScript!
+
     public UnityEngine.UI.Button LevelZeroEndButton;
+    [Space]
+    [Header("Level 2")]
     public Canvas CanvasLevelOneParent;
+    public FractionText ScoreDisplaySystemTwo;
     public HazardhotspotData LevelOneData;
     public UnityEngine.UI.Button LevelOneEndButton;
+    [Space]
+    [Header("Level 3")]
     public Canvas CanvasLevelTwoParent;
+    public FractionText ScoreDisplaySystemThree;
     public HazardhotspotData LevelTwoData;
     public UnityEngine.UI.Button LevelTwoEndButton;
+    [Space]
+    [Header("Debugging Related")]
     public int CurrentCanvasLevel = 0;
+    [SerializeField]
+    protected FractionText currentDisplayText;
     /// <summary>
     /// This needs to be called at the beginning of each 'Canvas Level'
     /// It automatically gets called our first time (Canvas Level zero) with the InfoPanelScript
@@ -57,16 +69,19 @@ public class HazardhotspotGameManager :FPSystemBase<HazardhotspotData>
         {
             //update FractionText Display for Max Number ends values
         }
-        UpdatePoints(0);
-           
+        //establish currentDisplay
+        if (ScoreDisplaySystemOne == null)
+        {
+            Debug.LogError($"Missing Score Text Ref");
+        }
     }
 
     public void UpdatePoints(int ptValue)
     {
         totalPoints += ptValue;
-        if (ScoreDisplaySystem != null) 
+        if (currentDisplayText != null) 
         {
-            ScoreDisplaySystem.DisplayUpdated(totalPoints,systemData.TotalHazardsToClick);
+            currentDisplayText.DisplayUpdated(totalPoints,systemData.TotalHazardsToClick);
         }
         if (totalPoints >= systemData.TotalHazardsToClick)
         {
@@ -89,6 +104,7 @@ public class HazardhotspotGameManager :FPSystemBase<HazardhotspotData>
     }
     // You will need to call this when you end your Hazard Game
     // you
+    [ContextMenu("Test: Skip Level")]
     public void CanvasLevelChange()
     {
         AllHotSpotExplainations.Clear();
@@ -99,7 +115,12 @@ public class HazardhotspotGameManager :FPSystemBase<HazardhotspotData>
             CanvasLevelZeroParent.gameObject.SetActive(false);
             CanvasLevelTwoParent.gameObject.SetActive(false);
             CanvasLevelOneParent.gameObject.SetActive(true);
-            StartCoroutine(DelayCanvasDataSetup(LevelOneData));
+            if (ScoreDisplaySystemTwo == null)
+            {
+                Debug.LogError($"Missing Score Text Ref");
+            }
+            
+            StartCoroutine(DelayCanvasDataSetup(LevelOneData,ScoreDisplaySystemTwo));
         }
         
         if (CurrentCanvasLevel == 2) 
@@ -107,15 +128,31 @@ public class HazardhotspotGameManager :FPSystemBase<HazardhotspotData>
             CanvasLevelTwoParent.gameObject.SetActive(true);
             CanvasLevelZeroParent.gameObject.SetActive(false);
             CanvasLevelOneParent.gameObject.SetActive(false);
-            StartCoroutine(DelayCanvasDataSetup(LevelTwoData));
+            if (ScoreDisplaySystemThree == null)
+            {
+                Debug.LogError($"Missing Score Text Ref");
+            }
+           
+            StartCoroutine(DelayCanvasDataSetup(LevelTwoData,ScoreDisplaySystemThree));
         }
     }
-    IEnumerator  DelayCanvasDataSetup(HazardhotspotData dataToReset)
+    IEnumerator  DelayCanvasDataSetup(HazardhotspotData dataToReset,FractionText nextPanel)
     {
         yield return new WaitForEndOfFrame();
         yield return new WaitForEndOfFrame();
         this.Initialize(false, dataToReset);
+        //setup score rendering
+        RenderScoreSetup(nextPanel);
 
+    }
+    /// <summary>
+    /// Method to reassign score panel and refresh
+    /// </summary>
+    /// <param name="nextPanel"></param>
+    public void RenderScoreSetup(FractionText nextPanel)
+    {
+        currentDisplayText = nextPanel;
+        UpdatePoints(0);
     }
     #region Updating Lists
     public void AddHazardToList(correctHazardMono aHazard)

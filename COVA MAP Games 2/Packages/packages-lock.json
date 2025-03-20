@@ -23,8 +23,10 @@
       "version": "https://github.com/jshull/FP_UI.git",
       "depth": 0,
       "source": "git",
-      "dependencies": {},
-      "hash": "b3d0f0e079976ea116faf918ef3450fa3e373d7b"
+      "dependencies": {
+        "com.unity.textmeshpro": "3.0.9"
+      },
+      "hash": "a97517bf2328138132705d6e0febd4ef65a3606e"
     },
     "com.fuzzphyte.utility": {
       "version": "https://github.com/jshull/FP_Utility.git",
