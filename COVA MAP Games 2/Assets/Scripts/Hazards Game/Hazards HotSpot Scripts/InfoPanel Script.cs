@@ -19,7 +19,7 @@ public class InfoPanelScript : MonoBehaviour
             var hazardManager = (HazardhotspotGameManager)HazardhotspotGameManager.Instance;
             hazardManager.Initialize(false, gamedata);
 
-            hazardManager.RenderScoreSetup(hazardManager.ScoreDisplaySystemOne);
+            hazardManager.RenderScoreSetup(hazardManager.ScoreDisplaySystemThree);
         }
     }
 }

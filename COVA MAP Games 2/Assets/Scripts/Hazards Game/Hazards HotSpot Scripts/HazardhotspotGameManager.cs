@@ -16,6 +16,7 @@ public class HazardhotspotGameManager :FPSystemBase<HazardhotspotData>
     public List<correctHazardMono> AllHotSpotExplainations = new List<correctHazardMono>();
     public Canvas CanvasLevelZeroParent;
     public FractionText ScoreDisplaySystemOne;
+    public HazardhotspotData gamedata;
     //level zero data is coming in from InfoPanelScript!
 
     public UnityEngine.UI.Button LevelZeroEndButton;
@@ -33,7 +34,7 @@ public class HazardhotspotGameManager :FPSystemBase<HazardhotspotData>
     public UnityEngine.UI.Button LevelTwoEndButton;
     [Space]
     [Header("Debugging Related")]
-    public int CurrentCanvasLevel = 0;
+    public int CurrentCanvasLevel = 2;
     [SerializeField]
     protected FractionText currentDisplayText;
     /// <summary>
@@ -109,7 +110,19 @@ public class HazardhotspotGameManager :FPSystemBase<HazardhotspotData>
     {
         AllHotSpotExplainations.Clear();
         //update your new level value
-        CurrentCanvasLevel++;
+        CurrentCanvasLevel--;
+        if (CurrentCanvasLevel == 0)
+        {
+            CanvasLevelZeroParent.gameObject.SetActive(true);
+            CanvasLevelTwoParent.gameObject.SetActive(false);
+            CanvasLevelOneParent.gameObject.SetActive(false);
+            if (ScoreDisplaySystemOne == null)
+            {
+                Debug.LogError($"Missing Score Text Ref");
+            }
+
+            StartCoroutine(DelayCanvasDataSetup(gamedata, ScoreDisplaySystemOne));
+        }
         if (CurrentCanvasLevel == 1)
         {
             CanvasLevelZeroParent.gameObject.SetActive(false);

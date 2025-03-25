@@ -44,7 +44,7 @@ public class hazardCollider : MonoBehaviour
         {
             return;
         }
-        var halfWidthParent = ParentContainer.sizeDelta.x * 0.5f;
+        var halfWidthParent = ParentContainer.sizeDelta.x * 0.75f; ///changed from .5 to .75 for size adjusting
         //right or left of center
         bool RightEdgeFree=false;
         bool LeftEdgeFree=false;
