@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e4d24e9893cf6940a9720d5cd971afd, type: 3}
+  m_Name: 04012025_035744_FPHHeader
+  m_EditorClassIdentifier: 
+  UniqueID: 3:57:44 PMFPHeader_42
+  CloseIcon: {fileID: 2800000, guid: 339e6e13ea2b38c4f8056b6fa77a7d53, type: 3}
+  OpenIcon: {fileID: 2800000, guid: b2e509d39cf5fbc46866da6f6b74409c, type: 3}
+  SelectAllIcon: {fileID: 2800000, guid: 568b1a04180602241aab4bddfc689460, type: 3}
+  SelectAllIconActive: {fileID: 2800000, guid: 00e09816e202ced40b685138d6b57218, type: 3}
+  ExpandedColor: {r: 0.412, g: 0.678, b: 0, a: 1}
+  CollapsedColor: {r: 0.728, g: 0.678, b: 0, a: 1}
+  HeaderColor: {r: 0, g: 0, b: 0, a: 1}
+  Headers: []

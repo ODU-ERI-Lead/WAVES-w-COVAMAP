@@ -1,5 +1,6 @@
 using UnityEngine;
 using FuzzPhyte.Utility;
+using System;
 
 
 
@@ -8,7 +9,7 @@ using FuzzPhyte.Utility;
 public class PipefitterpartData : FP_Data
 {
     [Header("Part_Name")]
-
+    //public Array<FP_Data> Part type; 
 
     [Header("Part_Specs")]
 

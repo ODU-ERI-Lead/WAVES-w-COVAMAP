@@ -19,14 +19,65 @@
       },
       "hash": "79c233fb783eb500b95c3cd5c118795f75bd7faa"
     },
-    "com.fuzzphyte.ui": {
-      "version": "https://github.com/jshull/FP_UI.git",
+    "com.fuzzphyte.game": {
+      "version": "https://github.com/jshull/fp_game.git",
       "depth": 0,
       "source": "git",
       "dependencies": {
-        "com.unity.textmeshpro": "3.0.9"
+        "com.unity.mathematics": "1.2.6",
+        "com.unity.textmeshpro": "3.0.9",
+        "com.unity.ugui": "2.0.0",
+        "com.unity.burst": "1.8.18",
+        "com.fuzzphyte.utility": "https://github.com/jshull/FP_Utility.git",
+        "com.fuzzphyte.systemevent": "https://github.com/jshull/FP_Event.git",
+        "com.fuzzphyte.ui": "https://github.com/jshull/FP_UI.git",
+        "com.fuzzphyte.utility.analytics": "https://github.com/JShull/FP_Utility_Analytics.git"
       },
-      "hash": "a97517bf2328138132705d6e0febd4ef65a3606e"
+      "hash": "9128a907e1d4976b9f9bffb55c841ae9cd54423c"
+    },
+    "com.fuzzphyte.ray": {
+      "version": "https://github.com/jshull/fp_ray.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.mathematics": "1.2.6",
+        "com.fuzzphyte.utility": "https://github.com/jshull/FP_Utility.git"
+      },
+      "hash": "4d763727aed1a153068d48614e1bb209675c0233"
+    },
+    "com.fuzzphyte.systemevent": {
+      "version": "https://github.com/jshull/fp_event.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.mathematics": "1.2.6",
+        "com.unity.textmeshpro": "3.0.6",
+        "com.fuzzphyte.utility": "https://github.com/jshull/FP_Utility.git"
+      },
+      "hash": "8a08efacf2a1fa2c5733c94ea3136c3e4357b2df"
+    },
+    "com.fuzzphyte.tool": {
+      "version": "https://github.com/jshull/fp_tool.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.mathematics": "1.2.6",
+        "com.unity.textmeshpro": "3.0.9",
+        "com.fuzzphyte.utility": "https://github.com/jshull/FP_Utility.git",
+        "com.fuzzphyte.ray": "https://github.com/jshull/FP_Ray.git"
+      },
+      "hash": "f96727cf3831cb6977c00545f3e7daef4426d413"
+    },
+    "com.fuzzphyte.ui": {
+      "version": "https://github.com/jshull/fp_ui.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.textmeshpro": "3.0.9",
+        "com.unity.ugui": "2.0.0",
+        "com.unity.inputsystem": "1.11.2"
+      },
+      "hash": "84c427a8b6a53799ca9633d8a4ae9bb98089f42f"
     },
     "com.fuzzphyte.utility": {
       "version": "https://github.com/jshull/FP_Utility.git",
@@ -36,7 +87,16 @@
         "com.unity.mathematics": "1.2.6",
         "com.unity.textmeshpro": "3.0.9"
       },
-      "hash": "e1d6678eeb08179aaa150fd627d9daabf55915a2"
+      "hash": "6fd80bbd935e4e9ddbf5f047488ccb02498edf9a"
+    },
+    "com.fuzzphyte.utility.analytics": {
+      "version": "https://github.com/jshull/fp_utility_analytics.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.fuzzphyte.utility": "https://github.com/JShull/FP_Utility.git"
+      },
+      "hash": "3fc34610d0c166246052a8c9fdcf928e54c10f3a"
     },
     "com.fuzzphyte.utility.edu": {
       "version": "https://github.com/jshull/FP_Utility_EDU.git",
@@ -170,7 +230,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.visualstudio": {
-      "version": "2.0.22",
+      "version": "2.0.23",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -178,11 +238,13 @@
       },
       "url": "https://packages.unity.com"
     },
-    "com.unity.ide.vscode": {
-      "version": "1.2.4",
-      "depth": 0,
+    "com.unity.inputsystem": {
+      "version": "1.11.2",
+      "depth": 1,
       "source": "registry",
-      "dependencies": {},
+      "dependencies": {
+        "com.unity.modules.uielements": "1.0.0"
+      },
       "url": "https://packages.unity.com"
     },
     "com.unity.mathematics": {
@@ -380,6 +442,16 @@
         "com.unity.modules.ui": "1.0.0",
         "com.unity.modules.imgui": "1.0.0"
       }
+    },
+    "com.unity.visualscripting": {
+      "version": "1.9.6",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.ugui": "1.0.0",
+        "com.unity.modules.jsonserialize": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
     },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",
