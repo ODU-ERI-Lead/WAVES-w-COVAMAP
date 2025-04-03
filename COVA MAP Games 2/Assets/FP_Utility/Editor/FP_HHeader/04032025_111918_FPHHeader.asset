@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9e4d24e9893cf6940a9720d5cd971afd, type: 3}
-  m_Name: FP_HHeaderDataz_Austin
+  m_Name: 04032025_111918_FPHHeader
   m_EditorClassIdentifier: 
-  UniqueID: BOB
+  UniqueID: 11:19:18 AMFPHeader_42
   CloseIcon: {fileID: 2800000, guid: 339e6e13ea2b38c4f8056b6fa77a7d53, type: 3}
   OpenIcon: {fileID: 2800000, guid: b2e509d39cf5fbc46866da6f6b74409c, type: 3}
   SelectAllIcon: {fileID: 2800000, guid: 568b1a04180602241aab4bddfc689460, type: 3}
@@ -21,8 +21,7 @@ MonoBehaviour:
   CollapsedColor: {r: 0.728, g: 0.678, b: 0, a: 1}
   HeaderColor: {r: 0, g: 0, b: 0, a: 1}
   Headers:
-  - Managers
+  - MANAGERS
   - UI
-  - Lighting
-  - Tools
-  - 3D World
+  - LIGHTING
+  - TOOLS

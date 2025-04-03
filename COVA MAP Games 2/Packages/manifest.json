@@ -6,7 +6,7 @@
     "com.fuzzphyte.systemevent": "https://github.com/jshull/fp_event.git",
     "com.fuzzphyte.tool": "https://github.com/jshull/fp_tool.git",
     "com.fuzzphyte.ui": "https://github.com/jshull/fp_ui.git",
-    "com.fuzzphyte.utility": "https://github.com/jshull/FP_Utility.git",
+    "com.fuzzphyte.utility": "https://github.com/jshull/fp_utility.git",
     "com.fuzzphyte.utility.analytics": "https://github.com/jshull/fp_utility_analytics.git",
     "com.fuzzphyte.utility.edu": "https://github.com/jshull/FP_Utility_EDU.git",
     "com.unity.2d.sprite": "1.0.0",

@@ -80,14 +80,14 @@
       "hash": "84c427a8b6a53799ca9633d8a4ae9bb98089f42f"
     },
     "com.fuzzphyte.utility": {
-      "version": "https://github.com/jshull/FP_Utility.git",
+      "version": "https://github.com/jshull/fp_utility.git",
       "depth": 0,
       "source": "git",
       "dependencies": {
         "com.unity.mathematics": "1.2.6",
         "com.unity.textmeshpro": "3.0.9"
       },
-      "hash": "6fd80bbd935e4e9ddbf5f047488ccb02498edf9a"
+      "hash": "8c933526af73bac48b267e3b6fc21c1fdc0fa87d"
     },
     "com.fuzzphyte.utility.analytics": {
       "version": "https://github.com/jshull/fp_utility_analytics.git",
