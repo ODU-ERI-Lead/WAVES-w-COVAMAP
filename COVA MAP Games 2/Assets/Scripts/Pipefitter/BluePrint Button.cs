@@ -5,27 +5,18 @@ using UnityEngine.UI;
 public class BluePrintButton : MonoBehaviour
 {
     public Button BluePrint_Button;
-    public bool BP_Pressed = false;
+    public Toggle BP_Pressed; // chaned this to toggle from bool
     public Button BP_close;
    // public Toggle 
     public GameObject BluePrint_Image;
     //public Image BluePrint_Image;
 
 
-   /// public void ImageAlphaSetOne(bool alphaActive)
-    //{
-     //   var curColor = BluePrint_Image.color;
-     //   float alpha = 1f;
-     //   if (!alphaActive)
-      //  {
-     //       alpha = 0;
-     //   }
-    //    BluePrint_Image.color = new Color(curColor.r, curColor.g, curColor.b, alpha);
-  //  }
+   
     public void Onopen()
     {
        
-        if (BP_Pressed = true)
+        if (BP_Pressed)
         {
             BluePrint_Image.SetActive(true);
            
@@ -34,7 +25,7 @@ public class BluePrintButton : MonoBehaviour
 
     public void Onclose()
     {
-        if (BP_Pressed = false)
+        if (!BP_Pressed)
         {
             Debug.Log("Button clicked, object is being deactivated");
             BluePrint_Image.SetActive(false);

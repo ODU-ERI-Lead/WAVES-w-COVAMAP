@@ -51,7 +51,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Cut_per: 0.61
+    - _Cut_per: -0.34
     - _Float: 0
     - _QueueControl: 0
     - _QueueOffset: 0
