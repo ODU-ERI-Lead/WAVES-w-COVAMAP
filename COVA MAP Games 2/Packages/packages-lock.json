@@ -33,7 +33,7 @@
         "com.fuzzphyte.ui": "https://github.com/jshull/FP_UI.git",
         "com.fuzzphyte.utility.analytics": "https://github.com/JShull/FP_Utility_Analytics.git"
       },
-      "hash": "9128a907e1d4976b9f9bffb55c841ae9cd54423c"
+      "hash": "b46777002fb9b3809d4bd084a04d9c5bbdc38de8"
     },
     "com.fuzzphyte.ray": {
       "version": "https://github.com/jshull/fp_ray.git",
@@ -63,10 +63,11 @@
       "dependencies": {
         "com.unity.mathematics": "1.2.6",
         "com.unity.textmeshpro": "3.0.9",
+        "com.unity.render-pipelines.universal": "17.0.4",
         "com.fuzzphyte.utility": "https://github.com/jshull/FP_Utility.git",
         "com.fuzzphyte.ray": "https://github.com/jshull/FP_Ray.git"
       },
-      "hash": "f96727cf3831cb6977c00545f3e7daef4426d413"
+      "hash": "8b6a7799e7a1313c13f7a0da7bae9e248146a107"
     },
     "com.fuzzphyte.ui": {
       "version": "https://github.com/jshull/fp_ui.git",
@@ -87,7 +88,7 @@
         "com.unity.mathematics": "1.2.6",
         "com.unity.textmeshpro": "3.0.9"
       },
-      "hash": "8c933526af73bac48b267e3b6fc21c1fdc0fa87d"
+      "hash": "5c2a807290ec978f276ff311314a1160830dabb6"
     },
     "com.fuzzphyte.utility.analytics": {
       "version": "https://github.com/jshull/fp_utility_analytics.git",

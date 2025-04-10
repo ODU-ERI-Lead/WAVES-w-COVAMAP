@@ -5,10 +5,10 @@
         "com.fuzzphyte.utility",
         "com.fuzzphyte.ray",
         "Unity.Mathematics",
-        "Unity.TextMeshPro",
         "com.fuzzphyte.tools",
-        "com.fuzzphyte.utility.analytics",
-        "com.fuzzphyte.game.samples"
+        "Unity.TextMeshPro",
+        "Unity.RenderPipelines.Universal.Runtime",
+        "com.fuzzphyte.tools.connections"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

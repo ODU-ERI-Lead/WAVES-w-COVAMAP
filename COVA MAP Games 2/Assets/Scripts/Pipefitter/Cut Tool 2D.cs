@@ -37,13 +37,12 @@ public class CutTool2D : FP_Tool<FP_CutToolData>, IPointerDownHandler, IPointerU
 
     [Header("URP Shader Graph stuff")]
     protected Material URP_Shadergraph_Cutmat;
-    protected float Cut_per = 1f; //may need to change but this is in reference to the shader materials float of "cut per" not sure if I leave blank or give it its assigned value here?
+    protected float Cut_per = 1f;//may need to change but this is in reference to the shader materials float of "cut per" not sure if I leave blank or give it its assigned value here?
+    public string Cutmat;
 
     //Think this concludes all need prereq info/values
 
-
-
-
+   
     /// <summary>
     /// Public accessor from UI to start the "tool"
     /// </summary>
@@ -73,7 +72,7 @@ public class CutTool2D : FP_Tool<FP_CutToolData>, IPointerDownHandler, IPointerU
         return false;
     }
    
-    public void OnPointerDown( PointerEventData eventData )
+    public void OnPointerDown( PointerEventData eventData)
     {
         Debug.LogWarning($"Pointer down!-Cut");
         if(!ToolIsCurrent)
@@ -105,9 +104,9 @@ public class CutTool2D : FP_Tool<FP_CutToolData>, IPointerDownHandler, IPointerU
                     currentActiveLine.DropSecondPoint(CutstartPosition);
                     UpdateTextFormat(0);
                     currentActiveLine.UpdateTextLocation(CutstartPosition);
-                    currentActiveLine.Add(currentActiveLine);
+                    allCutLines.Add(currentActiveLine);
                     // I think actual cutting mechanic code should go here
-                    Material.SetFloat(URP_Shadergraph_Cutmat, Cut_per );  // Maybe cutmeasurmentPrefix isntead of URP_Shadergraph_Cutmat? 
+                    URP_Shadergraph_Cutmat.SetFloat(Cutmat, Cut_per = -5.36f);  // Maybe cutmeasurmentPrefix isntead of URP_Shadergraph_Cutmat? 
 
 
                 }

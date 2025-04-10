@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4361648229144597027}
   - component: {fileID: 3101746064374326233}
   - component: {fileID: 2235623719334739748}
+  - component: {fileID: 1082098184537842743}
   m_Layer: 5
   m_Name: Point_1
   m_TagString: Untagged
@@ -75,6 +76,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!210 &1082098184537842743
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2797598328921381518}
+  m_Enabled: 1
+  m_SortingLayerID: -1050877157
+  m_SortingLayer: 2
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
 --- !u!1 &4394308881315106937
 GameObject:
   m_ObjectHideFlags: 0
@@ -100,7 +113,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4394308881315106937}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -153,8 +166,8 @@ LineRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1565349213
+  m_SortingLayer: 1
   m_SortingOrder: 10
   m_Positions:
   - {x: 0, y: 0, z: 0}
@@ -250,8 +263,8 @@ RectTransform:
   m_Children:
   - {fileID: 4361648229144597027}
   - {fileID: 3703335867367433806}
-  - {fileID: 8357569952955926297}
   - {fileID: 2069758417530343688}
+  - {fileID: 8357569952955926297}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -430,6 +443,7 @@ GameObject:
   - component: {fileID: 3703335867367433806}
   - component: {fileID: 4637116862999508208}
   - component: {fileID: 9033450800949648919}
+  - component: {fileID: 516652006903333743}
   m_Layer: 5
   m_Name: Point_2
   m_TagString: Untagged
@@ -494,3 +508,15 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!210 &516652006903333743
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9039556271744102741}
+  m_Enabled: 1
+  m_SortingLayerID: -1050877157
+  m_SortingLayer: 2
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
