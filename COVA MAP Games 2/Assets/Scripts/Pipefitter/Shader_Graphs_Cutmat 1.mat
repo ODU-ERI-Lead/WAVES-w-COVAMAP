@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader_Graphs_Cutmat
+  m_Name: Shader_Graphs_Cutmat 1
   m_Shader: {fileID: -6465566751694194690, guid: 451bc62d77fbcf34b8eba510adf7fbb3, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -51,7 +51,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Cut_per: 0.27
+    - _Cut_per: -4.535
     - _Float: 0
     - _QueueControl: 0
     - _QueueOffset: 0

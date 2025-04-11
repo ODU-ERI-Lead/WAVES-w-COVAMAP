@@ -30,10 +30,9 @@
         "com.unity.burst": "1.8.18",
         "com.fuzzphyte.utility": "https://github.com/jshull/FP_Utility.git",
         "com.fuzzphyte.systemevent": "https://github.com/jshull/FP_Event.git",
-        "com.fuzzphyte.ui": "https://github.com/jshull/FP_UI.git",
-        "com.fuzzphyte.utility.analytics": "https://github.com/JShull/FP_Utility_Analytics.git"
+        "com.fuzzphyte.ui": "https://github.com/jshull/FP_UI.git"
       },
-      "hash": "b46777002fb9b3809d4bd084a04d9c5bbdc38de8"
+      "hash": "8c8d4e1d82ff60cd35fd5edd4e1321b877057656"
     },
     "com.fuzzphyte.ray": {
       "version": "https://github.com/jshull/fp_ray.git",
@@ -67,7 +66,7 @@
         "com.fuzzphyte.utility": "https://github.com/jshull/FP_Utility.git",
         "com.fuzzphyte.ray": "https://github.com/jshull/FP_Ray.git"
       },
-      "hash": "8b6a7799e7a1313c13f7a0da7bae9e248146a107"
+      "hash": "7d35d9746322913a7603d1d558f96e68cd2c9b87"
     },
     "com.fuzzphyte.ui": {
       "version": "https://github.com/jshull/fp_ui.git",
