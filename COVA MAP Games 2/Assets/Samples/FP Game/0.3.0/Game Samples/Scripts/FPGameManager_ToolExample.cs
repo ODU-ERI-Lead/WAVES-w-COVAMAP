@@ -31,6 +31,7 @@ namespace FuzzPhyte.Game.Samples
         public Button The3DRemoveLinesButton;
         public Button TheAttachButton;
         public Button TheDetachButton;
+        public Button TheCutButton;
         public List<GameObject> AllButtonSelectIcons = new List<GameObject>();
         public FP_PanMove TheMoveRotateTool;
         public Slider TheForwardZPlaneSlider;
