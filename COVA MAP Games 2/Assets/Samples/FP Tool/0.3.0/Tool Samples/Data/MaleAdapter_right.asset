@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UniqueID: 
   connectionType: 
-  width: 0
-  ConnectionUnitOfMeasure: 0
+  width: 0.5
+  ConnectionUnitOfMeasure: 10
   localForward: {x: 0, y: 0, z: 0}
-  TriggerSize: {x: 0, y: 0, z: 0}
+  TriggerSize: {x: 0.02, y: 0.02, z: 0.02}
   TriggerCenter: {x: 0, y: 0, z: 0}
   LocalRelativePivotPosition: {x: 0, y: 0, z: 0}
   localRotationAngles: []
@@ -25,4 +25,8 @@ MonoBehaviour:
   InitAlignmentTolerance: 20
   TriggerTagCompare: Part
   PercentOfMeasure: 0.2
-  localConnectors: []
+  localConnectors:
+  - {x: 0, y: 0.06, z: 0}
+  - {x: 0, y: -0.06, z: 0}
+  - {x: 0, y: 0, z: 0.06}
+  - {x: 0, y: 0, z: -0.06}

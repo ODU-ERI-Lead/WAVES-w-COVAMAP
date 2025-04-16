@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: MaleAdapter_7
   m_EditorClassIdentifier: 
   UniqueID: 
-  UniquePartID: 0
+  UniquePartID: 7
   PartWidth: 0
-  ConnectionEndPrefab: {fileID: 0}
-  AllConnectionPointsForPart: []
+  ConnectionEndPrefab: {fileID: 1830916329416036123, guid: 45c2afeb939ccca4fb9533885c11a847, type: 3}
+  AllConnectionPointsForPart:
+  - {fileID: 11400000, guid: e06980cf7ddfb094a94aa9e9cd375109, type: 2}
+  - {fileID: 11400000, guid: b83892208b3283b458e0a1e298ea3f72, type: 2}

@@ -26,6 +26,7 @@ namespace FuzzPhyte.Tools.Samples
         protected Plane cachedPlane;
         [SerializeField] FP_MeasureLine3D currentActiveLine;
         [SerializeField]protected List<FP_MeasureLine3D> allMeasuredLines = new List<FP_MeasureLine3D>();
+       //[SerializeField] public Gameobject PromptPanel;
         
         /// <summary>
         /// Some additional UI reference to reset lines and deactivate if we need it
@@ -236,6 +237,7 @@ namespace FuzzPhyte.Tools.Samples
                             currentActiveLine.DropSecondPoint(endPosition);
                             UpdateMeasurementText();
                             currentActiveLine.transform.SetParent(ParentDecals);
+                            Debug.Log($"Do you wish to place hanger?");
                         }
                     }
                     OnMeasureToolEnding.Invoke();
