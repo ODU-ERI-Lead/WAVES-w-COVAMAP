@@ -2,15 +2,17 @@ using UnityEngine;
 
 public class Trashbin : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void DeleteLastSelected()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (Itemselector.lastSelected != null)
+        {
+            Debug.Log("Deleting: " + Itemselector.lastSelected.name);
+            Destroy(Itemselector.lastSelected);
+            Itemselector.lastSelected = null; // Clear the reference
+        }
+        else
+        {
+            Debug.Log("No item selected to delete.");
+        }
     }
 }

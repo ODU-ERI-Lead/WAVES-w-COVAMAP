@@ -1,16 +1,41 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Partspawnerscript : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public Button Elbow;
+    public Button Valve;
+    public Button Pipe;
+    public Button FemaleAdapter;
+    public Button MaleAdapter;
+
+    public GameObject[] PartsTospawn;
+    public Transform SpawnPoint;
+
+
+
+    public void SpawnElbow()
     {
-        
+        Instantiate(PartsTospawn[0],SpawnPoint.position, Quaternion.identity);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SpawnValve()
     {
-        
+
+    }
+
+    public void SpawnPipe()
+    {
+
+    }
+
+    public void SpawnFemaleAdapter()
+    {
+
+    }
+
+    public void SpawnMaleAdapter()
+    { 
+    
     }
 }
