@@ -25,6 +25,7 @@ public class CutTool2D : FP_Tool<FP_CutToolData>, IPointerDownHandler, IPointerU
     [Header("Unity Events")]
     public UnityEvent OnCutToolActivation;
     public UnityEvent OnCutToolStarting;
+    public UnityEvent OnCutToolActiveUse;
     public UnityEvent OnCutToolEnding;
     public UnityEvent OnCutToolDeactivation;
     [Header("Internal Parameters")]
@@ -120,6 +121,7 @@ public class CutTool2D : FP_Tool<FP_CutToolData>, IPointerDownHandler, IPointerU
         }
     }
 
+    //may need some sort of on active use call in here based on unity debug log.
     public void OnDrag(PointerEventData eventData)
     {
         if(!ToolIsCurrent)

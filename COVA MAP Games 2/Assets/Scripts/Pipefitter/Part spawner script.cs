@@ -21,21 +21,21 @@ public class Partspawnerscript : MonoBehaviour
 
     public void SpawnValve()
     {
-
+        Instantiate(PartsTospawn[1],SpawnPoint.position, Quaternion.identity);  
     }
 
     public void SpawnPipe()
     {
-
+        Instantiate(PartsTospawn[2],SpawnPoint.position, Quaternion.identity);  
     }
 
     public void SpawnFemaleAdapter()
     {
-
+        Instantiate(PartsTospawn[3],SpawnPoint.position, Quaternion.identity);
     }
 
     public void SpawnMaleAdapter()
-    { 
-    
+    {
+        Instantiate(PartsTospawn[4],SpawnPoint.position, Quaternion.identity);
     }
 }

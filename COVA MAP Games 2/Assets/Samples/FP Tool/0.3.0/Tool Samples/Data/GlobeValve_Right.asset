@@ -17,8 +17,8 @@ MonoBehaviour:
   width: 0.5
   ConnectionUnitOfMeasure: 10
   localForward: {x: 0, y: 0, z: 0}
-  TriggerSize: {x: 0.02, y: 0.02, z: 0.02}
-  TriggerCenter: {x: 0.03, y: 0, z: 0}
+  TriggerSize: {x: 0.05, y: 0.05, z: 0.05}
+  TriggerCenter: {x: 0.05, y: 0, z: 0}
   LocalRelativePivotPosition: {x: 0, y: 0, z: 0}
   localRotationAngles:
   - {x: 0, y: 0, z: 90}

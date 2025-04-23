@@ -17,7 +17,7 @@ MonoBehaviour:
   LineMat: {fileID: 2100000, guid: 34432d723ac7da042b274bc8b5d6b4ab, type: 2}
   lineWidth: 0.1
   lineDepth: 3
-  measurementUnits: 3
+  measurementUnits: 10
   measurementPrefix: 'Dis:'
   measurementLabelOffsetPixels: {x: 0, y: -0.5, z: 0}
   measurementPrecision: 2
