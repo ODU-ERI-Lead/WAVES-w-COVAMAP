@@ -7,12 +7,13 @@ using FuzzPhyte.Utility;
 using UnityEngine.UI;
 using FuzzPhyte.Tools;
 using Unity.VisualScripting;
+using FuzzPhyte.Tools.Samples;
 
 
 [RequireComponent(typeof(RectTransform))]
 
 
-public class CutTool2D : FP_Tool<FP_CutToolData>, IPointerDownHandler, IPointerUpHandler
+public class CutTool2D : FP_Tool<FP_CutToolData>, IFPUIEventListener<FP_Tool<FP_MeasureToolData>> ///IPointerDownHandler, IPointerUpHandler,
 {
     [Space]
     [Header("keep Using the Cut Tool?")]
@@ -53,7 +54,17 @@ public class CutTool2D : FP_Tool<FP_CutToolData>, IPointerDownHandler, IPointerU
         ActivateTool();
     }
 
-    public void DeactivateToolFromUI()
+    public void DeactivateResetLinesUI()
+    {
+        ForceDeactivateTool();
+        //blast all the lines
+        foreach (var line in allCutLines)
+        {
+            Destroy(line.gameObject);
+        }
+        allCutLines.Clear();
+    }
+    public override void DeactivateToolFromUI()
     {
         DeactivateTool();
     }
@@ -72,8 +83,40 @@ public class CutTool2D : FP_Tool<FP_CutToolData>, IPointerDownHandler, IPointerU
         Debug.LogWarning($"Did not activate the tool?");
         return false;
     }
-   
-    public void OnPointerDown( PointerEventData eventData)
+
+    public void OnUIEvent(FP_UIEventData<FP_Tool<FP_MeasureToolData>> eventData)
+    {
+        Debug.LogWarning($"OnUIEvent was processed {eventData.EventType} {eventData.AdditionalData} {this} {ToolIsCurrent}");
+        if (!ToolIsCurrent)
+        {
+            return;
+        }
+        if (eventData.TargetObject == this.gameObject)
+        {
+
+            //it's me
+            //Debug.LogWarning($"Event Data Target Object is me {eventData.TargetObject} {this}");
+            switch (eventData.EventType)
+            {
+                case FP_UIEventType.PointerDown:
+                    PointerDown(eventData.UnityPointerEventData);
+                    break;
+                case FP_UIEventType.PointerUp:
+                    PointerUp(eventData.UnityPointerEventData);
+                    break;
+                case FP_UIEventType.Drag:
+                    PointerDrag(eventData.UnityPointerEventData);
+                    break;
+            }
+        }
+        else
+        {
+            //it's not me
+            Debug.LogWarning($"Event Data Target Object is NOT me {eventData.TargetObject} {this}");
+        }
+    }
+
+        public void PointerDown( PointerEventData eventData)
     {
         Debug.LogWarning($"Pointer down!-Cut");
         if(!ToolIsCurrent)
@@ -122,7 +165,7 @@ public class CutTool2D : FP_Tool<FP_CutToolData>, IPointerDownHandler, IPointerU
     }
 
     //may need some sort of on active use call in here based on unity debug log.
-    public void OnDrag(PointerEventData eventData)
+    public void PointerDrag(PointerEventData eventData)
     {
         if(!ToolIsCurrent)
         {
@@ -139,7 +182,7 @@ public class CutTool2D : FP_Tool<FP_CutToolData>, IPointerDownHandler, IPointerU
         }
     }
 
-    public void OnPointerUp(PointerEventData eventData)
+    public void PointerUp(PointerEventData eventData)
     {
         Debug.Log($"On pointer up -Cut");
         if(!ToolIsCurrent)
@@ -194,6 +237,12 @@ public class CutTool2D : FP_Tool<FP_CutToolData>, IPointerDownHandler, IPointerU
             return true;
         }
         return false;
+    }
+
+
+    public void ResetVisuals()
+    {
+        DeactivateResetLinesUI();
     }
     /// <summary>
     /// Returns a screen position coordinate based on the canvas already assigned in the inspector

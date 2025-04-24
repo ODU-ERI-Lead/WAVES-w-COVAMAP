@@ -6835,7 +6835,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 818964383}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a733c0238e4bb954eb76f9a3dcf0b182, type: 3}
   m_Name: 
@@ -9492,7 +9492,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 484.39993, y: -120.89493}
+  m_AnchoredPosition: {x: 484.3999, y: -120.89493}
   m_SizeDelta: {x: 268.35, y: 158.49}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1146928043
@@ -16933,7 +16933,7 @@ MonoBehaviour:
   AfterLateUpdateActive: 0
   systemData: {fileID: 11400000, guid: 0ccb128b5507b41b5ad26462f63d98c3, type: 2}
   GameClock: {fileID: 7756453374589065085}
-  GameTimer: 500
+  GameTimer: 1000
   TenSecondsToGoEvent:
     m_PersistentCalls:
       m_Calls:
@@ -17026,6 +17026,7 @@ MonoBehaviour:
   fPGameUIMouseListenerPartsMove: {fileID: 37334981}
   fpGameUIMouseListenerAttachTool: {fileID: 37334982}
   fpGameUIMouseListenerDetachTool: {fileID: 37334983}
+  fPGameUIMouseListenerCutTool: {fileID: 37334980}
   AllMeasureToolsLeft:
   - {fileID: 1451456559}
   AllMeasureToolsRight:
@@ -17964,7 +17965,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.2}
   m_AnchorMax: {x: 0.1, y: 0.875}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -1}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2018171977
