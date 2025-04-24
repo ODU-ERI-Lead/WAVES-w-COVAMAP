@@ -9,7 +9,7 @@ using System;
 public class PipefitterpartData : FP_Data
 {
     [Header("Part_Name")]
-    //public Array<FP_Data> Part type; 
+    public Array[] Part_type; 
 
     [Header("Part_Specs")]
 
