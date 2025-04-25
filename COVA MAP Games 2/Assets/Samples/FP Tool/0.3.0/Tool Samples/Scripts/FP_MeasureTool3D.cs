@@ -12,6 +12,8 @@ namespace FuzzPhyte.Tools.Samples
     [RequireComponent(typeof(RectTransform))]
     public class FP_MeasureTool3D : FP_Tool<FP_MeasureToolData>, IFPUIEventListener<FP_Tool<FP_MeasureToolData>>
     {
+        public float CustomScale = 1f;
+        public string CustomScaleText = "FT";
         public Transform ParentDecals;
         //public float RaycastMaxDistance = 20f;
         [Tooltip("We are 2D casting into 3D Space - this RectTransform is our boundary")]
@@ -286,11 +288,11 @@ namespace FuzzPhyte.Tools.Samples
             if (currentActiveLine != null)
             {
                 //convert to the correct measurement system - our distance coming in is going to be in world meters
-                var unitReturn = FP_UtilityData.ReturnUnitByPixels(1, distance, toolData.measurementUnits);
+                var unitReturn = FP_UtilityData.ReturnUnitByPixels(1, distance, toolData.measurementUnits,CustomScale);
                 if (unitReturn.Item1)
                 {
                     var formattedDistance = unitReturn.Item2.ToString($"F{toolData.measurementPrecision}");
-                    currentActiveLine.UpdateText($"{toolData.measurementPrefix} {formattedDistance} {toolData.measurementUnits}");
+                    currentActiveLine.UpdateText($"{toolData.measurementPrefix} {formattedDistance} {CustomScaleText}");
                 }
                 else
                 {

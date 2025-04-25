@@ -19,7 +19,7 @@ namespace FuzzPhyte.Game.Samples
         public FPGameUIMouseListenerMove fPGameUIMouseListenerPartsMove;
         public FPGameUIMouseListenerAttach fpGameUIMouseListenerAttachTool;
         public FPGameUIMouseListenerDetach fpGameUIMouseListenerDetachTool;
-        public FPGameUIMouseListener fPGameUIMouseListenerCutTool;
+        public FPGameUIMouseListener fPGameUIMouseListenerCutTool;    /// add Cut after listener for clean fix 
         public List<FP_Tool<FP_MeasureToolData>> AllMeasureToolsLeft = new List<FP_Tool<FP_MeasureToolData>>();
         public List<FP_Tool<FP_MeasureToolData>> AllMeasureToolsRight = new List<FP_Tool<FP_MeasureToolData>>();
         public List<FP_Tool<PartData>> AllMoveParts = new List<FP_Tool<PartData>>();
@@ -267,7 +267,7 @@ namespace FuzzPhyte.Game.Samples
             fPGameUIMouseListenerRightScreen.ActivateListener();
             fpGameUIMouseListenerAttachTool.DeactivateListener();
             fpGameUIMouseListenerDetachTool.DeactivateListener();
-            fPGameUIMouseListenerCutTool.DeactivateListener();
+            fPGameUIMouseListenerCutTool.ActivateListener();
             if (theTool != null)
             {
                 if (AllMeasureToolsRight.Contains(theTool))
@@ -295,6 +295,7 @@ namespace FuzzPhyte.Game.Samples
                         };
                     }
                     theTool.ActivateTool();
+                    Debug.LogError($"3D measure tool is activated");
                 }
                 else
                 {
