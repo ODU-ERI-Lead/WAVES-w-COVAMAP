@@ -8,6 +8,7 @@ using UnityEngine.UI;
 using FuzzPhyte.Tools;
 using Unity.VisualScripting;
 using FuzzPhyte.Tools.Samples;
+using System;
 
 
 [RequireComponent(typeof(RectTransform))]
@@ -38,13 +39,15 @@ public class CutTool2D : FP_Tool<FP_CutToolData>, IFPUIEventListener<FP_Tool<FP_
     
 
     [Header("URP Shader Graph stuff")]
-    protected Material URP_Shadergraph_Cutmat;
+   [SerializeField] protected Material URP_Shadergraph_Cutmat;
     protected float Cut_per = 1f;//may need to change but this is in reference to the shader materials float of "cut per" not sure if I leave blank or give it its assigned value here?
-    public string Cutmat;
+    public string Cutmat = "Cut_per";
+    public Renderer CutmatRenderer; 
 
-    //Think this concludes all need prereq info/values
 
-   
+    //Think this concludes all need prereq info/values             new(URP_Shadergraph_Cutmat) 
+
+
     /// <summary>
     /// Public accessor from UI to start the "tool"
     /// </summary>
@@ -151,8 +154,8 @@ public class CutTool2D : FP_Tool<FP_CutToolData>, IFPUIEventListener<FP_Tool<FP_
                     allCutLines.Add(currentActiveLine);
                     // I think actual cutting mechanic code should go here
                     URP_Shadergraph_Cutmat.SetFloat(Cutmat, Cut_per = -5.36f);  // Maybe cutmeasurmentPrefix isntead of URP_Shadergraph_Cutmat? 
-
-
+                                                                                // Instantiate<thisgameobject>(pipe).setFloat(Cutmat, Cut_per = [Range(-1, 1)]; //based on cut position create something to do this.
+                    Debug.LogWarning($"Cut line should have showed and material should have changed.");
                 }
                 else
                 { 
@@ -164,8 +167,37 @@ public class CutTool2D : FP_Tool<FP_CutToolData>, IFPUIEventListener<FP_Tool<FP_
         }
     }
 
-    //may need some sort of on active use call in here based on unity debug log.
-    public void PointerDrag(PointerEventData eventData)
+    /// <summary>
+    /// use this somehwere, 
+    ///  GameObject obj = Instantiate(pipe);
+
+    // Assuming pipe has a Renderer and we're modifying a material property
+  //  Renderer rend = obj.GetComponent<Renderer>();
+
+    // Get world position of pointer
+ //   Vector3 worldPoint = Camera.main.ScreenToWorldPoint(eventData.position);
+
+    // Calculate local position within the object
+   // Vector3 localPoint = obj.transform.InverseTransformPoint(worldPoint);
+
+    // Assuming you want to map local x-position across the object's width to a range of -1 to 1
+  //  float objectWidth = rend.bounds.size.x;
+  //  float clampedX = Mathf.Clamp(localPoint.x, -objectWidth / 2, objectWidth / 2);
+   // float normalizedX = (clampedX / (objectWidth / 2)); // Gives value from -1 to 1
+
+    // Set shader/material float property
+ //   if (rend.material.HasProperty("_Cutmat"))
+  //  {
+  //      rend.material.SetFloat("_Cutmat", normalizedX); // _Cutmat is the shader property name
+   // }
+/// </summary>
+/// <param name="eventData"></param>
+
+
+
+
+//may need some sort of on active use call in here based on unity debug log.
+public void PointerDrag(PointerEventData eventData)
     {
         if(!ToolIsCurrent)
         {
