@@ -14138,7 +14138,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1571243624}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1587829606}
+        m_TargetAssemblyTypeName: FinalInspectionScript, Assembly-CSharp
+        m_MethodName: CheckAnswers
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1571243624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14420,7 +14432,17 @@ MonoBehaviour:
   - {fileID: 390138005}
   - {fileID: 2110928943}
   Answer_Parts: []
-  Correct_parts_data: []
+  Correct_parts_data:
+  - {fileID: 11400000, guid: 3507e4c634723a44eb07688538dafd57, type: 2}
+  - {fileID: 11400000, guid: 55320433fb708bd4e89de40e01c20e44, type: 2}
+  - {fileID: 11400000, guid: 847ec59d870043244b5dfed1c4d6b145, type: 2}
+  - {fileID: 11400000, guid: 29ecd62cc4ce6214a9e9eadc8dea3982, type: 2}
+  - {fileID: 11400000, guid: c35349b9ac5eb2847b3f830699ce0434, type: 2}
+  - {fileID: 11400000, guid: 8a1024a2e8efd7c4db7aeb3952a88632, type: 2}
+  - {fileID: 11400000, guid: a6a25aab2b061e041bd5c52ecfdd319e, type: 2}
+  - {fileID: 11400000, guid: a7eae507a5cb8624eb0c6c67579ab230, type: 2}
+  - {fileID: 11400000, guid: fe6760e077189fc4c805928fd45a989d, type: 2}
+  answerSlots: []
 --- !u!1 &1596744046
 GameObject:
   m_ObjectHideFlags: 0
