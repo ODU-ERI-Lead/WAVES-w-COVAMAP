@@ -26,7 +26,11 @@ public class FinalInspectionScript : MonoBehaviour
 
 
     //filling in list for spawned parts
-
+  //  public void OnCheck()
+   // {
+    //    GameObject[blueprinted_answer_parts] activate
+    //  all blueprinted_answer_parts.SetActive
+  //  }
 
 
     ///raycast portion/function loop use if drag or on drag of moving part scrpt
