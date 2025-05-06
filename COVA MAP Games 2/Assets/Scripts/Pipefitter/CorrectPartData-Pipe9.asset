@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5ee46402184f534ca7b76ef0c164547, type: 3}
   m_Name: CorrectPartData-Pipe9
   m_EditorClassIdentifier: 
-  UniqueID: 
-  PartName: 
-  CorrectPart_ID: 0
-  part_Length: 0
+  UniqueID: 99999999999999999999999
+  PartName: pipe part 9
+  CorrectPart_ID: 9
+  part_Length: 3
   Roughness: 0
   beenWelded: 0
   HasConnection: 0
