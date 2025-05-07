@@ -45,7 +45,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Ambient_Occlusion_Map:
-        m_Texture: {fileID: 2800000, guid: 2c71100aaa9a37346a4096155ce8acc2, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _AnisotropyMap:
@@ -168,10 +168,10 @@ Material:
     - _AlphaRemapMax: 1
     - _AlphaRemapMin: 0
     - _AlphaSrcBlend: 1
-    - _Ambient_Occlusion_Intensity: 1
+    - _Ambient_Occlusion_Intensity: 0
     - _Anisotropy: 0
-    - _Base_Smoothness_Max: 0.854
-    - _Base_Smoothness_Min: 0.818
+    - _Base_Smoothness_Max: 0.255
+    - _Base_Smoothness_Min: 0.182
     - _BlendMode: 0
     - _CoatMask: 0
     - _ConservativeDepthOffsetEnable: 0
@@ -217,7 +217,7 @@ Material:
     - _IridescenceThickness: 1
     - _LinkDetailsWithBase: 1
     - _MaterialID: 1
-    - _Meallic: 0.1
+    - _Meallic: 0.138
     - _Metallic: 0
     - _MetallicRemapMax: 1
     - _MetallicRemapMin: 0
@@ -285,7 +285,7 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
     - _Base_Smoothness_Tiling: {r: 30, g: 30, b: 0, a: 0}
-    - _Color: {r: 1, g: 0.7392711, b: 0, a: 1}
+    - _Color: {r: 0.6662958, g: 0.76336867, b: 0.8773585, a: 1}
     - _Detail_Smoothness_Tiling: {r: 2, g: 2, b: 0, a: 0}
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
@@ -294,7 +294,7 @@ Material:
     - _EmissiveColorLDR: {r: 0, g: 0, b: 0, a: 1}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
-    - _Normal_Tiling: {r: 10, g: 10, b: 0, a: 0}
+    - _Normal_Tiling: {r: 2, g: 2, b: 0, a: 0}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _ThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _TransmittanceColor: {r: 1, g: 1, b: 1, a: 1}
