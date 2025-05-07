@@ -23,13 +23,19 @@ public class Zoom_In_Out : MonoBehaviour
         return CutterCamera; 
     }
 
-    public void OnZoom(float value, Camera mainCamera)
+    public void OnZoom()
     {
-      //  float v = Mathf.Clamp(mainCamera + value, MinZoom, MaxZoom);
+      // float v = Mathf.Clamp(mainCamera + value, MinZoom, MaxZoom);
+      if (mainCamera.orthographicSize > MinZoom)
+      mainCamera.orthographicSize -= zoomDelta;
+      Debug.LogWarning("camera should be zooming in");
     }
 
-    public void OnZoomOut(float value)
+    public void OnZoomOut()
     {
+        if (mainCamera.orthographicSize < MaxZoom)
+      mainCamera.orthographicSize += zoomDelta;
+      Debug.LogWarning("camera should be zooming out");
 
     }
 
