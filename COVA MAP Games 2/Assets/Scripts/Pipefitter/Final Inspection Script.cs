@@ -7,6 +7,7 @@ using FuzzPhyte.UI;
 
 
 
+
 public class FinalInspectionScript : MonoBehaviour //PipefitterpartData may need to switch??
 {
     [System.Serializable]
@@ -18,13 +19,14 @@ public class FinalInspectionScript : MonoBehaviour //PipefitterpartData may need
     }
    // public PipefitterpartData PipefitterpartData;
     public GameObject[] blueprinted_answer_parts;
+    public bool SetBPA_Active = false;
     public Transform[] Blueprint_Answer_Transforms;
     public GameObject[] Spawned_parts;
     public Collider[] correct_parts_Colliders;
     public List<PipefitterpartData> Answer_Parts = new List<PipefitterpartData>();
     public List<PipefitterpartData> Correct_parts_data;
     public AnswerSlots[] answerSlots;
-
+    private PipefitterpartData PipefitterpartData;
 
     //filling in list for spawned parts
   //  public void OnCheck()
@@ -32,6 +34,13 @@ public class FinalInspectionScript : MonoBehaviour //PipefitterpartData may need
     //    GameObject[blueprinted_answer_parts] activate
     //  all blueprinted_answer_parts.SetActive
   //  }
+  public void DisplayBPA_Parts()
+    {
+        foreach (GameObject gameObjects in blueprinted_answer_parts)
+        {
+            gameObjects.SetActive(true);
+        }
+    }
 
 
     ///raycast portion/function loop use if drag or on drag of moving part scrpt
@@ -64,14 +73,14 @@ public class FinalInspectionScript : MonoBehaviour //PipefitterpartData may need
             {
                 Debug.LogWarning($"No hit from ray at {slot.rayOrigin.name}");
             }
-          // if (PipefitterpartData.Matches())
-          //  {
-           //     Debug.Log($"Correct part at {slot.rayOrigin.name}");
-           // }
-          //  else
-          //  {
-           //     Debug.LogWarning($"Incorrect part at {slot.rayOrigin.name}");
-           // }
+           if (PipefitterpartData.Matches(PipefitterpartData))
+            {
+                Debug.Log($"Correct part at {slot.rayOrigin.name}");
+            }
+           else
+           {
+              Debug.LogWarning($"Incorrect part at {slot.rayOrigin.name}");
+           }
 
             // start if loops like is bool welded checked
             //is bool connected proper check
