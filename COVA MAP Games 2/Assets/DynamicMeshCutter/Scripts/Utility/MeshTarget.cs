@@ -31,7 +31,7 @@ namespace DynamicMeshCutter
         public RagdollPhysics[] Physics = new RagdollPhysics[2] { RagdollPhysics.NonKinematic, RagdollPhysics.NonKinematic };
 
         //inheritance
-        public bool[] Inherit = new bool[2] { false, false };
+        public bool[] Inherit = new bool[2] { false , false };  //changing from flase to true for testing...
 
         private MeshRenderer _meshRenderer;
         private SkinnedMeshRenderer _skinnedMeshRenderer;

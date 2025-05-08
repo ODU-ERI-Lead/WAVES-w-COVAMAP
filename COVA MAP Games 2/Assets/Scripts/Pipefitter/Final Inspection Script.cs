@@ -6,7 +6,8 @@ using FuzzPhyte.UI;
 
 
 
-public class FinalInspectionScript : MonoBehaviour
+
+public class FinalInspectionScript : MonoBehaviour //PipefitterpartData may need to switch??
 {
     [System.Serializable]
     public class AnswerSlots
@@ -63,10 +64,10 @@ public class FinalInspectionScript : MonoBehaviour
             {
                 Debug.LogWarning($"No hit from ray at {slot.rayOrigin.name}");
             }
-           // if (PipefitterpartData.Matches())
-           // {
+          // if (PipefitterpartData.Matches())
+          //  {
            //     Debug.Log($"Correct part at {slot.rayOrigin.name}");
-          //  }
+           // }
           //  else
           //  {
            //     Debug.LogWarning($"Incorrect part at {slot.rayOrigin.name}");
