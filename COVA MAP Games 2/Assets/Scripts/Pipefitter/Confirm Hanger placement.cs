@@ -12,6 +12,8 @@ public class ConfirmHangerplacement : MonoBehaviour
     public GameObject[] hangerObjects;
     public GameObject Promptpanel;
     protected int currentIndex = 0;
+    public float activationDistance = 5f;
+    public Transform[] hangerpositions;
     // void Start()
     // {
     //     confirmButton.onClick.AddListener(OnConfirmPressed);
@@ -27,11 +29,16 @@ public class ConfirmHangerplacement : MonoBehaviour
             return;
         }
 
-        
-      //  foreach (GameObject hanger in hangerObjects)
-      //  {
-       //     hanger.SetActive(false);
-       // }
+
+        //  foreach (GameObject hanger in hangerObjects)
+        //  {
+        //     hanger.SetActive(false);
+        // }
+        // Convert mouse position to world space
+       // Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane));
+
+        // Calculate distance between mouse and target object
+       // float distance = Vector3.Distance(mouseWorldPosition, hangerpositions.position);
 
         // Activate the current hanger in sequence
         hangerObjects[currentIndex].SetActive(true);
