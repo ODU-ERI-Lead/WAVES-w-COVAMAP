@@ -5,7 +5,7 @@ using FuzzPhyte.Tools.Connections;
 
 
 
-    [System.Serializable]
+[System.Serializable]
 [CreateAssetMenu(fileName ="CorrectPartData", menuName = "Pipefitter/CorrectPartData")]
 public class PipefitterpartData : FP_Data
 {

@@ -28,26 +28,44 @@ public class ConfirmHangerplacement : MonoBehaviour
             Promptpanel.SetActive(false);
             return;
         }
+        // Convert hanger world position to screen space
+        //  Vector3 hangerScreenPos = Camera.main.WorldToScreenPoint(hangerpositions[currentIndex].position);
 
+        // Get current mouse position (also in screen space)
+        // Vector2 mouseScreenPos = Input.mousePosition;
 
-        //  foreach (GameObject hanger in hangerObjects)
-        //  {
-        //     hanger.SetActive(false);
-        // }
-        // Convert mouse position to world space
-       // Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane));
+        // Calculate distance in screen space (2D X/Y only)
+        // float distance = Vector2.Distance(new Vector2(hangerScreenPos.x, hangerScreenPos.y), mouseScreenPos);
+        // Get the depth of the hanger's position from the camera
+        Vector3 hangerScreenPos = Camera.main.WorldToScreenPoint(hangerpositions[currentIndex].position);
 
-        // Calculate distance between mouse and target object
-       // float distance = Vector3.Distance(mouseWorldPosition, hangerpositions.position);
+        // Use the hanger's depth to convert the mouse position correctly
+        Vector3 mouseScreenPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, hangerScreenPos.z);
+        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
+
+        // Calculate the distance from mouse to hanger
+        float distance = Vector3.Distance(mouseWorldPosition, hangerpositions[currentIndex].position);
+        Debug.Log($"Mouse to hanger distance: {distance}");
+
+        Debug.Log($"Mouse distance to hanger {currentIndex}: {distance}");
 
         // Activate the current hanger in sequence
-        hangerObjects[currentIndex].SetActive(true);
+        if (distance <= activationDistance)
+        {
+            hangerObjects[currentIndex].SetActive(true);
 
         Debug.Log("Activated Hanger: " + hangerObjects[currentIndex].name);
 
+
         // Move to the next one
         currentIndex++;
+        }
+        else
+        {
+            Debug.Log("Click was too far from hanger. Hanger not activated.");
+        }
 
+        Promptpanel.SetActive(false);
 
         //temp debug method
         for (int i = 0; i < hangerObjects.Length; i++)

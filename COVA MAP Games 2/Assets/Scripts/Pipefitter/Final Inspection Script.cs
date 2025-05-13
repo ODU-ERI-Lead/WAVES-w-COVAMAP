@@ -17,7 +17,8 @@ public class FinalInspectionScript : MonoBehaviour //PipefitterpartData may need
         public string expectedPartName;
         public int expectedPartID;
     }
-   // public PipefitterpartData PipefitterpartData;
+     // public PipefitterpartData PipefitterpartData;
+
     public GameObject[] blueprinted_answer_parts;
     public bool SetBPA_Active = false;
     public Transform[] Blueprint_Answer_Transforms;
@@ -27,6 +28,8 @@ public class FinalInspectionScript : MonoBehaviour //PipefitterpartData may need
     public List<PipefitterpartData> Correct_parts_data;
     public AnswerSlots[] answerSlots;
     private PipefitterpartData PipefitterpartData;
+    public GameObject Congrats_Display;
+    public bool beenMatched = false;
 
     //filling in list for spawned parts
   //  public void OnCheck()
@@ -90,7 +93,10 @@ public class FinalInspectionScript : MonoBehaviour //PipefitterpartData may need
             // then once finished display end game menu/coingrats 
 
             //also display work on board or display empty answer key on back once properly completed!
-
+            if (beenMatched == true)
+            {
+             Congrats_Display.SetActive(true);
+            }
         }
 
     }

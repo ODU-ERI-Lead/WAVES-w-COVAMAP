@@ -25,4 +25,4 @@ MonoBehaviour:
   matchesBlueprint: 0
   NeedsSanding: 0
   Sanded: 0
-  debugOutput: 0
+  debugOutput: 1
