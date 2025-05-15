@@ -24,9 +24,10 @@ public class Itemselector : MonoBehaviour
                 GameObject clickedObject = hit.collider.transform.root.gameObject;
                 lastSelected = clickedObject;
                 Debug.Log("Selected: " + lastSelected.name);
+                Debug.LogWarning("Clicked: " + hit.collider.name);
+                Debug.LogWarning("Selected root: " + hit.collider.transform.root.name);
             }
-            Debug.Log("Clicked: " + hit.collider.name);
-            Debug.Log("Selected root: " + hit.collider.transform.root.name);
+            
         }
     }
 
