@@ -13,7 +13,7 @@ public class FinalInspectionScript : MonoBehaviour //PipefitterpartData may need
 {
     [System.Serializable]
     public class AnswerSlots
-        {
+    {
         public Transform rayOrigin;
         public string expectedPartName;
         public int expectedPartID;
