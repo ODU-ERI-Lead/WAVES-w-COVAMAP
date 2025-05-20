@@ -101,11 +101,10 @@ namespace DynamicMeshCutter
                 return _asyncWorker;
             }
         }
-        private List<Info> _successes = new List<Info>();
-        private List<Info> _fails = new List<Info>();
-        private Queue<Info> _qSuccesses = new Queue<Info>();
-        private Queue<Info> _qFails = new Queue<Info>();
-
+        protected List<Info> _successes = new List<Info>();
+        protected List<Info> _fails = new List<Info>();
+        protected Queue<Info> _qSuccesses = new Queue<Info>();
+        protected Queue<Info> _qFails = new Queue<Info>();
         private bool _isInitialized = false;
 
         void InitializeWorker()
@@ -135,14 +134,16 @@ namespace DynamicMeshCutter
         {
             ApplicationHasQuit = false;
         }
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
             _cutterIsEnabled = true;
         }
-        private void OnDisable()
+        protected virtual void OnDisable()
         {
             _cutterIsEnabled = false;
+            Debug.LogWarning($"The Cutter is getting Disabled");
             Terminate();
+            _isInitialized = false;
         }
         protected virtual void Update()
         {
@@ -244,6 +245,15 @@ namespace DynamicMeshCutter
             }
             else
             {
+                if (AsyncWorker == null)
+                {
+                    Debug.LogWarning($"null ASYNC!");
+
+                }
+                if (info == null)
+                {
+                    Debug.LogWarning($"null INFO!");
+                }
                 AsyncWorker.Enqeue(info);
             }
         }

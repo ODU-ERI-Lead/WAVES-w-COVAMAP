@@ -4,6 +4,8 @@ public class Itemselector : MonoBehaviour
 {
     public static GameObject lastSelected;
     public LayerMask SelectableLayer;
+    private PipefitterpartData pipefitterpartData;
+    private FinalInspectionScript FinalInspectionScript;
 
     //potential item slect call to use.
     //public void SelectThisItem()
@@ -24,9 +26,11 @@ public class Itemselector : MonoBehaviour
                 GameObject clickedObject = hit.collider.transform.root.gameObject;
                 lastSelected = clickedObject;
                 Debug.Log("Selected: " + lastSelected.name);
+                Debug.LogWarning("Clicked: " + hit.collider.name);
+                Debug.LogWarning("Selected root: " + hit.collider.transform.root.name);
+               // Debug.LogWarning("Part selected ID for data file"+ slot.expectedPartID)
             }
-            Debug.Log("Clicked: " + hit.collider.name);
-            Debug.Log("Selected root: " + hit.collider.transform.root.name);
+            
         }
     }
 
