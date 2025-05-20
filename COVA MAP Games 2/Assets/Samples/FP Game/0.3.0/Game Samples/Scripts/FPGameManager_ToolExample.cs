@@ -8,6 +8,7 @@ namespace FuzzPhyte.Game.Samples
     using System.Collections.Generic;
     using FuzzPhyte.Tools.Connections;
     using FuzzPhyte.Tools.Samples;
+    using Codice.Client.BaseCommands;
 
     public class FPGameManager_ToolExample : FPGenericGameUtility
     {
@@ -43,6 +44,7 @@ namespace FuzzPhyte.Game.Samples
         public UnityEvent OnUnityGamePausedEvent;
         public UnityEvent OnUnityGameUnPausedEvent;
         protected bool useUnityEventsPlane;
+       // public List<PartCheckerCollider>   slshed out fofr now
 
         #region Overrides
         public override void Start()
