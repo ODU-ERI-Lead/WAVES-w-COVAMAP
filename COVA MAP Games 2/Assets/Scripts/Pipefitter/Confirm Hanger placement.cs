@@ -4,25 +4,45 @@ using FuzzPhyte.Utility;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using System.Collections.Generic;
+using System.Linq;
 
 public class ConfirmHangerplacement : MonoBehaviour 
 {
 
     public Button confirmButton;          
-    public GameObject[] hangerObjects;
+    //public GameObject[] hangerObjects;
+    public List<GameObject> AllHangerObjects = new List<GameObject>();
     public GameObject Promptpanel;
-    protected int currentIndex = 0;
+    protected int numberCorrect = 0;
     public float activationDistance = 5f;
-    public Transform[] hangerpositions;
-    // void Start()
-    // {
-    //     confirmButton.onClick.AddListener(OnConfirmPressed);
-    // }
-   
+    public FP_MeasureTool3D MeasureToolRef;
+    public UnityEvent AllHangersInPlace;
 
+    public void OnEnable()
+    {
+        if (MeasureToolRef != null)
+        {
+            MeasureToolRef.OnMeasureToolEnding.AddListener(ActivatePromptPanel);
+        }
+    }
+    public void Start()
+    {
+        for (int i = 0; i < AllHangerObjects.Count; i++)
+        {
+            AllHangerObjects[i].SetActive(false);
+        }
+    }
+    public void OnDisable()
+    {
+        if (MeasureToolRef != null)
+        {
+            MeasureToolRef.OnMeasureToolEnding.RemoveListener(ActivatePromptPanel);
+        }
+    }
     public void OnConfirmPressed()
     {
-        if (currentIndex >= hangerObjects.Length)
+        if(AllHangerObjects.Count == 0||MeasureToolRef==null)
         {
             Debug.Log("All hangers have already been activated.");
             Promptpanel.SetActive(false);
@@ -37,42 +57,49 @@ public class ConfirmHangerplacement : MonoBehaviour
         // Calculate distance in screen space (2D X/Y only)
         // float distance = Vector2.Distance(new Vector2(hangerScreenPos.x, hangerScreenPos.y), mouseScreenPos);
         // Get the depth of the hanger's position from the camera
-        Vector3 hangerScreenPos = Camera.main.WorldToScreenPoint(hangerpositions[currentIndex].position);
+        //Vector3 hangerScreenPos = Camera.main.WorldToScreenPoint(hangerObjects[currentIndex].transform.position);
 
         // Use the hanger's depth to convert the mouse position correctly
-        Vector3 mouseScreenPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, hangerScreenPos.z);
-        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
-
-        // Calculate the distance from mouse to hanger
-        float distance = Vector3.Distance(mouseWorldPosition, hangerpositions[currentIndex].position);
-        Debug.Log($"Mouse to hanger distance: {distance}");
-
-        Debug.Log($"Mouse distance to hanger {currentIndex}: {distance}");
-
-        // Activate the current hanger in sequence
-        if (distance <= activationDistance)
+        //Vector3 mouseScreenPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, hangerScreenPos.z);
+        //Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
+        Vector3 endMeasuredPosition = MeasureToolRef.EndPosition;
+        GameObject FoundHanger = null;
+        for(int i=0;i< AllHangerObjects.Count; i++)
         {
-            hangerObjects[currentIndex].SetActive(true);
+            float distance = Vector3.Distance(endMeasuredPosition, AllHangerObjects[i].transform.position);
+            // Calculate the distance from mouse to hanger
 
-        Debug.Log("Activated Hanger: " + hangerObjects[currentIndex].name);
+            Debug.Log($"Measurement End to hanger distance: {distance}");
 
+            Debug.Log($"Measurement End distance to hanger {AllHangerObjects[i].name}: {distance}");
 
-        // Move to the next one
-        currentIndex++;
-        }
-        else
-        {
-            Debug.Log("Click was too far from hanger. Hanger not activated.");
-        }
+            // Activate the current hanger in sequence
+            if (distance <= activationDistance)
+            {
+                AllHangerObjects[i].SetActive(true);
 
-        Promptpanel.SetActive(false);
+                Debug.Log("Activated Hanger: " + AllHangerObjects[i].name);
+                FoundHanger=AllHangerObjects[i];
 
-        //temp debug method
-        for (int i = 0; i < hangerObjects.Length; i++)
-        {
-            Debug.Log($"Index {i}: {hangerObjects[i]?.name}, Active: {hangerObjects[i]?.activeSelf}");
+                // Move to the next one
+                numberCorrect++;
+                break;
+            }
+            else
+            {
+                Debug.Log("Click was too far from hanger. Hanger not activated.");
+            }
         }
 
+        AllHangerObjects.Remove(FoundHanger);
+        if (AllHangerObjects.Count == 0)
+        {
+            if (MeasureToolRef != null)
+            {
+                MeasureToolRef.OnMeasureToolEnding.RemoveListener(ActivatePromptPanel);
+            }
+            AllHangersInPlace.Invoke();
+        }
         Promptpanel.SetActive(false);
     }
    
@@ -81,6 +108,8 @@ public class ConfirmHangerplacement : MonoBehaviour
         Promptpanel.SetActive(false);
     
     }
-
-
+    public void ActivatePromptPanel()
+    {
+        Promptpanel.SetActive(true);
+    }
 }

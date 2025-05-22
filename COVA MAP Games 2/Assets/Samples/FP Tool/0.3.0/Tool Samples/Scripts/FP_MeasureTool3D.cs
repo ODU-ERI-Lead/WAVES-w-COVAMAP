@@ -25,10 +25,11 @@ namespace FuzzPhyte.Tools.Samples
         [Header("Internal parameters")]
         protected Vector3 startPosition = Vector3.zero;
         protected Vector3 endPosition = Vector3.zero;
+        public Vector3 EndPosition { get => endPosition; }
         protected Plane cachedPlane;
         [SerializeField] FP_MeasureLine3D currentActiveLine;
         [SerializeField]protected List<FP_MeasureLine3D> allMeasuredLines = new List<FP_MeasureLine3D>();
-        public GameObject PromptPanel;
+        //public GameObject PromptPanel;
         
         /// <summary>
         /// Some additional UI reference to reset lines and deactivate if we need it
@@ -244,7 +245,7 @@ namespace FuzzPhyte.Tools.Samples
                     }
                     OnMeasureToolEnding.Invoke();
                     DeactivateTool();
-                    PromptPanel.SetActive(true);
+                    //PromptPanel.SetActive(true);
                 }
             }
             else

@@ -17,7 +17,8 @@ public class OrbitalRotationscript : FP_MotionBase
     protected float rotationY = 0f; // Track rotation in the Y direction
     protected float rotationZ = 0f; // Track roation in the Z direction 
     protected Vector3 currentCoordinate;
-
+    protected float FixedRotationX = 90f;
+    protected float FixedRotationZ = 0f;    
     public virtual void Setup(Vector3 startposition)
     {
         currentCoordinate = startposition;
