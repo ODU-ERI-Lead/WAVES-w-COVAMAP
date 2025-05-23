@@ -93,6 +93,10 @@ public class PartCheckerCollider : PartChecker
             OtherDetails = collision.gameObject.GetComponent<PartChecker>();
             this.PartDataReference = collision.gameObject.GetComponent<PartChecker>().PartDataReference;
         }
+        Debug.LogWarning("Part has entered an answer collider.");
+        UserEvaluatePart();
+
+
     }
 
     public void OnCollisionExit(Collision collision)
@@ -105,12 +109,19 @@ public class PartCheckerCollider : PartChecker
                 this.PartDataReference = null;
             }
         }
+        Debug.LogWarning("Part has left an answer collider.");
     }
 
 
     public void OnCollisionStay(Collision collision)
     {
-        
+
+
+
+
+
+
+        Debug.LogWarning("Part is within a answer collider.");
     }
 
 
