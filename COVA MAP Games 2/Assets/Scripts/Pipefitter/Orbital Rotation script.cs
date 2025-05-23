@@ -18,7 +18,8 @@ public class OrbitalRotationscript : FP_MotionBase
     protected float rotationZ = 0f; // Track roation in the Z direction 
     protected Vector3 currentCoordinate;
     protected float FixedRotationX = 90f;
-    protected float FixedRotationZ = 0f;    
+    protected float FixedRotationZ = 0f;
+    public Vector3 rotationAxis = Vector3.up;
     public virtual void Setup(Vector3 startposition)
     {
         currentCoordinate = startposition;
@@ -61,5 +62,12 @@ public class OrbitalRotationscript : FP_MotionBase
         }
         while (loop);
         EndMotion();
+    }
+
+     
+
+    public void Rotate90Degrees()
+    {
+        transform.Rotate(0,0,90); 
     }
 }

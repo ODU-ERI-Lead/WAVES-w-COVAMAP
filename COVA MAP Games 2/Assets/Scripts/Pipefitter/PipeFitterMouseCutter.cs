@@ -26,6 +26,8 @@ public class PipeFitterMouseCutter : CutterBehaviour
     [Tooltip("Make sure to drop in the length pipe part")]
     public GameObject PipePrefab;
     public Camera CutCam;
+    public Transform CutpartspawnTransform;
+
 
     public void Start()
     {
@@ -278,4 +280,14 @@ public class PipeFitterMouseCutter : CutterBehaviour
             LR.SetPosition(1, endPt);
         }
     }
+
+
+    //delete right side of cut pipe then transform to assembly area 
+    public void PostCutMove()
+    {
+        //cData.CreatedObjects.GetChild(0).transform , need to know left side cut code reference
+       
+    }
+
+
 }
