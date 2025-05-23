@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MainFPTag: {fileID: 0}
+  HelperTag: {fileID: 0}
 --- !u!114 &345722898336510264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,8 +197,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 6
+  m_fontSizeBase: 6
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -296,8 +297,8 @@ MonoBehaviour:
   m_UVBias: {x: 0, y: 0}
   m_DecalLayerMask: 1
   m_ScaleMode: 0
-  m_Offset: {x: 0, y: 0, z: 1}
-  m_Size: {x: 0.5, y: 0.5, z: 2}
+  m_Offset: {x: 0, y: 0, z: 0.1}
+  m_Size: {x: 0.043, y: 0.043, z: 0.2}
   m_FadeFactor: 1
 --- !u!1 &4476397312009439627
 GameObject:
@@ -352,8 +353,8 @@ MonoBehaviour:
   m_UVBias: {x: 0, y: 0}
   m_DecalLayerMask: 1
   m_ScaleMode: 0
-  m_Offset: {x: 0, y: 0, z: 0.5}
-  m_Size: {x: 0.1, y: 5, z: 1}
+  m_Offset: {x: 0, y: 0, z: 0.1}
+  m_Size: {x: 0.02, y: 5, z: 0.2}
   m_FadeFactor: 1
 --- !u!1 &5874037868087297061
 GameObject:
@@ -441,6 +442,6 @@ MonoBehaviour:
   m_UVBias: {x: 0, y: 0}
   m_DecalLayerMask: 1
   m_ScaleMode: 0
-  m_Offset: {x: 0, y: 0, z: 1}
-  m_Size: {x: 0.5, y: 0.5, z: 2}
+  m_Offset: {x: 0, y: 0, z: 0.1}
+  m_Size: {x: 0.043, y: 0.043, z: 0.2}
   m_FadeFactor: 1

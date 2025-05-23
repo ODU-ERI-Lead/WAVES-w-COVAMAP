@@ -9,6 +9,10 @@ public class PipeFitterMouseCutter : CutterBehaviour
     public LineRenderer LR => GetComponent<LineRenderer>();
     public float BladeLength = 2;
     public float BladeWidth = 0.002f;
+    public float ZForwardDistanceLineRendererOffCam;
+    [Header("Cut Parameters")]
+    public bool MoveLeftPieceOnCut = true;
+    public float SeparationDistance = 0.007f;
     [Space]
     [Header("Colors")]
     public Color ToolOnColor;
@@ -21,6 +25,7 @@ public class PipeFitterMouseCutter : CutterBehaviour
     private Plane cachedCuttingPlane;
     [Tooltip("Make sure to drop in the length pipe part")]
     public GameObject PipePrefab;
+    public Camera CutCam;
 
     public void Start()
     {
@@ -153,6 +158,8 @@ public class PipeFitterMouseCutter : CutterBehaviour
                     
                 }
                 var CCollider = pipeCode.ColliderParent.GetChild(0).gameObject.GetComponent<CapsuleCollider>();
+               
+                float newPipeLength = 0;
                 if (childIndex == 0)
                 {
                     //update rightEndPoint
@@ -161,28 +168,44 @@ public class PipeFitterMouseCutter : CutterBehaviour
                     
                     Vector3 worldMid = (leftEndPoint.transform.position + intersection) / 2f;
                     Vector3 localMid = CCollider.gameObject.transform.InverseTransformPoint(worldMid);
-                    float newPipeLength = Vector3.Distance(rightEndPoint.position, leftEndPoint.position);
+                    newPipeLength = Vector3.Distance(rightEndPoint.position, leftEndPoint.position);
+                    
+                    
                     if (CCollider != null)
                     {
                         CCollider.center = localMid;
                         CCollider.height = newPipeLength;
                     }
-                    PipePart.transform.position += new Vector3(-0.07f,0 , 0);
+                    if (MoveLeftPieceOnCut)
+                    {
+                        PipePart.transform.position += new Vector3(-SeparationDistance, 0, 0);
+                    }
                 }
+                    
                 if (childIndex == 1)
                 {
                     //update leftEndpoint
                     leftEndPoint.transform.position = intersection;
                     Vector3 worldMid = (rightEndPoint.transform.position + intersection) / 2f;
                     Vector3 localMid = CCollider.gameObject.transform.InverseTransformPoint(worldMid);
-                    float newPipeLength = Vector3.Distance(rightEndPoint.position, leftEndPoint.position);
+                    newPipeLength = Vector3.Distance(rightEndPoint.position, leftEndPoint.position);
                     if (CCollider != null)
                     {
                         CCollider.center = localMid;
                         CCollider.height = newPipeLength;
                     }
-                    PipePart.transform.position += new Vector3(0.07f, 0, 0);
+                    if (MoveLeftPieceOnCut)
+                    {
+                        PipePart.transform.position += new Vector3(SeparationDistance, 0, 0);
+                    }
+                    else
+                    {
+                        //only right is moving
+                        PipePart.transform.position += new Vector3(SeparationDistance*2f, 0, 0);
+                    }
+                    
                 }
+                
                 yield return new WaitForEndOfFrame();
                 if (rightEndPoint.GetComponent<BoxCollider>() && leftEndPoint.GetComponent<BoxCollider>())
                 {
@@ -202,6 +225,8 @@ public class PipeFitterMouseCutter : CutterBehaviour
                     details.PipeMesh = newMesh.gameObject;
                     details.LeftEndPoint = leftEndPoint.gameObject;
                     details.RightEndPoint = rightEndPoint.gameObject;
+                    details.UpdateLength(newPipeLength);
+                    
                     //info.MeshTarget.gameObject.GetComponent<PipeFitterPipeTargetDetails>()
                 }
             }
@@ -210,15 +235,15 @@ public class PipeFitterMouseCutter : CutterBehaviour
     }
     private void DrawCutTool(Color currentColor)
     {
-        var mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane + 0.05f);
-        _to = Camera.main.ScreenToWorldPoint(mousePos);
+        var mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, CutCam.nearClipPlane + ZForwardDistanceLineRendererOffCam);
+        _to = CutCam.ScreenToWorldPoint(mousePos);
         _endBladePt = _to - new Vector3(0, BladeLength, 0);
         VisualizeLine(true, _to, _endBladePt,currentColor);
     }
 
     private void Cut()
     {
-        Plane plane = new Plane(_endBladePt, _to, Camera.main.transform.position);
+        Plane plane = new Plane(_endBladePt, _to, CutCam.transform.position);
         cachedCuttingPlane = plane;
         var roots = UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects();
         foreach (var root in roots)

@@ -8,6 +8,7 @@ public class PipeFitterPipeTargetDetails : MonoBehaviour
     public GameObject RightEndPoint;
     public GameObject ParentPivot;
     public GameObject PipeMesh;
+    [SerializeField]protected float pipeLength;
     
 
     public void Start()
@@ -18,5 +19,10 @@ public class PipeFitterPipeTargetDetails : MonoBehaviour
             RightEndPoint = ConnectionData.ConnectionPointParent.GetChild(1).gameObject;
         }
         
+    }
+
+    public void UpdateLength(float newLength)
+    {
+        pipeLength = newLength;
     }
 }

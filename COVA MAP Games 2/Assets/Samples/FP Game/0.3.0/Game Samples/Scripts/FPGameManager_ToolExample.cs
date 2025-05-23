@@ -43,6 +43,8 @@ namespace FuzzPhyte.Game.Samples
         //public Image ButtonSelectionIcon;
         public UnityEvent OnUnityGamePausedEvent;
         public UnityEvent OnUnityGameUnPausedEvent;
+        [Space]
+        public UnityEvent TurnOffOnStart;
         protected bool useUnityEventsPlane;
        // public List<PartCheckerCollider>   slshed out fofr now
 
@@ -51,13 +53,14 @@ namespace FuzzPhyte.Game.Samples
         {
             base.Start();
             useUnityEventsPlane = false;
-            TheForwardZPlaneSlider.maxValue = SliderMax;
-            TheForwardZPlaneSlider.value = SliderMax * 0.5f;
-            sliderLastPos = TheForwardZPlaneSlider.value;
+            //TheForwardZPlaneSlider.maxValue = SliderMax;
+            //TheForwardZPlaneSlider.value = SliderMax * 0.5f;
+            //sliderLastPos = TheForwardZPlaneSlider.value;
             if (TheMoveRotateTool == null)
             {
                 Debug.LogError($"Need to assign my Move Tool so I can adjust the Forward Plane");
             }
+            TurnOffOnStart.Invoke();
         }
         public override void FixedUpdate()
         {
@@ -297,7 +300,7 @@ namespace FuzzPhyte.Game.Samples
                         };
                     }
                     theTool.ActivateTool();
-                    Debug.LogError($"3D measure tool is activated");
+                    //Debug.LogError($"3D measure tool is activated");
                 }
                 else
                 {

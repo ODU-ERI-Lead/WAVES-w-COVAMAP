@@ -1,7 +1,8 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Zoom_In_Out : MonoBehaviour
+public class Zoom_In_Out : MonoBehaviour, IPointerDownHandler, IDragHandler 
 {
     public Button Zoom_In;
     public Button Zoom_Out;
@@ -12,6 +13,9 @@ public class Zoom_In_Out : MonoBehaviour
     public RectTransform BPtoZoom;
     public Camera mainCamera;
     public Camera CutterCamera;
+    public Vector2 pointerDownPos;
+    public Vector2 startPos;
+    public RectTransform BPrectTransform;
 
     public Camera GetMainCamera()
     {
@@ -51,7 +55,22 @@ public class Zoom_In_Out : MonoBehaviour
         return new Vector3(clamped, clamped, 1f);
     }
 
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            BPrectTransform, eventData.position, eventData.pressEventCamera, out pointerDownPos);
+        startPos = BPrectTransform.anchoredPosition;
+    }
 
+    public void OnDrag(PointerEventData eventData)
+    {
+        Vector2 currentPointerPos;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            BPrectTransform, eventData.position, eventData.pressEventCamera, out currentPointerPos);
+
+        Vector2 offset = currentPointerPos - pointerDownPos;
+        BPrectTransform.anchoredPosition = startPos + offset;
+    }
 
 
 }
