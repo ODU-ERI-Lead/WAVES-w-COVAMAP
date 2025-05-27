@@ -69,5 +69,10 @@ public class OrbitalRotationscript : FP_MotionBase
     public void Rotate90Degrees()
     {
         transform.Rotate(0,0,90); 
+
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            transform.Rotate(0, 0, 90);
+        }
     }
 }

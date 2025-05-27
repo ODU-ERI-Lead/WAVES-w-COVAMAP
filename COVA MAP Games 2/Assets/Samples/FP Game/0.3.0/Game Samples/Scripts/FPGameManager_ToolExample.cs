@@ -9,7 +9,7 @@ namespace FuzzPhyte.Game.Samples
     using FuzzPhyte.Tools.Connections;
     using FuzzPhyte.Tools.Samples;
     using Codice.Client.BaseCommands;
-
+    
     public class FPGameManager_ToolExample : FPGenericGameUtility
     {
         [Space]
@@ -47,6 +47,8 @@ namespace FuzzPhyte.Game.Samples
         public UnityEvent TurnOffOnStart;
         protected bool useUnityEventsPlane;
        // public List<PartCheckerCollider>   slshed out fofr now
+       public MonoBehaviour ConfirmHanagerplacement;
+
 
         #region Overrides
         public override void Start()
