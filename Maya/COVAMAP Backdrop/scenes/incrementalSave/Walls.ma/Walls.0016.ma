@@ -1,6 +1,6 @@
 //Maya ASCII 2025ff03 scene
 //Name: Walls.ma
-//Last modified: Wed, May 07, 2025 03:47:11 PM
+//Last modified: Wed, May 07, 2025 04:38:55 PM
 //Codeset: 1252
 requires maya "2025ff03";
 requires "stereoCamera" "10.0";
@@ -11,17 +11,17 @@ fileInfo "product" "Maya 2025";
 fileInfo "version" "2025";
 fileInfo "cutIdentifier" "202409190603-cbdc5a7e54";
 fileInfo "osv" "Windows 11 Pro v2009 (Build: 26100)";
-fileInfo "UUID" "023AAF7F-41EE-931C-1559-5E82AD8F65AB";
+fileInfo "UUID" "03820269-4522-8538-361C-E8A19430D8A8";
 createNode transform -s -n "persp";
 	rename -uid "8905996F-4DC4-5BA8-2757-0B961BE81E4B";
 	setAttr ".v" no;
-	setAttr ".t" -type "double3" -31.478663486172035 148.34482699007796 349.49873350883593 ;
-	setAttr ".r" -type "double3" -21.338352729275005 -362.59999999958211 0 ;
+	setAttr ".t" -type "double3" 88.791749893978306 551.53042146847929 1026.6308320261071 ;
+	setAttr ".r" -type "double3" -27.338352729274984 -354.59999999958143 -1.9967081373067562e-16 ;
 createNode camera -s -n "perspShape" -p "persp";
 	rename -uid "6CE13FB4-403E-0175-3314-8E9C75E06BFF";
 	setAttr -k off ".v" no;
 	setAttr ".fl" 34.999999999999993;
-	setAttr ".coi" 432.08990503086602;
+	setAttr ".coi" 1220.2922379751055;
 	setAttr ".imn" -type "string" "persp";
 	setAttr ".den" -type "string" "persp_depth";
 	setAttr ".man" -type "string" "persp_mask";
@@ -20580,7 +20580,7 @@ createNode mesh -n "Mockup_CableShape" -p "Mockup_Cable";
 	setAttr ".iog[0].og[4].gcl" -type "componentList" 4 "f[1808:1834]" "f[1851:1872]" "f[1893]" "f[1920:1951]";
 	setAttr ".vir" yes;
 	setAttr ".vif" yes;
-	setAttr ".pv" -type "double2" 0.0049203915987163782 1 ;
+	setAttr ".pv" -type "double2" 0.48882062750635669 0.50000002246815711 ;
 	setAttr ".uvst[0].uvsn" -type "string" "map1";
 	setAttr -s 3124 ".uvst[0].uvsp";
 	setAttr ".uvst[0].uvsp[0:249]" -type "float2" 0.85816282 0.32982901 0.8544786
@@ -26689,16 +26689,16 @@ createNode shadingEngine -n "lambert5SG";
 createNode materialInfo -n "materialInfo5";
 	rename -uid "03EE2793-4671-BE0B-A7B0-F79553B8AB55";
 createNode groupId -n "groupId423";
-	rename -uid "B8734DD1-4957-6D6A-5183-06B5BDDF59FC";
+	rename -uid "0A346DF6-4C2A-A0CB-A591-4C84286C4CD8";
 	setAttr ".ihi" 0;
 createNode groupId -n "groupId424";
-	rename -uid "2AF929C5-402B-6CEA-3EA0-95AE465BAFD1";
+	rename -uid "FE52789B-4EAA-D40E-DD4C-069B2EE6BCD0";
 	setAttr ".ihi" 0;
 createNode groupId -n "groupId425";
-	rename -uid "F9FB3AEC-4C91-A65E-30B6-E08FACED01E3";
+	rename -uid "79436EB1-47E7-8DB4-B78A-BE881442930C";
 	setAttr ".ihi" 0;
 createNode groupId -n "groupId426";
-	rename -uid "43346740-46CD-E5AA-2F4E-4080FDBC5910";
+	rename -uid "F3F510E8-4AA5-7B83-AB83-A9A582515E46";
 	setAttr ".ihi" 0;
 select -ne :time1;
 	setAttr ".o" 0;
