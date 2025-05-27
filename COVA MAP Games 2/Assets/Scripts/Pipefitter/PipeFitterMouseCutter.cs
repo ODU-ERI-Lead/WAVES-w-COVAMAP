@@ -4,6 +4,7 @@ using System.Collections;
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using UnityEngine.AI;
 public class PipeFitterMouseCutter : CutterBehaviour
 {
     public LineRenderer LR => GetComponent<LineRenderer>();
@@ -144,7 +145,7 @@ public class PipeFitterMouseCutter : CutterBehaviour
         float denominator = Vector3.Dot(planeNormal, pipeDirection);
         float t = numerator/ denominator;
         Vector3 intersection = leftEdgeBeforeCut + ( t * pipeDirection);
-
+        GameObject cutpipe = new GameObject("cutpipe");
 
         if (pipeCode)
         {
@@ -234,6 +235,7 @@ public class PipeFitterMouseCutter : CutterBehaviour
             }
            
         }
+       // oncutpipegenerated?
     }
     private void DrawCutTool(Color currentColor)
     {
@@ -263,6 +265,7 @@ public class PipeFitterMouseCutter : CutterBehaviour
     void OnCreated(Info info, MeshCreationData cData)
     {
         MeshCreation.TranslateCreatedObjects(info, cData.CreatedObjects, cData.CreatedTargets, Separation);
+        
     }
     private void VisualizeLine(bool value, Vector3 startPt,Vector3 endPt, Color lineColor )
     {
@@ -283,10 +286,13 @@ public class PipeFitterMouseCutter : CutterBehaviour
 
 
     //delete right side of cut pipe then transform to assembly area 
-    public void PostCutMove()
+    public void PostCutMove(Info info, int childIndex)
     {
         //cData.CreatedObjects.GetChild(0).transform , need to know left side cut code reference
-        
+        // childIndex           ;
+        // GeneratePipeFromPart
+        // StartCoroutine(GeneratePipeFromPart())
+      //  var cutpipepart = GetComponent < childIndex(0) >;
     }
 
 
