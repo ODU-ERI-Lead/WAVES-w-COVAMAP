@@ -5605,7 +5605,7 @@ GameObject:
   - component: {fileID: 328430450}
   - component: {fileID: 328430449}
   m_Layer: 5
-  m_Name: Button_Cut  (changes needed)
+  m_Name: Button_Cut  (c)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5692,7 +5692,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1952052478}
         m_TargetAssemblyTypeName: FuzzPhyte.Game.Samples.FPGameManager_ToolExample,
           com.fuzzphyte.game.samples
-        m_MethodName: UIDetachToolButtonPushed
+        m_MethodName: UICutToolButtonPushed
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 818964383}
@@ -7099,6 +7099,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1704933974}
         m_TargetAssemblyTypeName: OrbitalRotationscript, Assembly-CSharp
         m_MethodName: Rotate90Degrees
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1952052478}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9023,7 +9035,7 @@ Transform:
   m_GameObject: {fileID: 549230305}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.271, y: 0.167, z: -0.167}
+  m_LocalPosition: {x: 0.75, y: 0.167, z: -0.167}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11187,6 +11199,7 @@ GameObject:
   - component: {fileID: 707780994}
   - component: {fileID: 707780993}
   - component: {fileID: 707780992}
+  - component: {fileID: 707780995}
   m_Layer: 5
   m_Name: Part confirm
   m_TagString: Untagged
@@ -11258,13 +11271,25 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 707780995}
+        m_TargetAssemblyTypeName: MoveCutParts, Assembly-CSharp
+        m_MethodName: PostCutMove
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 707780995}
+        m_TargetAssemblyTypeName: MoveCutParts, Assembly-CSharp
+        m_MethodName: OnEnable
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -11308,6 +11333,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 707780990}
   m_CullTransparentMesh: 1
+--- !u!114 &707780995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 707780990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9910cb5d8257a3f4e873f423d247f141, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SendtoAssemblyButton: {fileID: 707780992}
+  AssemblyAreaSpawn: {fileID: 549230306}
 --- !u!1 &718611943
 GameObject:
   m_ObjectHideFlags: 0
@@ -13898,6 +13937,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1952052480}
         m_TargetAssemblyTypeName: CameraSwitcher, Assembly-CSharp
         m_MethodName: OnClickHB
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 707780995}
+        m_TargetAssemblyTypeName: MoveCutParts, Assembly-CSharp
+        m_MethodName: OnDisable
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -31523,7 +31574,7 @@ MonoBehaviour:
   The3DRemoveLinesButton: {fileID: 1900529060}
   TheAttachButton: {fileID: 2056514209}
   TheDetachButton: {fileID: 1007971603}
-  TheCutButton: {fileID: 144266729}
+  TheCutButton: {fileID: 328430450}
   AllButtonSelectIcons:
   - {fileID: 1914875703}
   - {fileID: 1171361450}

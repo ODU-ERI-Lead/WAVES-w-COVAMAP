@@ -18,7 +18,7 @@ public class PipeFitterMouseCutter : CutterBehaviour
     [Header("Colors")]
     public Color ToolOnColor;
     public Color ToolAboutToCutColor;
-    
+
     private Vector3 _endBladePt;
     private Vector3 _from;
     private Vector3 _to;
@@ -28,7 +28,10 @@ public class PipeFitterMouseCutter : CutterBehaviour
     public GameObject PipePrefab;
     public Camera CutCam;
     public Transform CutpartspawnTransform;
-
+    // delegate attempt one for getting children to be moved 
+    public delegate void GetCutPart(GameObject CutpartLeft, GameObject GetCutPartaRight);
+    public static event GetCutPart RetrievePartsFromCut;
+   
 
     public void Start()
     {
@@ -75,8 +78,10 @@ public class PipeFitterMouseCutter : CutterBehaviour
     }
     protected override void CreateGameObjects(Info info)
     {
+
         //base.CreateGameObjects(info);
         //get the plane from info
+        
 
         MeshCreationData creationInfo = MeshCreation.CreateObjects(info, DefaultMaterial, VertexCreationThreshold);
         Vector3 worldScale = info.MeshTarget.transform.lossyScale;
@@ -85,6 +90,9 @@ public class PipeFitterMouseCutter : CutterBehaviour
         Vector3 WorldRightEndPos = Vector3.zero;
         Vector3 WorldPivotMeshBeforeCut = Vector3.zero;
         Transform OldMesh = null;
+        GameObject CutPartLeft = creationInfo.CreatedObjects[0];    
+        GameObject CutPartRight = creationInfo.CreatedObjects[1];
+
         if (info.MeshTarget.gameObject.GetComponent<PipeFitterPipeTargetDetails>())
         {
             WorldLeftStartPos = info.MeshTarget.gameObject.GetComponent<PipeFitterPipeTargetDetails>().LeftEndPoint.transform.position;
@@ -125,27 +133,33 @@ public class PipeFitterMouseCutter : CutterBehaviour
         //destroy actual pipe
         Destroy(OldMesh.gameObject);
         info.OnCreatedCallback?.Invoke(info, creationInfo);
+        //using here isnt getting all part components unslash if need be
+        // seeing if a delayed coroutine works, originally was just post cut etc.
+      StartCoroutine(DelayedPostCut( CutPartLeft, CutPartRight));
+        Debug.Log("Should have ran and invked post cut parts should be assigned");
 
     }
-    private IEnumerator GeneratePipeFromPart(Transform newMesh, Vector3 originalPivot,Vector3 leftEdgeBeforeCut, Vector3 rightEdgeBeforeCut, int childIndex)
+    private IEnumerator GeneratePipeFromPart(Transform newMesh, Vector3 originalPivot, Vector3 leftEdgeBeforeCut, Vector3 rightEdgeBeforeCut, int childIndex)
     {
         var PipePart = GameObject.Instantiate(PipePrefab, originalPivot, Quaternion.identity);
         //first child is the visual
-        
+
         GameObject oldVisual = PipePart.transform.GetChild(0).gameObject;
         Destroy(oldVisual);
         newMesh.transform.SetParent(PipePart.transform);
         yield return new WaitForEndOfFrame();
         var pipeCode = PipePart.GetComponent<ConnectionPart>();
-        
+
         Vector3 pipeDirection = rightEdgeBeforeCut - leftEdgeBeforeCut;
         Vector3 planeNormal = cachedCuttingPlane.normal;
         float planeDistance = cachedCuttingPlane.distance;
         float numerator = -(Vector3.Dot(planeNormal, leftEdgeBeforeCut) + planeDistance);
         float denominator = Vector3.Dot(planeNormal, pipeDirection);
-        float t = numerator/ denominator;
-        Vector3 intersection = leftEdgeBeforeCut + ( t * pipeDirection);
-        GameObject cutpipe = new GameObject("cutpipe");
+        float t = numerator / denominator;
+        Vector3 intersection = leftEdgeBeforeCut + (t * pipeDirection);
+       // GameObject cutpipe = new GameObject("cutpipe");
+     // GameObject CutPartLeft = pipeCode.ColliderParent.GetChild(0).gameObject;
+     // GameObject CutPartRight = pipeCode.ColliderParent.GetChild(1).gameObject;
 
         if (pipeCode)
         {
@@ -233,9 +247,15 @@ public class PipeFitterMouseCutter : CutterBehaviour
                     //info.MeshTarget.gameObject.GetComponent<PipeFitterPipeTargetDetails>()
                 }
             }
+
            
         }
-       // oncutpipegenerated?
+        // do not use here screws up cut
+     // PostCut(CutPartLeft, CutPartRight);
+     // Debug.Log("Should have ran and invked post cut parts should be assigned");
+        // may not be right spot to call post cut?
+        // PostCut(GameObject CutPartLeft, GameObject CutPartRight);
+        // oncutpipegenerated?
     }
     private void DrawCutTool(Color currentColor)
     {
@@ -264,8 +284,13 @@ public class PipeFitterMouseCutter : CutterBehaviour
 
     void OnCreated(Info info, MeshCreationData cData)
     {
+        //see if it works here delete if need be, postcut tht is.
+        //post cut does work here but same issue as before, collider and connection do not move on cut. unslash if need be
+      //  GameObject CutPartLeft = cData.CreatedObjects[0];
+      //  GameObject CutPartRight = cData.CreatedObjects[1];
         MeshCreation.TranslateCreatedObjects(info, cData.CreatedObjects, cData.CreatedTargets, Separation);
-        
+      //  PostCut(CutPartLeft, CutPartRight);
+      //  Debug.Log("Should have ran and invked post cut parts should be assigned");
     }
     private void VisualizeLine(bool value, Vector3 startPt,Vector3 endPt, Color lineColor )
     {
@@ -284,6 +309,24 @@ public class PipeFitterMouseCutter : CutterBehaviour
         }
     }
 
+    private IEnumerator DelayedPostCut(GameObject cutLeft, GameObject cutRight)
+    {
+        // Wait one frame (or you can use WaitForSeconds(0.1f))
+        yield return new WaitForEndOfFrame();
+
+        // Now safely fire the event
+        PostCut(cutLeft, cutRight);
+    }
+
+    // this isnt getting all the part data.
+    public void PostCut(GameObject CutPartLeft, GameObject CutPartRight)
+    {
+        RetrievePartsFromCut?.Invoke(CutPartLeft, CutPartRight);
+        if (RetrievePartsFromCut != null)
+        {
+            Debug.Log(" Parts should be retrieved and ready to be passed");
+        }
+    }
 
     //delete right side of cut pipe then transform to assembly area 
     public void PostCutMove(Info info, int childIndex)
