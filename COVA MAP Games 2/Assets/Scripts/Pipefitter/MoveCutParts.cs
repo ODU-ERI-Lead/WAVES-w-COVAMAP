@@ -52,6 +52,7 @@ public class MoveCutParts : MonoBehaviour
                 //sending right to assembly area may want to just not include this though.
                 CutPart2.transform.position = AssemblyAreaSpawn.position;
                 root2.position = AssemblyAreaSpawn.position;
+                CutPart1.transform.position = root1.transform.position;
              }
             else
             {

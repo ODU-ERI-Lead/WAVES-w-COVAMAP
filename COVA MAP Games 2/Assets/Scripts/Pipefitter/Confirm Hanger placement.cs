@@ -103,6 +103,7 @@ public class ConfirmHangerplacement : MonoBehaviour
         Promptpanel.SetActive(false);
     }
    
+   // public delegate event AllHangersInPlace();
     public void NoConfirmPressed()
     { 
         Promptpanel.SetActive(false);

@@ -31,6 +31,7 @@ public class PipeFitterMouseCutter : CutterBehaviour
     // delegate attempt one for getting children to be moved 
     public delegate void GetCutPart(GameObject CutpartLeft, GameObject GetCutPartaRight);
     public static event GetCutPart RetrievePartsFromCut;
+    public delegate void CutPipeLength();
    
 
     public void Start()
@@ -243,6 +244,7 @@ public class PipeFitterMouseCutter : CutterBehaviour
                     details.LeftEndPoint = leftEndPoint.gameObject;
                     details.RightEndPoint = rightEndPoint.gameObject;
                     details.UpdateLength(newPipeLength);
+                    Debug.Log("cut pipe length asserted"+ newPipeLength.ToString());
                     
                     //info.MeshTarget.gameObject.GetComponent<PipeFitterPipeTargetDetails>()
                 }

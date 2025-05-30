@@ -47,7 +47,7 @@ namespace FuzzPhyte.Game.Samples
         public UnityEvent TurnOffOnStart;
         protected bool useUnityEventsPlane;
        // public List<PartCheckerCollider>   slshed out fofr now
-       public MonoBehaviour ConfirmHanagerplacement;
+        public MonoBehaviour ConfirmHangerplacement;
 
 
         #region Overrides
@@ -62,6 +62,7 @@ namespace FuzzPhyte.Game.Samples
             {
                 Debug.LogError($"Need to assign my Move Tool so I can adjust the Forward Plane");
             }
+            //if (ConfirmHangerplacement.event.AllHangersInPlace)
             TurnOffOnStart.Invoke();
         }
         public override void FixedUpdate()
