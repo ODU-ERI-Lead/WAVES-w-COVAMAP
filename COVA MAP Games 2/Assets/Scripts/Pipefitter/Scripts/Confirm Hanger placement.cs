@@ -102,7 +102,10 @@ public class ConfirmHangerplacement : MonoBehaviour
         }
         Promptpanel.SetActive(false);
     }
-   
+   // public UnityEvent AllHangersInPlace()
+   // {
+
+   // }
    // public delegate event AllHangersInPlace();
     public void NoConfirmPressed()
     { 
