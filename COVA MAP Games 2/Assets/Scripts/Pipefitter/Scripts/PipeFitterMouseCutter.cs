@@ -5,6 +5,7 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 using UnityEngine.AI;
+using JetBrains.Annotations;
 public class PipeFitterMouseCutter : CutterBehaviour
 {
     public LineRenderer LR => GetComponent<LineRenderer>();
@@ -28,7 +29,9 @@ public class PipeFitterMouseCutter : CutterBehaviour
     public GameObject PipePrefab;
     public Camera CutCam;
     public Transform CutpartspawnTransform;
-    // delegate attempt one for getting children to be moved 
+    // delegate attempt one for getting children to be moved
+    public delegate void CutStateEvents();
+    public event CutStateEvents OnFininshedCutting;
     public delegate void GetCutPart(GameObject CutpartLeft, GameObject GetCutPartaRight);
     public static event GetCutPart RetrievePartsFromCut;
     public delegate void CutPipeLength();
@@ -136,7 +139,7 @@ public class PipeFitterMouseCutter : CutterBehaviour
         info.OnCreatedCallback?.Invoke(info, creationInfo);
         //using here isnt getting all part components unslash if need be
         // seeing if a delayed coroutine works, originally was just post cut etc.
-      StartCoroutine(DelayedPostCut( CutPartLeft, CutPartRight));
+        StartCoroutine(DelayedPostCut( CutPartLeft, CutPartRight));
         Debug.Log("Should have ran and invked post cut parts should be assigned");
 
     }
@@ -234,19 +237,28 @@ public class PipeFitterMouseCutter : CutterBehaviour
                 //update the visual information
                 pipeCode.MyVisualItem = newMesh.gameObject;
                 newMesh.transform.SetAsFirstSibling();
-                if (newMesh.GetChild(0).gameObject.GetComponent<MeshTarget>())
+                var meshTargetFound = newMesh.GetChild(0).gameObject.GetComponent<MeshTarget>();
+                var rootParentTransform = pipeCode.gameObject.transform;
+
+                //add our component
+                var details = rootParentTransform.gameObject.AddComponent<PipeFitterPipeTargetDetails>();
+                if (meshTargetFound != null)
                 {
-                    //add our component
-                    var details = newMesh.GetChild(0).gameObject.AddComponent<PipeFitterPipeTargetDetails>();
-                    details.ConnectionData = pipeCode;
-                    details.ParentPivot = PipePart;
-                    details.PipeMesh = newMesh.gameObject;
-                    details.LeftEndPoint = leftEndPoint.gameObject;
-                    details.RightEndPoint = rightEndPoint.gameObject;
-                    details.UpdateLength(newPipeLength);
-                    Debug.Log("cut pipe length asserted"+ newPipeLength.ToString());
+                    details.ReferenceToMeshTarget = meshTargetFound;
+                } 
+                details.ConnectionData = pipeCode;
+                details.ParentPivot = PipePart;
+                details.PipeMesh = newMesh.gameObject;
+                details.LeftEndPoint = leftEndPoint.gameObject;
+                details.RightEndPoint = rightEndPoint.gameObject;
+                details.UpdateLength(newPipeLength);
+                Debug.Log("cut pipe length asserted"+ newPipeLength.ToString());
                     
                     //info.MeshTarget.gameObject.GetComponent<PipeFitterPipeTargetDetails>()
+                
+              //  delegate void CutPipelength()
+                {
+
                 }
             }
 
@@ -328,6 +340,10 @@ public class PipeFitterMouseCutter : CutterBehaviour
         {
             Debug.Log(" Parts should be retrieved and ready to be passed");
         }
+        //LAST THING THAT OCCURS
+        OnFininshedCutting?.Invoke();
+       
+
     }
 
     //delete right side of cut pipe then transform to assembly area 

@@ -1,6 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum SpawnAreaType
+{
+    NA=0,
+    Shelf=1,
+    Bench=2,
+    Ground=3
+}
 public class Partspawnerscript : MonoBehaviour
 {
     public Button Elbow;
@@ -11,6 +18,7 @@ public class Partspawnerscript : MonoBehaviour
 
     public GameObject[] PartsTospawn;
     public Transform SpawnPoint;
+    public Transform BinSpawnPoint;
     public Transform LeftSpawnEdge;
     public Transform RightSpawnEdge;
     public int HorizontalBinCount = 10;
@@ -18,31 +26,44 @@ public class Partspawnerscript : MonoBehaviour
     protected int currentIndex=0;
     protected int currentIndexDepth = 0;
     public bool TestHorizontalChange;
+    public SpawnAreaType SpawnLocationType;
+    public delegate void PartSpawned(GameObject thePart);
+    public event PartSpawned ElbowSpawned;
+    public event PartSpawned ValveSpawned;
+    public event PartSpawned MAdapterSpawned;
+    public event PartSpawned FAdapterSpawned;
+    public event PartSpawned PipeSpawned;
+
 
     public void SpawnElbow()
     {
         //someValue = condition ? newValue : someOtherValue;
-        Instantiate(PartsTospawn[0], TestHorizontalChange ? GetSpawnLocation() : SpawnPoint.position, Quaternion.identity);
+        var item = Instantiate(PartsTospawn[0], TestHorizontalChange ? GetSpawnLocation() : SpawnPoint.position, Quaternion.identity);
+        ElbowSpawned?.Invoke(item);
     }
 
     public void SpawnValve()
     {
-        Instantiate(PartsTospawn[1], TestHorizontalChange ? GetSpawnLocation() : SpawnPoint.position, Quaternion.identity);  
+        var item = Instantiate(PartsTospawn[1], TestHorizontalChange ? GetSpawnLocation() : SpawnPoint.position, Quaternion.identity);
+        ValveSpawned?.Invoke(item);
     }
 
     public void SpawnPipe()
     {
-        Instantiate(PartsTospawn[2], TestHorizontalChange ? GetSpawnLocation() : SpawnPoint.position, Quaternion.identity);  
+        var item = Instantiate(PartsTospawn[2], TestHorizontalChange ? GetSpawnLocation() : SpawnPoint.position, Quaternion.identity);
+        PipeSpawned?.Invoke(item);
     }
 
     public void SpawnFemaleAdapter()
     {
-        Instantiate(PartsTospawn[3], TestHorizontalChange ? GetSpawnLocation() : SpawnPoint.position, Quaternion.identity);
+        var item = Instantiate(PartsTospawn[3], TestHorizontalChange ? GetSpawnLocation() : SpawnPoint.position, Quaternion.identity);
+        FAdapterSpawned?.Invoke(item);
     }
 
     public void SpawnMaleAdapter()
     {
-        Instantiate(PartsTospawn[4], TestHorizontalChange ? GetSpawnLocation() : SpawnPoint.position, Quaternion.identity);
+        var item = Instantiate(PartsTospawn[4], TestHorizontalChange ? GetSpawnLocation() : SpawnPoint.position, Quaternion.identity);
+        MAdapterSpawned?.Invoke(item);
     }
     public Vector3 GetSpawnLocation()
     {
@@ -67,7 +88,7 @@ public class Partspawnerscript : MonoBehaviour
         {
             currentIndexDepth = 0;
         }
-        SpawnPoint.position = LeftSpawnEdge.position + new Vector3(xChange, 0, zChange);
-        return SpawnPoint.position;
+        BinSpawnPoint.position = LeftSpawnEdge.position + new Vector3(xChange, 0, zChange);
+        return BinSpawnPoint.position;
     }
 }

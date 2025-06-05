@@ -1,9 +1,10 @@
 using FuzzPhyte.Tools.Connections;
 using UnityEngine;
-
+using DynamicMeshCutter;
 public class PipeFitterPipeTargetDetails : MonoBehaviour
 {
     public ConnectionPart ConnectionData;
+    public MeshTarget ReferenceToMeshTarget;
     public GameObject LeftEndPoint;
     public GameObject RightEndPoint;
     public GameObject ParentPivot;
