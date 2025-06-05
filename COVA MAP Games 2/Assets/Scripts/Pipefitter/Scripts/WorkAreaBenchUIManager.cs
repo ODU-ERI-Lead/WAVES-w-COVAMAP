@@ -122,14 +122,47 @@ public class WorkAreaBenchUIManager : MonoBehaviour
         {
             //who are we moving?
             var listOfItems = MoveCutPartsRef.ReturnPartsToRotate();
+            Debug.LogError($"List of Items Count? {listOfItems.Count}");
             if (listOfItems != null)
             {
-                foreach (var item in listOfItems)
+                for(int i=0; i < listOfItems.Count; i++)
                 {
+                    var item = listOfItems[i];
+                    Debug.LogError($"Who am I? {item.name}");
                     if (item.GetComponent<OrbitalRotationscript>())
                     {
+
+                        //TheTypeOfOrbital
+                        var ourItem = item.GetComponent<OrbitalRotationscript>();
+
                         //do the deal
-                        item.GetComponent<OrbitalRotationscript>().Rotate90Degrees();
+                        ourItem.Rotate90Degrees();
+                        /*
+                        if(ourItem.TheTypeOfOrbital == OrbitalType.Shifted)
+                        {
+                            //move someamount based on the data
+                            var theDetails = ourItem.gameObject.GetComponent<PipeFitterPipeTargetDetails>();
+                            if (theDetails != null)
+                            {
+                                (bool validReturn, Vector3 midPointWorld) = theDetails.ReturnWorldMidPoint();
+                                if (validReturn)
+                                {
+                                    //spawn at midpoint
+                                    var fakemidPt = GameObject.Instantiate(new GameObject(), midPointWorld, Quaternion.identity);
+                                    ourItem.transform.SetParent(fakemidPt.transform);
+                                    ourItem.Rotate90DegreesPassedObject(fakemidPt.transform);
+                                    ourItem.transform.SetParent(null);
+                                    Destroy(fakemidPt);
+                                    
+                                }
+                            }
+                        }
+                        else
+                        {
+                           
+                        }
+                        */
+
                     }
                 }
             }

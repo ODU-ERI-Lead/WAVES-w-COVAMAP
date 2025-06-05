@@ -13,6 +13,7 @@ public enum PartType
     StraightPipe =10
 }
 
+
 [RequireComponent(typeof(Collider))]
 public class PartChecker : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class PartChecker : MonoBehaviour
     public float Length;
     public float Width;
     public ConnectionPart PartDataReference;
-    
+    public bool EndPoint=false;
 
 
 

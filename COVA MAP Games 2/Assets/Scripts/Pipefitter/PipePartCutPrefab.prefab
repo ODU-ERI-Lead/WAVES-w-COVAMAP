@@ -697,10 +697,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3718913586603006816}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -1295,7 +1295,8 @@ MonoBehaviour:
   PlayOnStart: 0
   playOnSetup: 1
   rotationSpeed: 10
-  rotationAxis: {x: 0, y: 1, z: 0}
+  rotationAxis: {x: 0, y: 0, z: 1}
+  TheTypeOfOrbital: 1
 --- !u!1 &7723868958373728997
 GameObject:
   m_ObjectHideFlags: 0
@@ -1507,6 +1508,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ConnectionData: {fileID: 2562290660892796462}
+  ReferenceToMeshTarget: {fileID: 0}
   LeftEndPoint: {fileID: 0}
   RightEndPoint: {fileID: 0}
   ParentPivot: {fileID: 7448219017091200734}

@@ -16,6 +16,10 @@ public class PartCheckerCollider : PartChecker
     
     public void UserEvaluatePart()
     {
+        if (OtherDetails==null)
+        {
+            return;
+        }
         if (OtherDetails.PipeType == this.PipeType)
         {
             CorrectPart?.Invoke(this);
@@ -84,6 +88,7 @@ public class PartCheckerCollider : PartChecker
 
     public void OnCollisionEnter(Collision collision)
     {
+        Debug.LogWarning($"Collision information  {collision.collider.name}");
         if (this.PartDataReference != null)
         {
             return;
@@ -95,8 +100,38 @@ public class PartCheckerCollider : PartChecker
         }
         Debug.LogWarning("Part has entered an answer collider.");
         UserEvaluatePart();
-
-
+    }
+    public void OnTriggerEnter(Collider other)
+    {
+        
+        if (this.PartDataReference != null)
+        {
+            return;
+        }
+        if (other.gameObject.GetComponent<PartChecker>())
+        {
+            if (other.gameObject.GetComponent<PartChecker>().EndPoint)
+            {
+                return;
+            }
+            Debug.LogError($"Trigger information  {other.gameObject.name}");
+            OtherDetails = other.gameObject.GetComponent<PartChecker>();
+            this.PartDataReference = other.gameObject.GetComponent<PartChecker>().PartDataReference;
+            Debug.LogWarning($"Part has entered an answer collider, {OtherDetails.gameObject.name} with {other.gameObject.name} ");
+            UserEvaluatePart();
+        }
+    }
+    public void OnTriggerExit(Collider other)
+    {
+        if (this.PartDataReference != null && other.gameObject.GetComponent<PartChecker>())
+        {
+            if (other.gameObject.GetComponent<PartChecker>().PartDataReference == this.PartDataReference)
+            {
+                OtherDetails = null;
+                this.PartDataReference = null;
+            }
+        }
+        Debug.LogWarning("Part has left an answer collider.");
     }
 
     public void OnCollisionExit(Collision collision)
