@@ -1,8 +1,7 @@
 using System.Collections.Generic;
-using System;
 using UnityEngine;
 using UnityEngine.UI;
-
+using FuzzPhyte.Tools.Connections;
 
 public class MoveCutParts : MonoBehaviour
 {
@@ -139,6 +138,21 @@ public class MoveCutParts : MonoBehaviour
     {
         AssemblyAreaSpawn.transform.position = spawner.GetSpawnLocation();
         partToMove.position = AssemblyAreaSpawn.position;
+        //lets check to see if we have a random connection setup and null it out
+        if (partToMove.GetComponent<ConnectionPart>() != null)
+        {
+            StartCoroutine(DelayClearConnectionPart(partToMove));
+        }
+    }
+    System.Collections.IEnumerator DelayClearConnectionPart(Transform part)
+    {
+        yield return new WaitForEndOfFrame();
+        ConnectionPart connectionPart = part.GetComponent<ConnectionPart>();
+        for (int i = 0; i < connectionPart.MyConnectionPoints.Count; i++)
+        {
+            var aPoint = connectionPart.MyConnectionPoints[i];
+            aPoint.ForceOtherClearConnection();
+        }
     }
 
     private Transform GetRoot(Transform t)

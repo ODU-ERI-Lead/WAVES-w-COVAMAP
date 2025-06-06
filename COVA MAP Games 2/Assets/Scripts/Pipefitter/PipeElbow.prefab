@@ -406,6 +406,7 @@ MonoBehaviour:
   playOnSetup: 1
   rotationSpeed: 10
   rotationAxis: {x: 0, y: 0, z: 1}
+  TheTypeOfOrbital: 0
 --- !u!1 &2352284135394499216
 GameObject:
   m_ObjectHideFlags: 0
@@ -417,6 +418,7 @@ GameObject:
   - component: {fileID: 2754526175807154763}
   - component: {fileID: 9100714760888079320}
   - component: {fileID: 754505808134421118}
+  - component: {fileID: 1621942140833721265}
   m_Layer: 0
   m_Name: BodyCollider
   m_TagString: PartCollider
@@ -473,6 +475,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.023, y: 0.023, z: 0.02}
   m_Center: {x: -0.003, y: 0.003, z: 0}
+--- !u!114 &1621942140833721265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2352284135394499216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afd35571dbc034f4389be4ba44e5ce6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PipeType: 1
+  Length: 0
+  Width: 0
+  PartDataReference: {fileID: 7779841261050843385}
+  EndPoint: 0
 --- !u!1 &4490137756158532339
 GameObject:
   m_ObjectHideFlags: 0

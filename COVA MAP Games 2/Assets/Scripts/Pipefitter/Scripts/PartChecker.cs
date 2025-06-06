@@ -1,5 +1,6 @@
 using UnityEngine;
 using FuzzPhyte.Tools.Connections;
+using UnityEditor.EditorTools;
 
 
 
@@ -22,15 +23,18 @@ public class PartChecker : MonoBehaviour
     public float Length;
     public float Width;
     public ConnectionPart PartDataReference;
-    public bool EndPoint=false;
-
-
-
-   
-
-
-
-
-
-
+    public bool EndPoint = false;
+    [Range(0.01f, 0.5f)][Tooltip("Unity Meter to game inch scale")]
+    public float MeterInchScale = 0.04f;
+    public void PassData(PipeFitterPipeTargetDetails details)
+    {
+        if (details == null)
+        {
+            return;
+        }
+        PartDataReference = details.ConnectionData;
+        Length = details.PipeLength / MeterInchScale;
+        Debug.Log($"Length values: {Length} | {details.PipeLength} | {MeterInchScale}");
+        //Width = details.PipeMesh.GetComponent<MeshFilter>().sharedMesh.bounds.size.x;
+    }
 }

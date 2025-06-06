@@ -10,7 +10,10 @@ public class PipeFitterPipeTargetDetails : MonoBehaviour
     public GameObject ParentPivot;
     public GameObject PipeMesh;
     [SerializeField]protected float pipeLength;
-    
+    public float PipeLength
+    {
+        get { return pipeLength; }
+    }
 
     public void Start()
     {

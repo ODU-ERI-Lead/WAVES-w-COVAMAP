@@ -1525,6 +1525,7 @@ GameObject:
   - component: {fileID: 1126243422036932254}
   - component: {fileID: 7960037009356138932}
   - component: {fileID: 7153580104667582596}
+  - component: {fileID: 6487806092620794329}
   m_Layer: 0
   m_Name: BodyCollider
   m_TagString: PartCollider
@@ -1583,6 +1584,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveRotateItem: {fileID: 3689817573108400706}
+--- !u!114 &6487806092620794329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8158371560278784455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afd35571dbc034f4389be4ba44e5ce6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PipeType: 10
+  Length: 0
+  Width: 0
+  PartDataReference: {fileID: 2562290660892796462}
+  EndPoint: 0
+  MeterInchScale: 0.0357
 --- !u!1 &8242037555258308573
 GameObject:
   m_ObjectHideFlags: 0

@@ -292,7 +292,17 @@ public class PipeFitterMouseCutter : CutterBehaviour
                 Debug.Log("cut pipe length asserted"+ newPipeLength.ToString());
                 //manual move about of resetting our pivot point
                 List<Transform> mfChildren = new List<Transform>();
-                (bool success,Vector3 newWorldPivot) = details.ReturnWorldMidPoint();
+                //update details to PartChecker
+                var partCheckerRef = pipeCode.ColliderParent.GetChild(0).GetComponent<PartChecker>();
+                if (partCheckerRef!=null)
+                {
+                    partCheckerRef.PassData(details);
+                }
+                else
+                {
+                    Debug.LogError("PartChecker reference is null, please check your setup.");
+                }
+                (bool success, Vector3 newWorldPivot) = details.ReturnWorldMidPoint();
                 if (success)
                 {
                     var newParent = GameObject.Instantiate(new GameObject(), newWorldPivot, Quaternion.identity);
