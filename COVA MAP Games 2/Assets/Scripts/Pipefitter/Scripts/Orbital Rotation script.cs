@@ -7,7 +7,11 @@ using System.Collections;
 /// April 3, 2025
 /// This script utilizes the FP_MotionBase and allows a simple orbital rotation
 /// </summary>
-
+public enum OrbitalType
+{
+    NA=0,
+    Shifted = 1
+}
 public class OrbitalRotationscript : FP_MotionBase
 {
     [Header("Austins Orbital Parameters")]
@@ -20,6 +24,9 @@ public class OrbitalRotationscript : FP_MotionBase
     protected float FixedRotationX = 90f;
     protected float FixedRotationZ = 0f;
     public Vector3 rotationAxis = Vector3.up;
+    [Space]
+    [Tooltip("This is absurd but a way to adjust the pipe after rotation")]
+    public OrbitalType TheTypeOfOrbital;
     public virtual void Setup(Vector3 startposition)
     {
         currentCoordinate = startposition;
@@ -68,11 +75,13 @@ public class OrbitalRotationscript : FP_MotionBase
 
     public void Rotate90Degrees()
     {
-        transform.Rotate(0,0,90); 
-
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            transform.Rotate(0, 0, 90);
-        }
+        //targetObject.transform.Rotate(0,0,90);
+        targetObject.transform.Rotate(rotationAxis, 90);
     }
+    public void Rotate90DegreesPassedObject(Transform passedObject)
+    {
+        passedObject.Rotate(rotationAxis, 90);
+    }
+    
+
 }

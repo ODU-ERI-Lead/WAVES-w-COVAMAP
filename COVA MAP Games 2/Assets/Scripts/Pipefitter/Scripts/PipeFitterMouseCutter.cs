@@ -123,7 +123,10 @@ public class PipeFitterMouseCutter : CutterBehaviour
                 Debug.Log("Dynamic Mesh Cutter: Cut supressed creation of object due to VertexCreationThreshold. Make sure you handle NullReferenceExceptions!");
             }
         }
-        for(int i = 0; i < creationInfo.CreatedObjects.Length; i++)
+        // ALL BE IN ONE COROUTINE
+        StartCoroutine(MainPartCoroutine(info,creationInfo,OldMesh,CutPartLeft,CutPartRight,worldScale,WorldPivotMeshBeforeCut,WorldLeftStartPos,WorldRightEndPos));
+        /*
+        for (int i = 0; i < creationInfo.CreatedObjects.Length; i++)
         {
             GameObject anObject = creationInfo.CreatedObjects[i];
             if (anObject.transform.childCount > 0)
@@ -141,7 +144,40 @@ public class PipeFitterMouseCutter : CutterBehaviour
         // seeing if a delayed coroutine works, originally was just post cut etc.
         StartCoroutine(DelayedPostCut( CutPartLeft, CutPartRight));
         Debug.Log("Should have ran and invked post cut parts should be assigned");
+        */
+        //
+    }
+    
+    private IEnumerator MainPartCoroutine(Info info,MeshCreationData creationInfo, Transform OldMesh, GameObject PartLeft, GameObject PartRight, Vector3 worldScale, Vector3 WorldPivotMeshBeforeCut,Vector3 WorldLeftStartPos,Vector3 WorldRightEndPos)
+    {
+        for (int i = 0; i < creationInfo.CreatedObjects.Length; i++)
+        {
+            GameObject anObject = creationInfo.CreatedObjects[i];
+            if (anObject.transform.childCount > 0)
+            {
+                anObject.transform.GetChild(0).transform.localScale = worldScale;
+                yield return StartCoroutine(GeneratePipeFromPart(anObject.transform, WorldPivotMeshBeforeCut, WorldLeftStartPos, WorldRightEndPos, i));
 
+            }
+            //update scale
+            //anObject.transform.localScale = worldScale;
+        }
+        //destroy actual pipe
+        Destroy(OldMesh.gameObject);
+        info.OnCreatedCallback?.Invoke(info, creationInfo);
+        //using here isnt getting all part components unslash if need be
+        // seeing if a delayed coroutine works, originally was just post cut etc.
+        //yield return StartCoroutine(DelayedPostCut(PartLeft, PartRight));
+
+        // Now safely fire the event
+        RetrievePartsFromCut?.Invoke(PartLeft.transform.parent.gameObject, PartRight.transform.parent.gameObject);
+        if (RetrievePartsFromCut != null)
+        {
+            Debug.Log(" Parts should be retrieved and ready to be passed");
+        }
+        //LAST THING THAT OCCURS
+        OnFininshedCutting?.Invoke();
+        Debug.Log("Should have ran and invked post cut parts should be assigned");
     }
     private IEnumerator GeneratePipeFromPart(Transform newMesh, Vector3 originalPivot, Vector3 leftEdgeBeforeCut, Vector3 rightEdgeBeforeCut, int childIndex)
     {
@@ -161,10 +197,8 @@ public class PipeFitterMouseCutter : CutterBehaviour
         float denominator = Vector3.Dot(planeNormal, pipeDirection);
         float t = numerator / denominator;
         Vector3 intersection = leftEdgeBeforeCut + (t * pipeDirection);
-       // GameObject cutpipe = new GameObject("cutpipe");
-     // GameObject CutPartLeft = pipeCode.ColliderParent.GetChild(0).gameObject;
-     // GameObject CutPartRight = pipeCode.ColliderParent.GetChild(1).gameObject;
-
+       
+        Debug.LogError($"I MADE IT THIS FAR:{pipeCode.gameObject.name} has # {pipeCode.ConnectionPointParent.childCount} children");
         if (pipeCode)
         {
            if(pipeCode.ConnectionPointParent.transform.childCount == 2)
@@ -226,8 +260,10 @@ public class PipeFitterMouseCutter : CutterBehaviour
                     }
                     
                 }
-                
+                Debug.LogError($"BEFORE Wait for end of frame");
+
                 yield return new WaitForEndOfFrame();
+                Debug.LogError($"After Wait for end of frame");
                 if (rightEndPoint.GetComponent<BoxCollider>() && leftEndPoint.GetComponent<BoxCollider>())
                 {
                     leftEndPoint.gameObject.GetComponent<BoxCollider>().enabled = true;
@@ -238,6 +274,7 @@ public class PipeFitterMouseCutter : CutterBehaviour
                 pipeCode.MyVisualItem = newMesh.gameObject;
                 newMesh.transform.SetAsFirstSibling();
                 var meshTargetFound = newMesh.GetChild(0).gameObject.GetComponent<MeshTarget>();
+                Debug.LogError($"Wtf am I {meshTargetFound}");
                 var rootParentTransform = pipeCode.gameObject.transform;
 
                 //add our component
@@ -253,23 +290,51 @@ public class PipeFitterMouseCutter : CutterBehaviour
                 details.RightEndPoint = rightEndPoint.gameObject;
                 details.UpdateLength(newPipeLength);
                 Debug.Log("cut pipe length asserted"+ newPipeLength.ToString());
-                    
-                    //info.MeshTarget.gameObject.GetComponent<PipeFitterPipeTargetDetails>()
-                
-              //  delegate void CutPipelength()
+                //manual move about of resetting our pivot point
+                List<Transform> mfChildren = new List<Transform>();
+                //update details to PartChecker
+                var partCheckerRef = pipeCode.ColliderParent.GetChild(0).GetComponent<PartChecker>();
+                if (partCheckerRef!=null)
                 {
-
+                    partCheckerRef.PassData(details);
                 }
-            }
+                else
+                {
+                    Debug.LogError("PartChecker reference is null, please check your setup.");
+                }
+                (bool success, Vector3 newWorldPivot) = details.ReturnWorldMidPoint();
+                if (success)
+                {
+                    var newParent = GameObject.Instantiate(new GameObject(), newWorldPivot, Quaternion.identity);
+                    for (int i = 0; i < pipeCode.transform.childCount; i++)
+                    {
+                        var aChild = pipeCode.transform.GetChild(i);
+                        mfChildren.Add(aChild);
+                        aChild.SetParent(null);
+                    }
+                    pipeCode.gameObject.transform.SetParent(newParent.transform);
+                    pipeCode.gameObject.transform.localPosition = Vector3.zero;
+                    pipeCode.gameObject.transform.SetParent(null);
+                    for (int i = 0; i<mfChildren.Count; i++) 
+                    {
+                        var aChild = mfChildren[i];
+                        aChild.SetParent(pipeCode.transform);
+                    }
+                    foreach(GameObject aCollider in pipeCode.MyBodyColliders)
+                    {
+                        if (aCollider.GetComponent<CapsuleCollider>())
+                        {
+                            aCollider.GetComponent<CapsuleCollider>().center = Vector3.zero;
+                        }
+                    }
+                    Destroy(newParent);
+                }
+                
+               
 
-           
+                //end of manual move
+            }
         }
-        // do not use here screws up cut
-     // PostCut(CutPartLeft, CutPartRight);
-     // Debug.Log("Should have ran and invked post cut parts should be assigned");
-        // may not be right spot to call post cut?
-        // PostCut(GameObject CutPartLeft, GameObject CutPartRight);
-        // oncutpipegenerated?
     }
     private void DrawCutTool(Color currentColor)
     {
@@ -329,23 +394,16 @@ public class PipeFitterMouseCutter : CutterBehaviour
         yield return new WaitForEndOfFrame();
 
         // Now safely fire the event
-        PostCut(cutLeft, cutRight);
-    }
-
-    // this isnt getting all the part data.
-    public void PostCut(GameObject CutPartLeft, GameObject CutPartRight)
-    {
-        RetrievePartsFromCut?.Invoke(CutPartLeft, CutPartRight);
+        RetrievePartsFromCut?.Invoke(cutLeft, cutRight);
         if (RetrievePartsFromCut != null)
         {
             Debug.Log(" Parts should be retrieved and ready to be passed");
         }
         //LAST THING THAT OCCURS
         OnFininshedCutting?.Invoke();
-       
-
     }
 
+   
     //delete right side of cut pipe then transform to assembly area 
     public void PostCutMove(Info info, int childIndex)
     {

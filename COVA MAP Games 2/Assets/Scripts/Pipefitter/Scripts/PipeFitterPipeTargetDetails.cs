@@ -10,7 +10,10 @@ public class PipeFitterPipeTargetDetails : MonoBehaviour
     public GameObject ParentPivot;
     public GameObject PipeMesh;
     [SerializeField]protected float pipeLength;
-    
+    public float PipeLength
+    {
+        get { return pipeLength; }
+    }
 
     public void Start()
     {
@@ -25,5 +28,13 @@ public class PipeFitterPipeTargetDetails : MonoBehaviour
     public void UpdateLength(float newLength)
     {
         pipeLength = newLength;
+    }
+    public (bool,Vector3) ReturnWorldMidPoint()
+    {
+        if(RightEndPoint !=null && LeftEndPoint != null)
+        {
+            return (true,(RightEndPoint.transform.position + LeftEndPoint.transform.position) * 0.5f);
+        }
+        return (false,Vector3.zero);
     }
 }
