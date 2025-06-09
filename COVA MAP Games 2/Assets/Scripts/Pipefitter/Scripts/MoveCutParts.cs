@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using FuzzPhyte.Tools.Connections;
+using VInspector.Libs;
 
 public class MoveCutParts : MonoBehaviour
 {
@@ -12,8 +13,9 @@ public class MoveCutParts : MonoBehaviour
     public Transform AssemblyAreaSpawn;
     //public Partspawnerscript PipePartSpawner;
     public Partspawnerscript OtherPartsSpawner;
-    //private 
-
+    [Tooltip("We are tracking if a part is on the bench to remove it if we go home without sending it")]
+    [SerializeField]
+    protected bool partsOnBench = false;
 
 
     public void OnEnable()
@@ -24,7 +26,11 @@ public class MoveCutParts : MonoBehaviour
         {
             OtherPartsSpawner.ElbowSpawned += NewPartAddedToBench;
             OtherPartsSpawner.PipeSpawned += NewPartAddedToBench;
+            OtherPartsSpawner.MAdapterSpawned += NewPartAddedToBench;
+            OtherPartsSpawner.ValveSpawned += NewPartAddedToBench;
+            OtherPartsSpawner.FAdapterSpawned += NewPartAddedToBench;
         }
+        partsOnBench = false;
         SendtoAssemblyButton.onClick.AddListener(UIMovePartToHomeClicked);
         //need a way to listen in on other parts being spawned Elbow/valve/adapter(s)
     }
@@ -37,7 +43,32 @@ public class MoveCutParts : MonoBehaviour
         {
             OtherPartsSpawner.ElbowSpawned -= NewPartAddedToBench;
             OtherPartsSpawner.PipeSpawned -= NewPartAddedToBench;
+            OtherPartsSpawner.MAdapterSpawned -= NewPartAddedToBench;
+            OtherPartsSpawner.ValveSpawned -= NewPartAddedToBench;
+            OtherPartsSpawner.FAdapterSpawned -= NewPartAddedToBench;
         }
+        if (partsOnBench)
+        {
+            //destroy here?
+            if (CutPart1 != null && CutPart2 != null)
+            {
+                //long pipe destroy both parts
+                Destroy(CutPart1);
+                Destroy(CutPart2);
+            }
+            else
+            {
+                if (OtherPart != null)
+                {
+                    //other part
+                    Destroy(OtherPart);       
+                }
+            }
+        }
+        partsOnBench = false;
+        CutPart1 = null;
+        CutPart2 = null;
+        OtherPart = null;
         SendtoAssemblyButton.onClick.RemoveListener(UIMovePartToHomeClicked);
     }
     /// <summary>
@@ -87,13 +118,14 @@ public class MoveCutParts : MonoBehaviour
         {
             //long pipe
             PostCutMove();
-            //
+            partsOnBench = false;
             return;
         }
         if (OtherPart != null)
         {
             //other part
             MovePart(OtherPart.transform, OtherPartsSpawner);
+            partsOnBench = false;
             OtherPart = null;
         }
     }
@@ -128,6 +160,7 @@ public class MoveCutParts : MonoBehaviour
     public void NewPartAddedToBench(GameObject partAdded)
     {
         OtherPart = partAdded;
+        partsOnBench = true;
     }
     /// <summary>
     /// Will move the part to a location defined by the spawner you give us
@@ -136,13 +169,35 @@ public class MoveCutParts : MonoBehaviour
     /// <param name="spawner"></param>
     protected void MovePart(Transform partToMove, Partspawnerscript spawner)
     {
-        AssemblyAreaSpawn.transform.position = spawner.GetSpawnLocation();
+        //john using new grid system
+        if (spawner.MyGridSystem != null)
+        {
+            (bool amAbleToMove, Vector3 movedLocation) = spawner.MyGridSystem.AssignGridBinComponent(partToMove.gameObject);
+            if (amAbleToMove)
+            {
+                partToMove.position = movedLocation;
+                StartCoroutine(DelayClearConnectionPart(partToMove));
+            }
+            else
+            {
+                Debug.LogWarning($"Could not move {partToMove.name} to the grid system, no available bin found.");
+                return;
+            }
+        }
+        else
+        {
+            Debug.LogError($"Missing a grid System referenced for the spawner");
+            return;
+        }
+        /*
+            AssemblyAreaSpawn.transform.position = spawner.GetSpawnLocation();
         partToMove.position = AssemblyAreaSpawn.position;
         //lets check to see if we have a random connection setup and null it out
         if (partToMove.GetComponent<ConnectionPart>() != null)
         {
             StartCoroutine(DelayClearConnectionPart(partToMove));
         }
+        */
     }
     System.Collections.IEnumerator DelayClearConnectionPart(Transform part)
     {
@@ -161,6 +216,4 @@ public class MoveCutParts : MonoBehaviour
             t = t.parent;
         return t;
     }
-
-
 }

@@ -137,7 +137,7 @@ public class PartCheckerCollider : PartChecker
             {
                 return;
             }
-            Debug.LogError($"Trigger information  {other.gameObject.name}");
+            //Debug.LogError($"Trigger information  {other.gameObject.name}");
             OtherDetails = other.gameObject.GetComponent<PartChecker>();
             this.PartDataReference = other.gameObject.GetComponent<PartChecker>().PartDataReference;
             Debug.LogWarning($"Part has entered an answer collider, {OtherDetails.gameObject.name} with {other.gameObject.name} ");

@@ -59,7 +59,7 @@
         "com.fuzzphyte.utility": "https://github.com/jshull/FP_Utility.git",
         "com.fuzzphyte.ray": "https://github.com/jshull/FP_Ray.git"
       },
-      "hash": "991d16809650deabd581c8c6da1c294966a78928"
+      "hash": "727a3b064e08126f64997b0ff62f71ee0faff77f"
     },
     "com.fuzzphyte.ui": {
       "version": "https://github.com/jshull/fp_ui.git",
