@@ -27,7 +27,7 @@ MonoBehaviour:
   - {x: 0, y: -90, z: 0}
   AngleTolerance: 30
   InitAlignmentTolerance: 20
-  TriggerTagCompare: Part
+  TriggerTagCompare: PartConnectionPoint
   PercentOfMeasure: 0.2
   localConnectors:
   - {x: 0, y: 0.6, z: 0}

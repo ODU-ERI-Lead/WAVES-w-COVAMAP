@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0596ba5a17ff6f7429965c6257fa932a, type: 3}
-  m_Name: GlobeValve_FixRight
+  m_Name: FemaleAdapter_LeftV
   m_EditorClassIdentifier: 
-  UniqueID: GlobeValveRightFix
-  connectionType: GlobeValve
+  UniqueID: FAdapterRight
+  connectionType: FAdapter
   width: 0.5
   ConnectionUnitOfMeasure: 10
-  localForward: {x: 1, y: 0, z: 0}
+  localForward: {x: -1, y: 0, z: 0}
   TriggerSize: {x: 0.03, y: 0.02, z: 0.02}
-  TriggerCenter: {x: 0.0113, y: 0, z: 0}
-  LocalRelativePivotPosition: {x: 0.0226, y: 0, z: 0}
+  TriggerCenter: {x: -0.0085, y: 0, z: 0}
+  LocalRelativePivotPosition: {x: -0.0171, y: 0, z: 0}
   localRotationAngles:
   - {x: 0, y: 0, z: 90}
   - {x: 0, y: 0, z: -90}
