@@ -40,10 +40,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 164612383649059741}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -408,6 +408,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MainFPTag: {fileID: 0}
+  HelperTag: {fileID: 0}
 --- !u!1 &779389188192560015
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,7 +420,7 @@ GameObject:
   - component: {fileID: 8289244280166853363}
   - component: {fileID: 3064609517582439386}
   - component: {fileID: 4541444290894354852}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: BodyCollider
   m_TagString: PartCollider
   m_Icon: {fileID: 0}

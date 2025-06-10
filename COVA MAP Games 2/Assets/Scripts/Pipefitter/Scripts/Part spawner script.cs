@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -33,7 +34,7 @@ public class Partspawnerscript : MonoBehaviour
     public event PartSpawned MAdapterSpawned;
     public event PartSpawned FAdapterSpawned;
     public event PartSpawned PipeSpawned;
-
+    public GridSpawnSystem MyGridSystem;
 
     public void SpawnElbow()
     {
@@ -65,8 +66,11 @@ public class Partspawnerscript : MonoBehaviour
         var item = Instantiate(PartsTospawn[4], TestHorizontalChange ? GetSpawnLocation() : SpawnPoint.position, Quaternion.identity);
         MAdapterSpawned?.Invoke(item);
     }
+    [Obsolete("We shouldn't use this anymore")]
     public Vector3 GetSpawnLocation()
     {
+        return SpawnPoint.position;
+        /*
         var dZ = Mathf.Abs(LeftSpawnEdge.transform.position.z-RightSpawnEdge.transform.position.z);
         var binDepth = dZ / ForwardBinCount;
         var binDepthMid = binDepth * 0.5f;
@@ -90,5 +94,6 @@ public class Partspawnerscript : MonoBehaviour
         }
         BinSpawnPoint.position = LeftSpawnEdge.position + new Vector3(xChange, 0, zChange);
         return BinSpawnPoint.position;
+        */
     }
 }

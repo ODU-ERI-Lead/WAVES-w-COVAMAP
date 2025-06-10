@@ -419,7 +419,7 @@ GameObject:
   - component: {fileID: 9100714760888079320}
   - component: {fileID: 754505808134421118}
   - component: {fileID: 1621942140833721265}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: BodyCollider
   m_TagString: PartCollider
   m_Icon: {fileID: 0}
@@ -492,6 +492,7 @@ MonoBehaviour:
   Width: 0
   PartDataReference: {fileID: 7779841261050843385}
   EndPoint: 0
+  MeterInchScale: 0.04
 --- !u!1 &4490137756158532339
 GameObject:
   m_ObjectHideFlags: 0

@@ -1526,7 +1526,7 @@ GameObject:
   - component: {fileID: 7960037009356138932}
   - component: {fileID: 7153580104667582596}
   - component: {fileID: 6487806092620794329}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: BodyCollider
   m_TagString: PartCollider
   m_Icon: {fileID: 0}
@@ -1567,7 +1567,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.03
+  m_Radius: 0.015
   m_Height: 0.29
   m_Direction: 0
   m_Center: {x: 0, y: 0, z: 0}

@@ -6,6 +6,7 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Linq;
+using FuzzPhyte.Game.Samples;
 
 public class ConfirmHangerplacement : MonoBehaviour 
 {
@@ -18,7 +19,9 @@ public class ConfirmHangerplacement : MonoBehaviour
     public float activationDistance = 5f;
     public FP_MeasureTool3D MeasureToolRef;
     public UnityEvent AllHangersInPlace;
-
+    public bool ClearMeasurementsIfCorrectHanger = false;
+    public FPGameManager_ToolExample GameManagerToolRef;
+    public GameObject Tool3DReferenceObject;
     public void OnEnable()
     {
         if (MeasureToolRef != null)
@@ -80,7 +83,10 @@ public class ConfirmHangerplacement : MonoBehaviour
 
                 Debug.Log("Activated Hanger: " + AllHangerObjects[i].name);
                 FoundHanger=AllHangerObjects[i];
-
+                if (ClearMeasurementsIfCorrectHanger && GameManagerToolRef!=null&& Tool3DReferenceObject!=null)
+                {
+                    GameManagerToolRef.UI3DToolRemoveLines(Tool3DReferenceObject);
+                }
                 // Move to the next one
                 numberCorrect++;
                 break;

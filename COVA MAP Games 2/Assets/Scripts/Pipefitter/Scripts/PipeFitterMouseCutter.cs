@@ -21,6 +21,7 @@ public class PipeFitterMouseCutter : CutterBehaviour
     public Color ToolAboutToCutColor;
 
     private Vector3 _endBladePt;
+    private Vector3 _topOfBladePt;
     private Vector3 _from;
     private Vector3 _to;
     private bool _isDragging;
@@ -89,6 +90,14 @@ public class PipeFitterMouseCutter : CutterBehaviour
 
         MeshCreationData creationInfo = MeshCreation.CreateObjects(info, DefaultMaterial, VertexCreationThreshold);
         Vector3 worldScale = info.MeshTarget.transform.lossyScale;
+        if (info.MeshTarget != null)
+        {
+            Debug.LogWarning($"Mesh Target Found? {info.MeshTarget.gameObject.name}");
+            if (info.MeshTarget.gameObject.GetComponent<MeshCollider>())
+            {
+                Destroy(info.MeshTarget.gameObject.GetComponent<MeshCollider>());
+            }
+        }
         //do we have our custom target information?
         Vector3 WorldLeftStartPos = Vector3.zero;
         Vector3 WorldRightEndPos = Vector3.zero;
@@ -156,6 +165,12 @@ public class PipeFitterMouseCutter : CutterBehaviour
             if (anObject.transform.childCount > 0)
             {
                 anObject.transform.GetChild(0).transform.localScale = worldScale;
+               
+                if (anObject.transform.GetChild(0).GetComponent<MeshCollider>())
+                {
+                    //remove the collider
+                    Destroy(anObject.transform.GetChild(0).GetComponent<MeshCollider>());
+                }
                 yield return StartCoroutine(GeneratePipeFromPart(anObject.transform, WorldPivotMeshBeforeCut, WorldLeftStartPos, WorldRightEndPos, i));
 
             }
@@ -198,7 +213,7 @@ public class PipeFitterMouseCutter : CutterBehaviour
         float t = numerator / denominator;
         Vector3 intersection = leftEdgeBeforeCut + (t * pipeDirection);
        
-        Debug.LogError($"I MADE IT THIS FAR:{pipeCode.gameObject.name} has # {pipeCode.ConnectionPointParent.childCount} children");
+        //Debug.LogError($"I MADE IT THIS FAR:{pipeCode.gameObject.name} has # {pipeCode.ConnectionPointParent.childCount} children");
         if (pipeCode)
         {
            if(pipeCode.ConnectionPointParent.transform.childCount == 2)
@@ -229,7 +244,16 @@ public class PipeFitterMouseCutter : CutterBehaviour
                     if (CCollider != null)
                     {
                         CCollider.center = localMid;
-                        CCollider.height = newPipeLength;
+                        //JOHN: need to incorporate radius and remove it from the height/length of our pipe
+                        //if distance is greater than 6" or roughly 0.2142 we should reduce by 3F
+                        if (newPipeLength > 0.2142f)
+                        {
+                            CCollider.height = newPipeLength - (CCollider.radius * 4f);
+                        }
+                        else
+                        {
+                            CCollider.height = newPipeLength - (CCollider.radius * 2f);
+                        }
                     }
                     if (MoveLeftPieceOnCut)
                     {
@@ -247,7 +271,14 @@ public class PipeFitterMouseCutter : CutterBehaviour
                     if (CCollider != null)
                     {
                         CCollider.center = localMid;
-                        CCollider.height = newPipeLength;
+                        if (newPipeLength > 0.2142f)
+                        {
+                            CCollider.height = newPipeLength - (CCollider.radius * 4f);
+                        }
+                        else
+                        {
+                            CCollider.height = newPipeLength - (CCollider.radius * 2f);
+                        }
                     }
                     if (MoveLeftPieceOnCut)
                     {
@@ -260,10 +291,10 @@ public class PipeFitterMouseCutter : CutterBehaviour
                     }
                     
                 }
-                Debug.LogError($"BEFORE Wait for end of frame");
+                //Debug.LogError($"BEFORE Wait for end of frame");
 
                 yield return new WaitForEndOfFrame();
-                Debug.LogError($"After Wait for end of frame");
+                //Debug.LogError($"After Wait for end of frame");
                 if (rightEndPoint.GetComponent<BoxCollider>() && leftEndPoint.GetComponent<BoxCollider>())
                 {
                     leftEndPoint.gameObject.GetComponent<BoxCollider>().enabled = true;
@@ -274,7 +305,7 @@ public class PipeFitterMouseCutter : CutterBehaviour
                 pipeCode.MyVisualItem = newMesh.gameObject;
                 newMesh.transform.SetAsFirstSibling();
                 var meshTargetFound = newMesh.GetChild(0).gameObject.GetComponent<MeshTarget>();
-                Debug.LogError($"Wtf am I {meshTargetFound}");
+                //Debug.LogError($"Wtf am I {meshTargetFound}");
                 var rootParentTransform = pipeCode.gameObject.transform;
 
                 //add our component
@@ -341,12 +372,15 @@ public class PipeFitterMouseCutter : CutterBehaviour
         var mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, CutCam.nearClipPlane + ZForwardDistanceLineRendererOffCam);
         _to = CutCam.ScreenToWorldPoint(mousePos);
         _endBladePt = _to - new Vector3(0, BladeLength, 0);
+        //assuming we are facing Z here with this one
+        _topOfBladePt = _to + new Vector3(0, 0, -1f);
+
         VisualizeLine(true, _to, _endBladePt,currentColor);
     }
 
     private void Cut()
     {
-        Plane plane = new Plane(_endBladePt, _to, CutCam.transform.position);
+        Plane plane = new Plane(_endBladePt, _to, _topOfBladePt);
         cachedCuttingPlane = plane;
         var roots = UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects();
         foreach (var root in roots)

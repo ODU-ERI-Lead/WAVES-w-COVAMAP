@@ -15,8 +15,8 @@ MonoBehaviour:
   UniqueID: FONTTool_Example_Header
   Label: 2
   Font: {fileID: 11400000, guid: 31d9a13f399d44399838319c55efa56e, type: 2}
-  MinSize: 4
-  MaxSize: 8
+  MinSize: 2
+  MaxSize: 4
   UseAutoSizing: 1
   FontStyle: 1
   FontAlignment: 514
