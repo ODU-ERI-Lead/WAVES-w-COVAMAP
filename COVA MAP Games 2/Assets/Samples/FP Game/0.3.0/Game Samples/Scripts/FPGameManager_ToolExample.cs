@@ -34,7 +34,9 @@ namespace FuzzPhyte.Game.Samples
         public Button The3DRemoveLinesButton;
         public Button TheAttachButton;
         public Button TheDetachButton;
-        public Button TheCutButton;
+        public Button WorkBenchButton;
+        public Button BluePrintButton;
+        //public Button TheCutButton;
         public List<GameObject> AllButtonSelectIcons = new List<GameObject>();
         public FP_PanMove TheMoveRotateTool;
         public Slider TheForwardZPlaneSlider;
@@ -151,6 +153,26 @@ namespace FuzzPhyte.Game.Samples
             TurnOffOnButtons(true);
             OnUnityGameUnPausedEvent?.Invoke();
         }
+        /// <summary>
+        /// Called when we open the blue print to manage our UI state of this main assembly zone
+        /// Kills the current tool
+        /// force resets icons
+        /// turns off all buttons
+        /// </summary>
+        public void UIBluePrintOpen()
+        {
+            ForceResetPreviousTool();
+            ResetIcons();
+            TurnOffOnButtons(false);
+        }
+        /// <summary>
+        /// Called when we close the blue print to manage our UI state of this main assembly zone
+        /// Basically just reactivating all of our buttons
+        /// </summary>
+        public void UIBluePrintClosed()
+        {
+            TurnOffOnButtons(true);
+        }
         protected void TurnOffOnButtons(bool status)
         {
             if (TheMeasureTool2DButton != null)
@@ -181,16 +203,21 @@ namespace FuzzPhyte.Game.Samples
             {
                 TheDetachButton.interactable = status;
             }
-            if(TheCutButton != null)
+            if(WorkBenchButton != null)
             {
-                TheCutButton.interactable = status;
+                WorkBenchButton.interactable = status;
             }
             if(TheForwardZPlaneSlider != null)
             {
                 //always disable the slider
                 TheForwardZPlaneSlider.interactable = false;
             }
+            if(BluePrintButton != null)
+            {
+                BluePrintButton.interactable = status;
+            }
         }
+
         public void ResetIcons()
         {
             foreach (var gO in AllButtonSelectIcons)

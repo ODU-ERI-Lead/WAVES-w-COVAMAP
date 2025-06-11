@@ -1,49 +1,38 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class CameraSwitcher : MonoBehaviour
 {
-    public Camera MainCamera;
-    public Camera CutterCamera;
-    public Camera AssemblyCamera;
-
-    public Button CutCameraButton;
-    public Button AssemblyCameraButton;
-    public Button HomeButton;
+    /// <summary>
+    /// Austin you had three cameras in here, one repeated itself :), you then were telling the same camera by two diff references
+    /// to do opposite things... meaning by luck you got it right as in you turned it off then on ;)
+    /// I fixed this and renamed everything so it made sense and removed uneeded references to random buttons
+    /// </summary>
+    public Camera AssemblyZoneMainCamera;
+    public Camera WorkZoneMainCamera;
 
     public void Start()
     {
         //ensuring only one camera starts active
-        MainCamera.gameObject.SetActive(true);
-        CutterCamera.gameObject.SetActive(false);
-       // AssemblyCamera.gameObject.SetActive(false);    right now main and assembly are same I think.
+        AssemblyZoneMainCamera.gameObject.SetActive(true);
+        WorkZoneMainCamera.gameObject.SetActive(false);
     }
 
 
     public void OnClickCCB()
     {
-       // if (CutCameraButton.)
-       MainCamera.gameObject.SetActive(false);
-        CutterCamera.gameObject.SetActive(true);
-        AssemblyCamera.gameObject.SetActive(false);
-
-
+        AssemblyZoneMainCamera.gameObject.SetActive(false);
+        WorkZoneMainCamera.gameObject.SetActive(true);
     }
 
     public void OnClickACB()
     { 
-        MainCamera.gameObject.SetActive(false);
-        CutterCamera.gameObject.SetActive(false);
-        AssemblyCamera.gameObject.SetActive(true);
-    
+        AssemblyZoneMainCamera.gameObject.SetActive(false);
+        WorkZoneMainCamera.gameObject.SetActive(false);
     }
 
-
-
-     public void OnClickHB()
+    public void OnClickHB()
     {
-        MainCamera.gameObject.SetActive(true);
-        CutterCamera.gameObject.SetActive(false);
-       // AssemblyCamera.gameObject.SetActive(false);   unslash if different cams
+        AssemblyZoneMainCamera.gameObject.SetActive(true);
+        WorkZoneMainCamera.gameObject.SetActive(false);
     }
 }

@@ -20,6 +20,14 @@ MonoBehaviour:
         keys:
         - globalObjectIdString: GlobalObjectId_V1-2-15648cc8bef080847be50f436df88b49-1557917111-0
         - globalObjectIdString: GlobalObjectId_V1-2-15648cc8bef080847be50f436df88b49-1806127221-0
+        - globalObjectIdString: GlobalObjectId_V1-2-15648cc8bef080847be50f436df88b49-197920966-0
+        - globalObjectIdString: GlobalObjectId_V1-2-15648cc8bef080847be50f436df88b49-73687509-0
+        - globalObjectIdString: GlobalObjectId_V1-2-15648cc8bef080847be50f436df88b49-2142034183-0
+        - globalObjectIdString: GlobalObjectId_V1-2-15648cc8bef080847be50f436df88b49-2070368171-0
+        - globalObjectIdString: GlobalObjectId_V1-2-15648cc8bef080847be50f436df88b49-1828743884298870894-0
+        - globalObjectIdString: GlobalObjectId_V1-2-15648cc8bef080847be50f436df88b49-2596776696133490921-0
+        - globalObjectIdString: GlobalObjectId_V1-2-15648cc8bef080847be50f436df88b49-832787729-0
+        - globalObjectIdString: GlobalObjectId_V1-2-15648cc8bef080847be50f436df88b49-499572907-0
         values:
         - colorIndex: 8
           iconNameOrGuid: 
@@ -27,6 +35,38 @@ MonoBehaviour:
           isColorRecursive: 0
         - colorIndex: 0
           iconNameOrGuid: Camera Icon
+          isIconRecursive: 0
+          isColorRecursive: 0
+        - colorIndex: 0
+          iconNameOrGuid: Camera Icon
+          isIconRecursive: 1
+          isColorRecursive: 0
+        - colorIndex: 0
+          iconNameOrGuid: Canvas Icon
+          isIconRecursive: 0
+          isColorRecursive: 0
+        - colorIndex: 0
+          iconNameOrGuid: Camera Icon
+          isIconRecursive: 0
+          isColorRecursive: 0
+        - colorIndex: 0
+          iconNameOrGuid: Camera Icon
+          isIconRecursive: 0
+          isColorRecursive: 0
+        - colorIndex: 0
+          iconNameOrGuid: Camera Icon
+          isIconRecursive: 0
+          isColorRecursive: 0
+        - colorIndex: 0
+          iconNameOrGuid: Canvas Icon
+          isIconRecursive: 0
+          isColorRecursive: 0
+        - colorIndex: 0
+          iconNameOrGuid: Canvas Icon
+          isIconRecursive: 0
+          isColorRecursive: 0
+        - colorIndex: 0
+          iconNameOrGuid: Canvas Icon
           isIconRecursive: 0
           isColorRecursive: 0
   bookmarks: []
