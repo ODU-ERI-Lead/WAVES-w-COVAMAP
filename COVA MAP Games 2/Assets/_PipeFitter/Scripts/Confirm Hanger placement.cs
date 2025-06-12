@@ -7,7 +7,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Linq;
 using FuzzPhyte.Game.Samples;
-
+using PipeFitter.Assembly;
 public class ConfirmHangerplacement : MonoBehaviour 
 {
 
@@ -18,15 +18,21 @@ public class ConfirmHangerplacement : MonoBehaviour
     protected int numberCorrect = 0;
     public float activationDistance = 5f;
     public FP_MeasureTool3D MeasureToolRef;
+    public PFHangerPlacementTool HangerToolRef;
     public UnityEvent AllHangersInPlace;
     public bool ClearMeasurementsIfCorrectHanger = false;
     public FPGameManager_ToolExample GameManagerToolRef;
     public GameObject Tool3DReferenceObject;
+    public GameObject HangerReferenceObject;
     public void OnEnable()
     {
         if (MeasureToolRef != null)
         {
-            MeasureToolRef.OnMeasureToolEnding.AddListener(ActivatePromptPanel);
+            //MeasureToolRef.OnMeasureToolEnding.AddListener(ActivatePromptPanel);
+        }
+        if (HangerToolRef != null)
+        {
+            HangerToolRef.OnHangerToolClickedRelease.AddListener(HangerConfirmSkip);
         }
     }
     public void Start()
@@ -40,15 +46,28 @@ public class ConfirmHangerplacement : MonoBehaviour
     {
         if (MeasureToolRef != null)
         {
-            MeasureToolRef.OnMeasureToolEnding.RemoveListener(ActivatePromptPanel);
+            //MeasureToolRef.OnMeasureToolEnding.RemoveListener(ActivatePromptPanel);
         }
+        if (HangerToolRef != null)
+        {
+            HangerToolRef.OnHangerToolClickedRelease.RemoveListener(HangerConfirmSkip);
+        }
+    }
+    public void HangerConfirmSkip()
+    {
+        OnConfirmPressed();
     }
     public void OnConfirmPressed()
     {
-        if(AllHangerObjects.Count == 0||MeasureToolRef==null)
+        if(AllHangerObjects.Count == 0||MeasureToolRef==null || HangerToolRef==null)
         {
             Debug.Log("All hangers have already been activated.");
             Promptpanel.SetActive(false);
+            //if we are in the measurement phase we want to activate all of the other buttons
+            if(GameManagerToolRef.ReturnGameState== PipeFitterGameState.Measurements)
+            {
+                GameManagerToolRef.UpdatePipeFitterState(PipeFitterGameState.Parts) ;
+            }
             return;
         }
         // Convert hanger world position to screen space
@@ -65,11 +84,12 @@ public class ConfirmHangerplacement : MonoBehaviour
         // Use the hanger's depth to convert the mouse position correctly
         //Vector3 mouseScreenPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, hangerScreenPos.z);
         //Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
-        Vector3 endMeasuredPosition = MeasureToolRef.EndPosition;
+        //Vector3 endMeasuredPosition = MeasureToolRef.EndPosition;
+        Vector3 endHangerPosition = HangerToolRef.ReturnLastEndPos;
         GameObject FoundHanger = null;
         for(int i=0;i< AllHangerObjects.Count; i++)
         {
-            float distance = Vector3.Distance(endMeasuredPosition, AllHangerObjects[i].transform.position);
+            float distance = Vector3.Distance(endHangerPosition, AllHangerObjects[i].transform.position);
             // Calculate the distance from mouse to hanger
 
             Debug.Log($"Measurement End to hanger distance: {distance}");
@@ -86,6 +106,10 @@ public class ConfirmHangerplacement : MonoBehaviour
                 if (ClearMeasurementsIfCorrectHanger && GameManagerToolRef!=null&& Tool3DReferenceObject!=null)
                 {
                     GameManagerToolRef.UI3DToolRemoveLines(Tool3DReferenceObject);
+                }
+                if(ClearMeasurementsIfCorrectHanger && GameManagerToolRef!=null&& HangerReferenceObject != null)
+                {
+                    GameManagerToolRef.UIRemoveHangerLines(HangerReferenceObject);
                 }
                 // Move to the next one
                 numberCorrect++;

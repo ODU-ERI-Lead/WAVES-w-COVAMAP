@@ -1,0 +1,21 @@
+{
+    "name": "com.pipefitter.assembly",
+    "rootNamespace": "PipeFitter.Assembly",
+    "references": [
+        "GUID:b2274f1409ce26f40919f89f9d4f667c",
+        "GUID:3e5c1780bb9c644dcaea36e6a56f9925",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:a9bffab694a06ab4f8716dae1088fbd2",
+        "GUID:f6e281f41edc74a408b48cdb8091a202",
+        "GUID:dda44226a2e734b418efe455fa0d42fb"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
