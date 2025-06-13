@@ -28,6 +28,8 @@ public class PipeFitterMouseCutter : CutterBehaviour
     private Plane cachedCuttingPlane;
     [Tooltip("Make sure to drop in the length pipe part")]
     public GameObject PipePrefab;
+    [Space]
+    public GameObject EmptyParentShell;
     public Camera CutCam;
     public Transform CutpartspawnTransform;
     // delegate attempt one for getting children to be moved
@@ -336,7 +338,7 @@ public class PipeFitterMouseCutter : CutterBehaviour
                 (bool success, Vector3 newWorldPivot) = details.ReturnWorldMidPoint();
                 if (success)
                 {
-                    var newParent = GameObject.Instantiate(new GameObject(), newWorldPivot, Quaternion.identity);
+                    var newParent = GameObject.Instantiate(EmptyParentShell, newWorldPivot, Quaternion.identity);
                     for (int i = 0; i < pipeCode.transform.childCount; i++)
                     {
                         var aChild = pipeCode.transform.GetChild(i);

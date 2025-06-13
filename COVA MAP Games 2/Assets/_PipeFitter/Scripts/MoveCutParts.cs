@@ -16,13 +16,14 @@ public class MoveCutParts : MonoBehaviour
     [Tooltip("We are tracking if a part is on the bench to remove it if we go home without sending it")]
     [SerializeField]
     protected bool partsOnBench = false;
+    public bool SendMainPartOnly = true;
 
 
     public void OnEnable()
     {
         PipeFitterMouseCutter.RetrievePartsFromCut += GettingCutParts;
-       
-        if(OtherPartsSpawner != null)
+
+        if (OtherPartsSpawner != null)
         {
             OtherPartsSpawner.ElbowSpawned += NewPartAddedToBench;
             OtherPartsSpawner.PipeSpawned += NewPartAddedToBench;
@@ -139,7 +140,14 @@ public class MoveCutParts : MonoBehaviour
                 Transform root1 = GetRoot(CutPart1.transform);
                 Transform root2 = GetRoot(CutPart2.transform);
                 MovePart(root1, OtherPartsSpawner);
-                MovePart(root2, OtherPartsSpawner);
+                if (!SendMainPartOnly)
+                {
+                    MovePart(root2, OtherPartsSpawner);
+                }
+                else
+                {
+                    Destroy(root2.gameObject);
+                }
                 CutPart1 = null;
                 CutPart2 = null;
             }

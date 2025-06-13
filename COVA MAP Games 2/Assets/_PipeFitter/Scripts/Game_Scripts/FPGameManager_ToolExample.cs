@@ -8,6 +8,8 @@ namespace FuzzPhyte.Game.Samples
     using System.Collections.Generic;
     using FuzzPhyte.Tools.Connections;
     using FuzzPhyte.Tools.Samples;
+    using Unity.Mathematics;
+
     [SerializeField]
     public enum PipeFitterGameState
     {
@@ -55,6 +57,8 @@ namespace FuzzPhyte.Game.Samples
         //public Image ButtonSelectionIcon;
         public UnityEvent OnUnityGamePausedEvent;
         public UnityEvent OnUnityGameUnPausedEvent;
+        [Tooltip("We invoke this from the Confirm Hanger Placement")]
+        public UnityEvent OnMeasurementComplete;
         [Space]
         public UnityEvent TurnOffOnStart;
         protected bool useUnityEventsPlane;
@@ -62,6 +66,7 @@ namespace FuzzPhyte.Game.Samples
 
         [SerializeField]protected PipeFitterGameState pfGameState;
         public PipeFitterGameState ReturnGameState { get { return pfGameState; } }
+       
 
         #region Overrides
         public override void Start()
@@ -175,14 +180,19 @@ namespace FuzzPhyte.Game.Samples
         {
             base.ResumeEngine();
             //buttons
-            if(pfGameState == PipeFitterGameState.Measurements)
+            switch (pfGameState)
             {
-                MeasurementPhaseButtons();
+                case PipeFitterGameState.Measurements:
+                    MeasurementPhaseButtons();
+                    break;
+                case PipeFitterGameState.Parts:
+                    TurnOffOnButtonsAfterMeasure(true);
+                    break;
+                case PipeFitterGameState.Finished:
+                    TurnOffOnButtons(false);
+                    break;
             }
-            else
-            {
-                TurnOffOnButtons(true);
-            }
+            
                
             OnUnityGameUnPausedEvent?.Invoke();
         }
@@ -210,7 +220,7 @@ namespace FuzzPhyte.Game.Samples
                     MeasurementPhaseButtons();
                     break;
                 case PipeFitterGameState.Parts:
-                    TurnOffOnButtons(true);
+                    TurnOffOnButtonsAfterMeasure(true);
                     break;
                 case PipeFitterGameState.Finished:
                     TurnOffOnButtons(false);
@@ -226,12 +236,62 @@ namespace FuzzPhyte.Game.Samples
                     MeasurementPhaseButtons();
                     break;
                 case PipeFitterGameState.Parts:
-                    TurnOffOnButtons(true);
+                    TurnOffOnButtonsAfterMeasure(true);
                     break;
                 case PipeFitterGameState.Finished:
                     TurnOffOnButtons(false);
                     break;
             }
+        }
+        protected void TurnOffOnButtonsAfterMeasure(bool status)
+        {
+            if (TheMeasureTool2DButton != null)
+            {
+                TheMeasureTool2DButton.interactable = status;
+            }
+            if (TheMeasureTool3DButton != null)
+            {
+                TheMeasureTool3DButton.interactable = status;
+            }
+            if (TheMovePanToolButton != null)
+            {
+                TheMovePanToolButton.interactable = status;
+            }
+            if (The2DRemoveLinesButton != null)
+            {
+                The2DRemoveLinesButton.interactable = status;
+            }
+            if (The3DRemoveLinesButton != null)
+            {
+                The3DRemoveLinesButton.interactable = status;
+            }
+            if (TheAttachButton != null)
+            {
+                TheAttachButton.interactable = status;
+            }
+            if (TheDetachButton != null)
+            {
+                TheDetachButton.interactable = status;
+            }
+            if (WorkBenchButton != null)
+            {
+                WorkBenchButton.interactable = status;
+            }
+            if (BluePrintButton != null)
+            {
+                BluePrintButton.interactable = status;
+            }
+            if (TheForwardZPlaneSlider != null)
+            {
+                //always disable the slider
+                TheForwardZPlaneSlider.interactable = false;
+            }
+            //no hanger button = always false
+            if (HangerButton != null)
+            {
+                HangerButton.interactable = false;
+            }
+            
         }
         protected void TurnOffOnButtons(bool status)
         {
@@ -251,28 +311,28 @@ namespace FuzzPhyte.Game.Samples
             {
                 The2DRemoveLinesButton.interactable = status;
             }
-            if(The3DRemoveLinesButton!= null)
+            if (The3DRemoveLinesButton != null)
             {
-                The3DRemoveLinesButton.interactable= status;
+                The3DRemoveLinesButton.interactable = status;
             }
-            if(TheAttachButton != null)
+            if (TheAttachButton != null)
             {
                 TheAttachButton.interactable = status;
             }
-            if(TheDetachButton != null)
+            if (TheDetachButton != null)
             {
                 TheDetachButton.interactable = status;
             }
-            if(WorkBenchButton != null)
+            if (WorkBenchButton != null)
             {
                 WorkBenchButton.interactable = status;
             }
-            if(TheForwardZPlaneSlider != null)
+            if (TheForwardZPlaneSlider != null)
             {
                 //always disable the slider
                 TheForwardZPlaneSlider.interactable = false;
             }
-            if(BluePrintButton != null)
+            if (BluePrintButton != null)
             {
                 BluePrintButton.interactable = status;
             }

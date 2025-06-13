@@ -1,8 +1,6 @@
 using FuzzPhyte.Tools.Connections;
 using UnityEngine;
 
-
-
 public class PartCheckerCollider : PartChecker
 {
     [Space]
@@ -53,7 +51,9 @@ public class PartCheckerCollider : PartChecker
             SetupColliderByScale();
         }
     }
-
+    /// <summary>
+    /// Called for Part Confirmation as well as Weld checks
+    /// </summary>
     public void UserEvaluatePart()
     {
         if (OtherDetails == null)
@@ -178,7 +178,11 @@ public class PartCheckerCollider : PartChecker
             OtherDetails = other.gameObject.GetComponent<PartChecker>();
             this.PartDataReference = other.gameObject.GetComponent<PartChecker>().PartDataReference;
             Debug.LogWarning($"Part has entered an answer collider, {OtherDetails.gameObject.name} with {other.gameObject.name} ");
-            UserEvaluatePart();
+            if (OtherDetails.PipeType == this.PipeType)
+            {
+                UserEvaluatePart();
+            }
+            
         }
     }
     public void OnTriggerExit(Collider other)

@@ -32,6 +32,19 @@ MonoBehaviour:
         - globalObjectIdString: GlobalObjectId_V1-2-15648cc8bef080847be50f436df88b49-1952052477-0
         - globalObjectIdString: GlobalObjectId_V1-2-15648cc8bef080847be50f436df88b49-1205377656-0
         - globalObjectIdString: GlobalObjectId_V1-2-15648cc8bef080847be50f436df88b49-246855856-0
+        - globalObjectIdString: GlobalObjectId_V1-2-15648cc8bef080847be50f436df88b49-1832524131-0
+        - globalObjectIdString: GlobalObjectId_V1-2-15648cc8bef080847be50f436df88b49-1670987328-0
+        - globalObjectIdString: GlobalObjectId_V1-2-15648cc8bef080847be50f436df88b49-161104223257314210-0
+        - globalObjectIdString: GlobalObjectId_V1-2-15648cc8bef080847be50f436df88b49-1923204598-0
+        - globalObjectIdString: GlobalObjectId_V1-2-15648cc8bef080847be50f436df88b49-1186692923-0
+        - globalObjectIdString: GlobalObjectId_V1-2-15648cc8bef080847be50f436df88b49-130686916-0
+        - globalObjectIdString: GlobalObjectId_V1-2-15648cc8bef080847be50f436df88b49-1611157215-0
+        - globalObjectIdString: GlobalObjectId_V1-2-15648cc8bef080847be50f436df88b49-2140329006-0
+        - globalObjectIdString: GlobalObjectId_V1-2-15648cc8bef080847be50f436df88b49-325944638-0
+        - globalObjectIdString: GlobalObjectId_V1-2-15648cc8bef080847be50f436df88b49-1357314162-0
+        - globalObjectIdString: GlobalObjectId_V1-2-15648cc8bef080847be50f436df88b49-390138003-0
+        - globalObjectIdString: GlobalObjectId_V1-2-15648cc8bef080847be50f436df88b49-2110928941-0
+        - globalObjectIdString: GlobalObjectId_V1-2-15648cc8bef080847be50f436df88b49-2037864447-0
         values:
         - colorIndex: 8
           iconNameOrGuid: 
@@ -87,6 +100,58 @@ MonoBehaviour:
           isColorRecursive: 0
         - colorIndex: 0
           iconNameOrGuid: Favorite
+          isIconRecursive: 0
+          isColorRecursive: 0
+        - colorIndex: 0
+          iconNameOrGuid: Canvas Icon
+          isIconRecursive: 1
+          isColorRecursive: 0
+        - colorIndex: 0
+          iconNameOrGuid: Rigidbody Icon
+          isIconRecursive: 1
+          isColorRecursive: 0
+        - colorIndex: 0
+          iconNameOrGuid: Rigidbody Icon
+          isIconRecursive: 1
+          isColorRecursive: 0
+        - colorIndex: 9
+          iconNameOrGuid: 
+          isIconRecursive: 0
+          isColorRecursive: 1
+        - colorIndex: 0
+          iconNameOrGuid: BoxCollider Icon
+          isIconRecursive: 0
+          isColorRecursive: 0
+        - colorIndex: 0
+          iconNameOrGuid: BoxCollider Icon
+          isIconRecursive: 0
+          isColorRecursive: 0
+        - colorIndex: 0
+          iconNameOrGuid: BoxCollider Icon
+          isIconRecursive: 0
+          isColorRecursive: 0
+        - colorIndex: 0
+          iconNameOrGuid: BoxCollider Icon
+          isIconRecursive: 0
+          isColorRecursive: 0
+        - colorIndex: 0
+          iconNameOrGuid: BoxCollider Icon
+          isIconRecursive: 0
+          isColorRecursive: 0
+        - colorIndex: 0
+          iconNameOrGuid: BoxCollider Icon
+          isIconRecursive: 0
+          isColorRecursive: 0
+        - colorIndex: 0
+          iconNameOrGuid: BoxCollider Icon
+          isIconRecursive: 0
+          isColorRecursive: 0
+        - colorIndex: 0
+          iconNameOrGuid: BoxCollider Icon
+          isIconRecursive: 0
+          isColorRecursive: 0
+        - colorIndex: 0
+          iconNameOrGuid: BoxCollider Icon
           isIconRecursive: 0
           isColorRecursive: 0
   bookmarks: []

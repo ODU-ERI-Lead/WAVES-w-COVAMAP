@@ -8,12 +8,11 @@ public class ConfirmHangerplacement : MonoBehaviour
 {
     [Tooltip("Main Hanger Objects in scene to be turned on/off")]
     public List<GameObject> AllHangerObjects = new List<GameObject>();
-    //public GameObject Promptpanel;
     protected int numberCorrect = 0;
     public float activationDistance = 5f;
     public FP_MeasureTool3D MeasureToolRef;
     public PFHangerPlacementTool HangerToolRef;
-    public UnityEvent AllHangersInPlace;
+   
     [Tooltip("If we want to clear measurements when the correct hanger is placed, set this to true.")]
     public bool ClearMeasurementsIfCorrectHanger = false;
     public FPGameManager_ToolExample GameManagerToolRef;
@@ -52,6 +51,7 @@ public class ConfirmHangerplacement : MonoBehaviour
     {
         OnConfirmPressed();
     }
+    #if UNITY_EDITOR
     [ContextMenu("Spawn all Hangers Now")]
     public void OverrideHangerPlacement()
     {
@@ -63,18 +63,19 @@ public class ConfirmHangerplacement : MonoBehaviour
             }
         }
         AllHangerObjects.Clear();
-        OnConfirmPressed();
+        HangersInPlace();
     }
+    #endif
     public void OnConfirmPressed()
     {
-        if(AllHangerObjects.Count == 0||MeasureToolRef==null || HangerToolRef==null)
+        if (AllHangerObjects.Count == 0 || MeasureToolRef == null || HangerToolRef == null)
         {
             Debug.Log("All hangers have already been activated.");
             //Promptpanel.SetActive(false);
             //if we are in the measurement phase we want to activate all of the other buttons
-            if(GameManagerToolRef.ReturnGameState== PipeFitterGameState.Measurements)
+            if (GameManagerToolRef.ReturnGameState == PipeFitterGameState.Measurements)
             {
-                GameManagerToolRef.UpdatePipeFitterState(PipeFitterGameState.Parts) ;
+                GameManagerToolRef.UpdatePipeFitterState(PipeFitterGameState.Parts);
             }
             return;
         }
@@ -95,7 +96,7 @@ public class ConfirmHangerplacement : MonoBehaviour
         //Vector3 endMeasuredPosition = MeasureToolRef.EndPosition;
         Vector3 endHangerPosition = HangerToolRef.ReturnLastEndPos;
         GameObject FoundHanger = null;
-        for(int i=0;i< AllHangerObjects.Count; i++)
+        for (int i = 0; i < AllHangerObjects.Count; i++)
         {
             float distance = Vector3.Distance(endHangerPosition, AllHangerObjects[i].transform.position);
             // Calculate the distance from mouse to hanger
@@ -110,12 +111,12 @@ public class ConfirmHangerplacement : MonoBehaviour
                 AllHangerObjects[i].SetActive(true);
 
                 Debug.Log("Activated Hanger: " + AllHangerObjects[i].name);
-                FoundHanger=AllHangerObjects[i];
-                if (ClearMeasurementsIfCorrectHanger && GameManagerToolRef!=null&& Tool3DReferenceObject!=null)
+                FoundHanger = AllHangerObjects[i];
+                if (ClearMeasurementsIfCorrectHanger && GameManagerToolRef != null && Tool3DReferenceObject != null)
                 {
                     GameManagerToolRef.UI3DToolRemoveLines(Tool3DReferenceObject);
                 }
-                if(ClearMeasurementsIfCorrectHanger && GameManagerToolRef!=null&& HangerReferenceObject != null)
+                if (ClearMeasurementsIfCorrectHanger && GameManagerToolRef != null && HangerReferenceObject != null)
                 {
                     GameManagerToolRef.UIRemoveHangerLines(HangerReferenceObject);
                 }
@@ -130,6 +131,11 @@ public class ConfirmHangerplacement : MonoBehaviour
         }
 
         AllHangerObjects.Remove(FoundHanger);
+        HangersInPlace();
+    }
+    
+    private void HangersInPlace()
+    {
         if (AllHangerObjects.Count == 0)
         {
             if (MeasureToolRef != null)
@@ -141,19 +147,19 @@ public class ConfirmHangerplacement : MonoBehaviour
             {
                 GameManagerToolRef.UpdatePipeFitterState(PipeFitterGameState.Parts);
             }
-            AllHangersInPlace.Invoke();
+            
+            GameManagerToolRef.OnMeasurementComplete.Invoke();
         }
-        //Promptpanel.SetActive(false);
     }
    // public UnityEvent AllHangersInPlace()
-   // {
+    // {
 
-   // }
-   // public delegate event AllHangersInPlace();
+    // }
+    // public delegate event AllHangersInPlace();
     public void NoConfirmPressed()
-    { 
+    {
         //Promptpanel.SetActive(false);
-    
+
     }
     public void ActivatePromptPanel()
     {
