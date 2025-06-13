@@ -59,7 +59,7 @@
         "com.fuzzphyte.utility": "https://github.com/jshull/FP_Utility.git",
         "com.fuzzphyte.ray": "https://github.com/jshull/FP_Ray.git"
       },
-      "hash": "727a3b064e08126f64997b0ff62f71ee0faff77f"
+      "hash": "e9c09630348f682d836ab555371c9b0c60f4aaa6"
     },
     "com.fuzzphyte.ui": {
       "version": "https://github.com/jshull/fp_ui.git",
@@ -80,7 +80,7 @@
         "com.unity.mathematics": "1.2.6",
         "com.unity.textmeshpro": "3.0.9"
       },
-      "hash": "ca46191ed763a76d51c01f348619925378e2f390"
+      "hash": "48fd523cc45c209ee5750b16190ab33920a80485"
     },
     "com.fuzzphyte.utility.analytics": {
       "version": "https://github.com/jshull/fp_utility_analytics.git",

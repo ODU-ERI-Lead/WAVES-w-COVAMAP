@@ -125,13 +125,13 @@ public class WorkAreaBenchUIManager : MonoBehaviour
         {
             //who are we moving?
             var listOfItems = MoveCutPartsRef.ReturnPartsToRotate();
-            Debug.LogError($"List of Items Count? {listOfItems.Count}");
+            //Debug.LogError($"List of Items Count? {listOfItems.Count}");
             if (listOfItems != null)
             {
                 for(int i=0; i < listOfItems.Count; i++)
                 {
                     var item = listOfItems[i];
-                    Debug.LogError($"Who am I? {item.name}");
+                    //Debug.LogError($"Who am I? {item.name}");
                     if (item.GetComponent<OrbitalRotationscript>())
                     {
 

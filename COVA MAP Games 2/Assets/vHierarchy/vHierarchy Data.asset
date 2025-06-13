@@ -29,6 +29,9 @@ MonoBehaviour:
         - globalObjectIdString: GlobalObjectId_V1-2-15648cc8bef080847be50f436df88b49-832787729-0
         - globalObjectIdString: GlobalObjectId_V1-2-15648cc8bef080847be50f436df88b49-499572907-0
         - globalObjectIdString: GlobalObjectId_V1-2-15648cc8bef080847be50f436df88b49-818964383-0
+        - globalObjectIdString: GlobalObjectId_V1-2-15648cc8bef080847be50f436df88b49-1952052477-0
+        - globalObjectIdString: GlobalObjectId_V1-2-15648cc8bef080847be50f436df88b49-1205377656-0
+        - globalObjectIdString: GlobalObjectId_V1-2-15648cc8bef080847be50f436df88b49-246855856-0
         values:
         - colorIndex: 8
           iconNameOrGuid: 
@@ -74,5 +77,17 @@ MonoBehaviour:
           iconNameOrGuid: 
           isIconRecursive: 0
           isColorRecursive: 1
+        - colorIndex: 2
+          iconNameOrGuid: Settings Icon
+          isIconRecursive: 0
+          isColorRecursive: 0
+        - colorIndex: 0
+          iconNameOrGuid: Favorite
+          isIconRecursive: 0
+          isColorRecursive: 0
+        - colorIndex: 0
+          iconNameOrGuid: Favorite
+          isIconRecursive: 0
+          isColorRecursive: 0
   bookmarks: []
   bookmarkedScenePaths: []

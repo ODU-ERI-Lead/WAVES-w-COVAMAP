@@ -8,6 +8,7 @@ TagManager:
   - PartCollider
   - PartConnectionPoint
   - ConnectionFixed
+  - PartMaleAdapter
   layers:
   - Default
   - TransparentFX

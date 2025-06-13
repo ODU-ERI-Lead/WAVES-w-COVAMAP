@@ -16,7 +16,44 @@ public class PartCheckerCollider : PartChecker
     [Range(0,1f)][Tooltip("Percentage of error allowed in length check, 0.1 = 10%")]
     public float ErrorRange = 0.1f;
     public bool IsPartRightLength = false;
+    [Header("Auto Adjust Box Collider")]
+    public bool DynamicAdjust = false;
+    public bool UseX = false;
+    public bool UseY = false;
+    public bool UseZ = false;
     
+    public void SetupColliderByScale()
+    {
+        var box = this.GetComponent<BoxCollider>();
+        if(box == null)
+        {
+            return;
+        }
+        if (UseX)
+        {
+            box.size = new Vector3(this.Length * MeterInchScale, MeterInchScale * 3, MeterInchScale * 3);
+            return;
+        }
+        if (UseY)
+        {
+            box.size = new Vector3(MeterInchScale * 3, this.Length * MeterInchScale, MeterInchScale * 3);
+            return;
+        }
+        if (UseZ)
+        {
+            box.size = new Vector3(MeterInchScale * 3, MeterInchScale * 3, this.Length * MeterInchScale);
+            return;
+        }
+    }
+   
+    public void Start()
+    {
+        if (DynamicAdjust)
+        {
+            SetupColliderByScale();
+        }
+    }
+
     public void UserEvaluatePart()
     {
         if (OtherDetails == null)
@@ -180,7 +217,7 @@ public class PartCheckerCollider : PartChecker
 
 
 
-        Debug.LogWarning("Part is within a answer collider.");
+       // Debug.LogWarning("Part is within a answer collider.");
     }
 
 

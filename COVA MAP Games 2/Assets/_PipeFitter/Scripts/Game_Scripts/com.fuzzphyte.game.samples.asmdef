@@ -14,7 +14,8 @@
         "com.fuzzphyte.tools",
         "com.fuzzphyte.tools.samples",
         "com.fuzzphyte.tools.connections",
-        "com.pipefitter.assembly"
+        "com.pipefitter.assembly",
+        ""
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

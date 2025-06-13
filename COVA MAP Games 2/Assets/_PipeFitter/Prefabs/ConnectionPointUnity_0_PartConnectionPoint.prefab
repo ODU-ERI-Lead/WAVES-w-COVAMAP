@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4446467107676056280}
   - component: {fileID: 1188616911157842732}
   m_Layer: 0
-  m_Name: ConnectionPointUnity_0
+  m_Name: ConnectionPointUnity_0_PartConnectionPoint
   m_TagString: PartConnectionPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

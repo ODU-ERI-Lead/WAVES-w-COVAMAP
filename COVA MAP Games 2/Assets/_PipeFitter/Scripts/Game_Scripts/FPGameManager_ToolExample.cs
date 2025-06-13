@@ -83,7 +83,7 @@ namespace FuzzPhyte.Game.Samples
             AllResetTools.AddRange(AllAttachTools);
             AllResetTools.AddRange(AllDetachTools);
             AllResetTools.AddRange(AllHangerTools);
-            Debug.LogError($"All Reset Tools List is now at {AllResetTools.Count} items in the list");
+            //Debug.LogError($"All Reset Tools List is now at {AllResetTools.Count} items in the list");
         }
         public override void FixedUpdate()
         {

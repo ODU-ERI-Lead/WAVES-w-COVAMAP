@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0596ba5a17ff6f7429965c6257fa932a, type: 3}
   m_Name: FemaleAdapter_LeftV
   m_EditorClassIdentifier: 
-  UniqueID: FAdapterRight
+  UniqueID: FAdapterLeft
+  ConnectionEndPrefab: {fileID: 1830916329416036123, guid: 45c2afeb939ccca4fb9533885c11a847, type: 3}
   connectionType: FAdapter
   width: 0.5
   ConnectionUnitOfMeasure: 10

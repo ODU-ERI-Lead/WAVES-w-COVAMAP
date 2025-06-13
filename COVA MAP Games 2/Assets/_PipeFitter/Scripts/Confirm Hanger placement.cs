@@ -1,25 +1,20 @@
 using FuzzPhyte.Tools.Samples;
-using FuzzPhyte.Tools;
-using FuzzPhyte.Utility;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 using System.Collections.Generic;
-using System.Linq;
 using FuzzPhyte.Game.Samples;
-using PipeFitter.Assembly;
+
 public class ConfirmHangerplacement : MonoBehaviour 
 {
-
-    public Button confirmButton;          
-    //public GameObject[] hangerObjects;
+    [Tooltip("Main Hanger Objects in scene to be turned on/off")]
     public List<GameObject> AllHangerObjects = new List<GameObject>();
-    public GameObject Promptpanel;
+    //public GameObject Promptpanel;
     protected int numberCorrect = 0;
     public float activationDistance = 5f;
     public FP_MeasureTool3D MeasureToolRef;
     public PFHangerPlacementTool HangerToolRef;
     public UnityEvent AllHangersInPlace;
+    [Tooltip("If we want to clear measurements when the correct hanger is placed, set this to true.")]
     public bool ClearMeasurementsIfCorrectHanger = false;
     public FPGameManager_ToolExample GameManagerToolRef;
     public GameObject Tool3DReferenceObject;
@@ -57,12 +52,25 @@ public class ConfirmHangerplacement : MonoBehaviour
     {
         OnConfirmPressed();
     }
+    [ContextMenu("Spawn all Hangers Now")]
+    public void OverrideHangerPlacement()
+    {
+        for(int i=0; i < AllHangerObjects.Count; i++)
+        {
+            if (AllHangerObjects[i] != null)
+            {
+                AllHangerObjects[i].SetActive(true);
+            }
+        }
+        AllHangerObjects.Clear();
+        OnConfirmPressed();
+    }
     public void OnConfirmPressed()
     {
         if(AllHangerObjects.Count == 0||MeasureToolRef==null || HangerToolRef==null)
         {
             Debug.Log("All hangers have already been activated.");
-            Promptpanel.SetActive(false);
+            //Promptpanel.SetActive(false);
             //if we are in the measurement phase we want to activate all of the other buttons
             if(GameManagerToolRef.ReturnGameState== PipeFitterGameState.Measurements)
             {
@@ -128,9 +136,14 @@ public class ConfirmHangerplacement : MonoBehaviour
             {
                 MeasureToolRef.OnMeasureToolEnding.RemoveListener(ActivatePromptPanel);
             }
+            //if we are in the measurement phase we want to activate all of the other buttons
+            if (GameManagerToolRef.ReturnGameState == PipeFitterGameState.Measurements)
+            {
+                GameManagerToolRef.UpdatePipeFitterState(PipeFitterGameState.Parts);
+            }
             AllHangersInPlace.Invoke();
         }
-        Promptpanel.SetActive(false);
+        //Promptpanel.SetActive(false);
     }
    // public UnityEvent AllHangersInPlace()
    // {
@@ -139,11 +152,11 @@ public class ConfirmHangerplacement : MonoBehaviour
    // public delegate event AllHangersInPlace();
     public void NoConfirmPressed()
     { 
-        Promptpanel.SetActive(false);
+        //Promptpanel.SetActive(false);
     
     }
     public void ActivatePromptPanel()
     {
-        Promptpanel.SetActive(true);
+        //Promptpanel.SetActive(true);
     }
 }
