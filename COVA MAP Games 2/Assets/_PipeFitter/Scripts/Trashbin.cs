@@ -12,6 +12,7 @@ public class Trashbin : MonoBehaviour
     public float ParticleSystemRunTime = 2f;
     private WaitForSecondsRealtime waitForDelayEffect;
     protected Coroutine vfxRunningCoroutine;
+    public Animator TrashBinAnimator;
 
     public void Start()
     {
@@ -61,5 +62,12 @@ public class Trashbin : MonoBehaviour
         yield return waitForDelayEffect;
         DeleteEffect.Stop();
         vfxRunningCoroutine = null; // Clear the reference to the coroutine
+    }
+    public void ActivateTrashBinAnimation()
+    {
+        if (TrashBinAnimator != null)
+        {
+            TrashBinAnimator.SetTrigger("TrashPart");
+        }
     }
 }

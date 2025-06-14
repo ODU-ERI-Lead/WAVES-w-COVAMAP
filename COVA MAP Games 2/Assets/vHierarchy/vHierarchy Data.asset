@@ -15,6 +15,7 @@ MonoBehaviour:
   sceneDatas_byGuid:
     keys:
     - 15648cc8bef080847be50f436df88b49
+    - 03c33caa57f63274f818c515c9617e0e
     values:
     - goDatas_byGlobalId:
         keys:
@@ -45,6 +46,9 @@ MonoBehaviour:
         - globalObjectIdString: GlobalObjectId_V1-2-15648cc8bef080847be50f436df88b49-390138003-0
         - globalObjectIdString: GlobalObjectId_V1-2-15648cc8bef080847be50f436df88b49-2110928941-0
         - globalObjectIdString: GlobalObjectId_V1-2-15648cc8bef080847be50f436df88b49-2037864447-0
+        - globalObjectIdString: GlobalObjectId_V1-2-15648cc8bef080847be50f436df88b49-519507270-0
+        - globalObjectIdString: GlobalObjectId_V1-2-15648cc8bef080847be50f436df88b49-1946872124-0
+        - globalObjectIdString: GlobalObjectId_V1-2-15648cc8bef080847be50f436df88b49-900520473-0
         values:
         - colorIndex: 8
           iconNameOrGuid: 
@@ -154,5 +158,25 @@ MonoBehaviour:
           iconNameOrGuid: BoxCollider Icon
           isIconRecursive: 0
           isColorRecursive: 0
+        - colorIndex: 0
+          iconNameOrGuid: WheelCollider Icon
+          isIconRecursive: 0
+          isColorRecursive: 0
+        - colorIndex: 0
+          iconNameOrGuid: WheelCollider Icon
+          isIconRecursive: 0
+          isColorRecursive: 0
+        - colorIndex: 0
+          iconNameOrGuid: Camera Icon
+          isIconRecursive: 0
+          isColorRecursive: 0
+    - goDatas_byGlobalId:
+        keys:
+        - globalObjectIdString: GlobalObjectId_V1-2-03c33caa57f63274f818c515c9617e0e-272178171-0
+        values:
+        - colorIndex: 3
+          iconNameOrGuid: 
+          isIconRecursive: 0
+          isColorRecursive: 1
   bookmarks: []
   bookmarkedScenePaths: []
