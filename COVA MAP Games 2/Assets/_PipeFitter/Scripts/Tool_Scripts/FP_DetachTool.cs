@@ -15,6 +15,7 @@ namespace FuzzPhyte.Tools.Samples
         protected ConnectionPointUnity selectedOtherItemCPU;
         public FP_AttachTool TheAttachTool;
         protected Vector3 worldSelectedLocation;
+        public LayerMask RaycastLayerMask;
         [SerializeField] protected RectTransform measurementParentSpace;
         public Transform ForwardPlaneLocation;
         public UnityEvent OnDetachToolActivated;
@@ -124,7 +125,7 @@ namespace FuzzPhyte.Tools.Samples
                     Debug.LogWarning($"Ray: {ray.origin} | {ray.direction}");
                     Debug.DrawRay(ray.origin, ray.direction * toolData.RaycastMax, FP_UtilityData.ReturnColorByStatus(SequenceStatus.Unlocked), 10f);
                     Debug.DrawRay(PointData.Item2, Vector3.up, Color.red, 9f);
-                    Physics.Raycast(ray, out potentialHit, toolData.RaycastMax);
+                    Physics.Raycast(ray, out potentialHit, toolData.RaycastMax,RaycastLayerMask);
 
                     if (potentialHit.collider != null) 
                     {

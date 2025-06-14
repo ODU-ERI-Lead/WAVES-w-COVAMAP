@@ -14,6 +14,10 @@ namespace FuzzPhyte.Tools.Samples
         protected ConnectionPointUnity selectedItemCPU;
         protected ConnectionPointUnity selectedOtherItemCPU;
         protected Vector3 worldSelectedLocation;
+        public Vector3 ReturnWorldSelectLocation { get => worldSelectedLocation; }
+        public delegate void AttachToolEvents (Vector3 location);
+        public event AttachToolEvents AttachToolSuccess;
+       
         public LayerMask RaycastLayerMask;
         
         [SerializeField] protected RectTransform measurementParentSpace;
@@ -232,6 +236,7 @@ namespace FuzzPhyte.Tools.Samples
 
                                 // Apply it to your object
                                 //spawnedVisual.transform.rotation = rotation;
+                                AttachToolSuccess?.Invoke(worldSelectedLocation);
                                 spawnedVisual.transform.rotation = selectedItemCPU.transform.rotation;
                                 spawnedVisual.name = "AttachedVisual_";
                                 AllAttachedVisuals.Add(selectedItemCPU,spawnedVisual);
