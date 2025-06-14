@@ -14,6 +14,7 @@ namespace FuzzPhyte.Tools.Samples
         protected ConnectionPointUnity selectedItemCPU;
         protected ConnectionPointUnity selectedOtherItemCPU;
         protected Vector3 worldSelectedLocation;
+        public LayerMask RaycastLayerMask;
         
         [SerializeField] protected RectTransform measurementParentSpace;
         
@@ -128,8 +129,8 @@ namespace FuzzPhyte.Tools.Samples
                     Debug.LogWarning($"Ray: {ray.origin} | {ray.direction}");
                     Debug.DrawRay(ray.origin, ray.direction * toolData.RaycastMax, FP_UtilityData.ReturnColorByStatus(SequenceStatus.Unlocked), 10f);
                     Debug.DrawRay(PointData.Item2, Vector3.up, Color.red, 9f);
-                    Physics.Raycast(ray, out potentialHit, toolData.RaycastMax);
-
+                   
+                    Physics.Raycast(ray, out potentialHit, toolData.RaycastMax, RaycastLayerMask);
                     if (potentialHit.collider != null) 
                     {
                         Debug.LogWarning($"ATTACH TOOL | Potential Hit: {potentialHit.collider.gameObject.name}");
@@ -149,7 +150,8 @@ namespace FuzzPhyte.Tools.Samples
                                     {
                                         selectedOtherItemCPU = cpu.OtherAlignedPoint;
                                         selectedItemCPU = cpu;
-                                        worldSelectedLocation = potentialHit.point;
+                                        //worldSelectedLocation = potentialHit.point;
+                                        worldSelectedLocation = selectedItemCPU.transform.position;
                                         Debug.LogWarning($"We are good! | {selectedItemCPU.gameObject.name} is aligned with {selectedOtherItemCPU.gameObject.name}");
                                         OnAttachToolDown.Invoke();
                                         if (UseTool())
@@ -215,6 +217,22 @@ namespace FuzzPhyte.Tools.Samples
                             if(!AllAttachedVisuals.ContainsKey(selectedItemCPU))
                             {
                                 var spawnedVisual = GameObject.Instantiate(toolData.AttachVisual, worldSelectedLocation, Quaternion.identity);
+                                //spawnedVisual comes in with 
+                                //var forwardVector = selectedItemCPU.transform.position + selectedItemCPU.transform.TransformDirection(selectedItemCPU.ConnectionPointData.localForward).normalized;
+                                //check rotation of selectedItemCPU parent
+                                // Calculate a corresponding forward direction (orthogonal to right)
+                                //Vector3 up = Vector3.up; // or use transform.up if you want to preserve local orientation
+                                //Vector3 forward = Vector3.Cross(up, forwardVector).normalized;
+
+                                // Recalculate up in case it was not perfectly perpendicular
+                                //up = Vector3.Cross(forwardVector, forward).normalized;
+
+                                // Construct rotation
+                                //Quaternion rotation = Quaternion.LookRotation(forward, up);
+
+                                // Apply it to your object
+                                //spawnedVisual.transform.rotation = rotation;
+                                spawnedVisual.transform.rotation = selectedItemCPU.transform.rotation;
                                 spawnedVisual.name = "AttachedVisual_";
                                 AllAttachedVisuals.Add(selectedItemCPU,spawnedVisual);
                             }

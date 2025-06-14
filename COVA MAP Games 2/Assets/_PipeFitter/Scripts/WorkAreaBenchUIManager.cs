@@ -24,15 +24,18 @@ public class WorkAreaBenchUIManager : MonoBehaviour
     public Button MAdapterButton;
     public Button FAdapterButton;
     public Button ValveButton;
+    
     private WaitForEndOfFrame waitforEndFrame = new WaitForEndOfFrame();
     [Space]
     public MoveCutParts MoveCutPartsRef;
     public PipeFitterMouseCutter MouseCutterRef;
     protected List<Button> allPartsButtons = new List<Button>();
+    
     public void OnEnable()
     {
         MouseCutterRef.OnFininshedCutting += MouseCutterRef_OnFininshedCutting;
         StartCoroutine(YieldASecond());
+        
     }
 
     private void MouseCutterRef_OnFininshedCutting()
@@ -122,13 +125,13 @@ public class WorkAreaBenchUIManager : MonoBehaviour
         {
             //who are we moving?
             var listOfItems = MoveCutPartsRef.ReturnPartsToRotate();
-            Debug.LogError($"List of Items Count? {listOfItems.Count}");
+            //Debug.LogError($"List of Items Count? {listOfItems.Count}");
             if (listOfItems != null)
             {
                 for(int i=0; i < listOfItems.Count; i++)
                 {
                     var item = listOfItems[i];
-                    Debug.LogError($"Who am I? {item.name}");
+                    //Debug.LogError($"Who am I? {item.name}");
                     if (item.GetComponent<OrbitalRotationscript>())
                     {
 
@@ -174,6 +177,7 @@ public class WorkAreaBenchUIManager : MonoBehaviour
         CutButton.interactable = false;
         SendToWorkButton.interactable = false;
         RotationButton.interactable = false;
+        
     }
     /// <summary>
     /// called from the home button on the work bench area (NOT THE BLUE PRINT HOME)
@@ -189,7 +193,7 @@ public class WorkAreaBenchUIManager : MonoBehaviour
     /// <summary>
     /// Must reference this from the coming out of blue print button
     /// </summary>
-    public void ComingBackFromBluePrint()
+    public void UIComingBackFromBluePrint()
     {
         switch (CurrentUIState){
             case StateOfUITool.Cutting:
@@ -236,7 +240,6 @@ public class WorkAreaBenchUIManager : MonoBehaviour
         if (notMe != null)
         {
             notMe.interactable = notMeState;
-        }
-        
+        }   
     }
 }

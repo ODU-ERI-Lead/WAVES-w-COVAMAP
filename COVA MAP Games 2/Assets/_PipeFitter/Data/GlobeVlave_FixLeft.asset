@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: GlobeVlave_FixLeft
   m_EditorClassIdentifier: 
   UniqueID: aspih3iu9f7
+  ConnectionEndPrefab: {fileID: 4831853964990894609, guid: 6b9650d703a508f418a8cfef69bc982c, type: 3}
   connectionType: GlobeValve
   width: 0.5
   ConnectionUnitOfMeasure: 10
@@ -27,7 +28,7 @@ MonoBehaviour:
   - {x: 0, y: -90, z: 0}
   AngleTolerance: 30
   InitAlignmentTolerance: 20
-  TriggerTagCompare: PartConnectionPoint
+  TriggerTagCompare: PartMaleAdapter
   PercentOfMeasure: 0.2
   localConnectors:
   - {x: 0, y: 0.6, z: 0}

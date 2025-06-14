@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: Elbow_left
   m_EditorClassIdentifier: 
   UniqueID: 1uriabkfb122345
+  ConnectionEndPrefab: {fileID: 1830916329416036123, guid: 45c2afeb939ccca4fb9533885c11a847, type: 3}
   connectionType: Elbow
   width: 0.5
   ConnectionUnitOfMeasure: 10
   localForward: {x: -1, y: 0, z: 0}
   TriggerSize: {x: 0.02, y: 0.02, z: 0.02}
-  TriggerCenter: {x: -0.012, y: 0, z: 0}
+  TriggerCenter: {x: -0.00875, y: 0, z: 0}
   LocalRelativePivotPosition: {x: -0.0175, y: 0, z: 0}
   localRotationAngles:
   - {x: 0, y: 0, z: -90}

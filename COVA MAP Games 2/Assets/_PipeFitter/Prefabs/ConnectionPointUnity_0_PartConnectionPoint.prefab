@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 3226424010135874951}
   - component: {fileID: 4446467107676056280}
   - component: {fileID: 1188616911157842732}
-  m_Layer: 0
-  m_Name: ConnectionPointUnity_0
+  m_Layer: 26
+  m_Name: ConnectionPointUnity_0_PartConnectionPoint
   m_TagString: PartConnectionPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,10 +75,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1830916329416036123}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}

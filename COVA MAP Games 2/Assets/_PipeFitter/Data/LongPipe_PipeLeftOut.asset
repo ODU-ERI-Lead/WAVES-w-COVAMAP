@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: LongPipe_PipeLeftOut
   m_EditorClassIdentifier: 
   UniqueID: QnVsa01pbml8UGlwZUxlZnRPdXR8MSwwLDAsMQ==
+  ConnectionEndPrefab: {fileID: 1830916329416036123, guid: 45c2afeb939ccca4fb9533885c11a847, type: 3}
   connectionType: LeftPipeCPU
   width: 0.5
   ConnectionUnitOfMeasure: 10

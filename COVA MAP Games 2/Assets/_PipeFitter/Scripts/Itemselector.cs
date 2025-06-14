@@ -6,16 +6,15 @@ public class Itemselector : MonoBehaviour
     public LayerMask SelectableLayer;
     private PipefitterpartData pipefitterpartData;
     private FinalInspectionScript FinalInspectionScript;
-
-    //potential item slect call to use.
-    //public void SelectThisItem()
-    // {
-    //    lastSelected = gameObject;
-    //    Debug.Log("Selected item: " + lastSelected.name);
-    // }
+    public bool UseSelectorCaster = false;
+    
 
     void Update()
     {
+        if (!UseSelectorCaster)
+        {
+            return;
+        }
         if (Input.GetMouseButtonDown(0)) // Left-click
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
