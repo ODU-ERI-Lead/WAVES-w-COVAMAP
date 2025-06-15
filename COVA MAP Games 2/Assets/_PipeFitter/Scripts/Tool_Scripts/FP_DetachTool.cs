@@ -22,6 +22,9 @@ namespace FuzzPhyte.Tools.Samples
         public UnityEvent OnDetachToolDown;
         public UnityEvent OnDetachToolDownError;
         public UnityEvent OnDetachToolUp;
+        public UnityEvent OnDetachToolDeactivated;
+        public delegate void DetachToolEvents(Vector3 location);
+        public event DetachToolEvents DetachToolSuccess;
         public void Start()
         {
             if (measurementParentSpace==null)
@@ -45,6 +48,7 @@ namespace FuzzPhyte.Tools.Samples
                 if (!LoopTool)
                 {
                     //we do want to turn off ToolIsCurrent
+                    OnDetachToolDeactivated.Invoke();
                     ToolIsCurrent = false;
                 }
                 return true;
@@ -71,6 +75,7 @@ namespace FuzzPhyte.Tools.Samples
             if (base.ForceDeactivateTool())
             {
                 ToolIsCurrent = false;
+                OnDetachToolDeactivated.Invoke();
                 return true;
             }
             return false;
@@ -210,6 +215,7 @@ namespace FuzzPhyte.Tools.Samples
                         {
                             Debug.LogWarning($"Detach was a success and it's been removed");
                             OnDetachToolUp.Invoke();
+                            DetachToolSuccess?.Invoke(worldSelectedLocation);
                         }
                         if(UnlockSuccess)
                         {

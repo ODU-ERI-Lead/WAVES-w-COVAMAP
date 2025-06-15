@@ -1,8 +1,5 @@
 using UnityEngine;
 using FuzzPhyte.Tools.Connections;
-using UnityEditor.EditorTools;
-
-
 
 public enum PartType
 {

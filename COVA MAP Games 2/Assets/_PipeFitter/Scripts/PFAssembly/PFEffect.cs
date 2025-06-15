@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using System.Collections.Generic;
 using System.Collections;
+
 namespace PipeFitter.Assembly
 {
     public enum PEffectState
@@ -31,6 +32,12 @@ namespace PipeFitter.Assembly
         protected Vector3 endLocation;
         public List<ParticleSystem> Effects = new List<ParticleSystem>();
         public List<AudioSource> AudioSources = new List<AudioSource>();
+        public Animator AnimatorEffect;
+        public string AnimationTriggerName = "StartEffect";
+        [Header("Unity Events")]
+        public UnityEvent OnToolEffectActivated;
+        public UnityEvent OnToolEffectDeactivated;
+        public UnityEvent OnEffectsStarted;
         public UnityEvent OnEffectsFinished;
         protected Coroutine effectDelayRoutine;
         protected bool effectActive;
@@ -38,7 +45,15 @@ namespace PipeFitter.Assembly
         {
             EffectDelay = new WaitForSeconds(TimeForEvent);
             TimeToMoveDelay = new WaitForSeconds(TimeToMoveToLocation);
-            startLocation = RootEffectPivot.transform.position;
+            if (RootEffectPivot != null)
+            {
+                startLocation = RootEffectPivot.transform.position;
+            }
+            
+            if (FirstPersonObjectRef != null)
+            {
+                FirstPersonObjectRef.SetActive(false);
+            }
         }
         public virtual void OnEnable()
         {
@@ -60,17 +75,14 @@ namespace PipeFitter.Assembly
             effectActive = true;
             RootEffectPivot.SetActive(true);
             EffectState = PEffectState.MovingToLocation;
-            if (WorldObjectRef != null)
-            {
-                WorldObjectRef.SetActive(false);
-            }
+            
             if (effectDelayRoutine != null)
             {
                 StopCoroutine(effectDelayRoutine);
                 StopEffect();
                 effectDelayRoutine = null;
             }
-           
+            OnEffectsStarted.Invoke();
             effectDelayRoutine = StartCoroutine(TimeDelayEndEffect());
         }
         public void StopEffect() 
@@ -106,10 +118,6 @@ namespace PipeFitter.Assembly
             OnEffectsFinished.Invoke();
             effectActive = false;
             RootEffectPivot.SetActive(false);
-            if (WorldObjectRef != null)
-            {
-                WorldObjectRef.SetActive(true);
-            }
             //RootEffectPivot.transform.position = startLocation;
         }
         /// <summary>
@@ -121,6 +129,11 @@ namespace PipeFitter.Assembly
             {
                 FirstPersonObjectRef.SetActive(true);
             }
+            if (WorldObjectRef != null)
+            {
+                WorldObjectRef.SetActive(false);
+            }
+            OnToolEffectActivated.Invoke();
         }
         public void ToolDeactivated()
         {
@@ -128,6 +141,11 @@ namespace PipeFitter.Assembly
             {
                 FirstPersonObjectRef.SetActive(false);
             }
+            if (WorldObjectRef != null)
+            {
+                WorldObjectRef.SetActive(true);
+            }
+            OnToolEffectDeactivated.Invoke();
         }
         public void Update()
         {
@@ -149,6 +167,10 @@ namespace PipeFitter.Assembly
                     case PEffectState.Active:
                         RootEffectPivot.transform.position = endLocation;
                         movingTime = 0;
+                        if (AnimatorEffect != null)
+                        {
+                            AnimatorEffect.SetTrigger(AnimationTriggerName);
+                        }
                         break;
                     case PEffectState.Finishing:
                         var finRatio = (float)movingTime / TimeToMoveToLocation;

@@ -1,19 +1,21 @@
 using UnityEngine;
 using FuzzPhyte.Tools.Samples;
+using FuzzPhyte.Tools.Connections;
 namespace PipeFitter.Assembly
 {
     public class PFMoveObjectEffect : PFEffect
     {
         [Space]
         [Header("Specific Tool Effect")]
-        public FP_AttachTool ToolReference;
+        public FP_PanMove ToolReference;
 
         public override void OnEnable()
         {
             base.OnEnable();
             if (ToolReference != null)
             {
-                ToolReference.AttachToolSuccess += GotToolData;
+                ToolReference.OnToolActivatedUnityEvent.AddListener(ToolActivated);
+                ToolReference.OnToolDeactivatedUnityEvent.AddListener(ToolDeactivated);
             }
         }
         public override void OnDisable()
@@ -21,13 +23,11 @@ namespace PipeFitter.Assembly
             base.OnDisable();
             if (ToolReference != null)
             {
-                ToolReference.AttachToolSuccess -= GotToolData;
+                ToolReference.OnToolActivatedUnityEvent.RemoveListener(ToolActivated);
+                ToolReference.OnToolDeactivatedUnityEvent.RemoveListener(ToolDeactivated);
             }
         }
 
-        public void GotToolData(Vector3 worldStartLocation)
-        {
-            RunEffect(worldStartLocation);
-        }
+       
     }
 }

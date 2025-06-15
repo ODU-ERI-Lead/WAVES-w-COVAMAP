@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine.AI;
 using JetBrains.Annotations;
+using UnityEngine.Events;
 public class PipeFitterMouseCutter : CutterBehaviour
 {
     public LineRenderer LR => GetComponent<LineRenderer>();
@@ -24,6 +25,7 @@ public class PipeFitterMouseCutter : CutterBehaviour
     private Vector3 _topOfBladePt;
     private Vector3 _from;
     private Vector3 _to;
+    public Vector3 MousePointPosition { get => _to; }
     private bool _isDragging;
     private Plane cachedCuttingPlane;
     [Tooltip("Make sure to drop in the length pipe part")]
@@ -38,7 +40,7 @@ public class PipeFitterMouseCutter : CutterBehaviour
     public delegate void GetCutPart(GameObject CutpartLeft, GameObject GetCutPartaRight);
     public static event GetCutPart RetrievePartsFromCut;
     public delegate void CutPipeLength();
-   
+    public UnityEvent CutEvent;
 
     public void Start()
     {
@@ -75,6 +77,7 @@ public class PipeFitterMouseCutter : CutterBehaviour
         if (Input.GetMouseButtonUp(0) && _isDragging)
         {
             _isDragging = false;
+            CutEvent.Invoke();
             Cut();
         }
     }

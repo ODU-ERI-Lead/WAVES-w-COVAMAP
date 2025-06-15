@@ -6,6 +6,7 @@ namespace PipeFitter.Assembly
     {
         public GameObject InitialDecal;
         public GameObject FinalDecal;
+        
         public void SetupHangerDecals()
         {
             FinalDecal.SetActive(false);

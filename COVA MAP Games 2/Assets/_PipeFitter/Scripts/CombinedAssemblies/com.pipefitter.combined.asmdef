@@ -1,0 +1,18 @@
+{
+    "name": "com.pipefitter.combined",
+    "rootNamespace": "PipeFitter.Combined",
+    "references": [
+        "GUID:f9add48b8a817fc4c98fefeebfe5dda7",
+        "GUID:02fa78ba1c248408dae081291790ad6a",
+        "GUID:4df93153155ff4009aa472b5dc6f4f46"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

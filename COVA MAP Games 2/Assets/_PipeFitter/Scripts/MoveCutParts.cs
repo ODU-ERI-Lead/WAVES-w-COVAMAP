@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using FuzzPhyte.Tools.Connections;
-using VInspector.Libs;
 
 public class MoveCutParts : MonoBehaviour
 {

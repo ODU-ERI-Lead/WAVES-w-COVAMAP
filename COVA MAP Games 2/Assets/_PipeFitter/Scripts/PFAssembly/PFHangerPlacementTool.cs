@@ -18,8 +18,12 @@ public class PFHangerPlacementTool : FP_Tool<PFHangerData>, IFPUIEventListener<F
     [SerializeField] protected List<PFHangerSetup> hangerDecals = new List<PFHangerSetup>();
     [SerializeField] protected PFHangerSetup currentHanger;
     [Space]
+    public UnityEvent OnHangerToolActivated;
+    public UnityEvent OnHangerToolDeactivated;
     public UnityEvent OnHangerToolClickedDown;
     public UnityEvent OnHangerToolClickedRelease;
+    public delegate void OnHangerToolClickedLocation(Vector3 location);
+    public event OnHangerToolClickedLocation ClickedDown;
    
     [Header("Additional Details")]
     public Transform ForwardPlaneLocation;
@@ -32,6 +36,7 @@ public class PFHangerPlacementTool : FP_Tool<PFHangerData>, IFPUIEventListener<F
             {
                 //we do want to turn off ToolIsCurrent
                 ToolIsCurrent = false;
+                OnHangerToolDeactivated.Invoke();
             }
             return true;
         }
@@ -48,6 +53,7 @@ public class PFHangerPlacementTool : FP_Tool<PFHangerData>, IFPUIEventListener<F
         {
             ToolIsCurrent = true;
             OnHangerToolClickedDown.Invoke();
+            OnHangerToolActivated.Invoke();
             return true;
         }
         Debug.LogWarning($"Didn't activate the tool?");
@@ -59,6 +65,7 @@ public class PFHangerPlacementTool : FP_Tool<PFHangerData>, IFPUIEventListener<F
         if (base.ForceDeactivateTool())
         {
             ToolIsCurrent = false;
+            OnHangerToolDeactivated.Invoke();
             return true;
         }
         return false;
@@ -201,6 +208,7 @@ public class PFHangerPlacementTool : FP_Tool<PFHangerData>, IFPUIEventListener<F
                 }
                 
                 OnHangerToolClickedRelease.Invoke();
+                ClickedDown?.Invoke(PointData.Item2);
                 DeactivateTool();
             }
         }

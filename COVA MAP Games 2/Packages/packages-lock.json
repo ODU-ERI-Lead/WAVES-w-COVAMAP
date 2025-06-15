@@ -8,9 +8,9 @@
         "com.fuzzphyte.utility": "https://github.com/JShull/FP_Utility.git",
         "com.fuzzphyte.utility.edu": "https://github.com/JShull/FP_Utility_EDU.git",
         "com.fuzzphyte.ui": "https://github.com/JShull/FP_UI.git",
-        "com.unity.textmeshpro": "3.0.6"
+        "com.unity.textmeshpro": "3.0.9"
       },
-      "hash": "79c233fb783eb500b95c3cd5c118795f75bd7faa"
+      "hash": "e72596e58c332244ccb08daf0e09a78bc89ac744"
     },
     "com.fuzzphyte.game": {
       "version": "https://github.com/jshull/fp_game.git",
@@ -70,7 +70,7 @@
         "com.unity.ugui": "2.0.0",
         "com.unity.inputsystem": "1.11.2"
       },
-      "hash": "84c427a8b6a53799ca9633d8a4ae9bb98089f42f"
+      "hash": "8c59743e2e5401f4d53626ec3918c44ff7fc55d7"
     },
     "com.fuzzphyte.utility": {
       "version": "https://github.com/jshull/fp_utility.git",
@@ -80,7 +80,7 @@
         "com.unity.mathematics": "1.2.6",
         "com.unity.textmeshpro": "3.0.9"
       },
-      "hash": "48fd523cc45c209ee5750b16190ab33920a80485"
+      "hash": "fdff09f1a7a21af61208875250822bced2a0d6c7"
     },
     "com.fuzzphyte.utility.analytics": {
       "version": "https://github.com/jshull/fp_utility_analytics.git",

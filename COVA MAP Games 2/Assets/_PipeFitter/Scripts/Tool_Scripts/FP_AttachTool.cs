@@ -27,6 +27,7 @@ namespace FuzzPhyte.Tools.Samples
         public UnityEvent OnAttachToolDown;
         public UnityEvent OnAttachToolDownError;
         public UnityEvent OnAttachToolUp;
+        public UnityEvent OnAttachToolDeactivated;
         public Dictionary<ConnectionPointUnity,GameObject> AllAttachedVisuals = new Dictionary<ConnectionPointUnity, GameObject>();
         
         public void Start()
@@ -54,6 +55,7 @@ namespace FuzzPhyte.Tools.Samples
                 {
                     //we do want to turn off ToolIsCurrent
                     ToolIsCurrent = false;
+                    OnAttachToolDeactivated.Invoke();
                 }
                 return true;
             }
@@ -79,6 +81,7 @@ namespace FuzzPhyte.Tools.Samples
             if (base.ForceDeactivateTool())
             {
                 ToolIsCurrent = false;
+                OnAttachToolDeactivated.Invoke();
                 return true;
             }
             return false;

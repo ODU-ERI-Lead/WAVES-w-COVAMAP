@@ -13,7 +13,9 @@ namespace PipeFitter.Assembly
             base.OnEnable();
             if (ToolReference != null) 
             {
-                ToolReference.AttachToolSuccess += GotToolData;
+                ToolReference.AttachToolSuccess += RunEffect;
+                ToolReference.OnAttachToolActivated.AddListener(ToolActivated);
+                ToolReference.OnAttachToolDeactivated.AddListener(ToolDeactivated);
             }
         }
         public override void OnDisable()
@@ -21,13 +23,11 @@ namespace PipeFitter.Assembly
             base.OnDisable();
             if (ToolReference != null)
             {
-                ToolReference.AttachToolSuccess -= GotToolData;
+                ToolReference.AttachToolSuccess -= RunEffect;
+                ToolReference.OnAttachToolActivated.RemoveListener(ToolActivated);
+                ToolReference.OnAttachToolDeactivated.RemoveListener(ToolDeactivated);
             }
         }
 
-        public void GotToolData(Vector3 worldStartLocation)
-        {
-            RunEffect(worldStartLocation);
-        }
     }
 }

@@ -1,8 +1,8 @@
 using FuzzPhyte.Tools.Samples;
 using UnityEngine;
-using UnityEngine.Events;
 using System.Collections.Generic;
 using FuzzPhyte.Game.Samples;
+using UnityEngine.Events;
 
 public class ConfirmHangerplacement : MonoBehaviour 
 {
@@ -12,12 +12,14 @@ public class ConfirmHangerplacement : MonoBehaviour
     public float activationDistance = 5f;
     public FP_MeasureTool3D MeasureToolRef;
     public PFHangerPlacementTool HangerToolRef;
-   
+    [Tooltip("This is an invisible object")]
+    public GameObject ShellHangerItem;
     [Tooltip("If we want to clear measurements when the correct hanger is placed, set this to true.")]
     public bool ClearMeasurementsIfCorrectHanger = false;
     public FPGameManager_ToolExample GameManagerToolRef;
     public GameObject Tool3DReferenceObject;
     public GameObject HangerReferenceObject;
+    public UnityEvent AllHangersConfirmedFireOnce;
     public void OnEnable()
     {
         if (MeasureToolRef != null)
@@ -109,7 +111,14 @@ public class ConfirmHangerplacement : MonoBehaviour
             if (distance <= activationDistance)
             {
                 AllHangerObjects[i].SetActive(true);
-
+                if (ShellHangerItem != null)
+                {
+                    if (ShellHangerItem.GetComponent<PFHangerShell>())
+                    {
+                        ShellHangerItem.GetComponent<PFHangerShell>().HangerPlaced(AllHangerObjects[i].transform.position);
+                    }
+                }
+                
                 Debug.Log("Activated Hanger: " + AllHangerObjects[i].name);
                 FoundHanger = AllHangerObjects[i];
                 if (ClearMeasurementsIfCorrectHanger && GameManagerToolRef != null && Tool3DReferenceObject != null)
@@ -147,7 +156,7 @@ public class ConfirmHangerplacement : MonoBehaviour
             {
                 GameManagerToolRef.UpdatePipeFitterState(PipeFitterGameState.Parts);
             }
-            
+            AllHangersConfirmedFireOnce.Invoke();
             GameManagerToolRef.OnMeasurementComplete.Invoke();
         }
     }

@@ -173,8 +173,8 @@ MonoBehaviour:
   m_UVBias: {x: 0, y: 0}
   m_DecalLayerMask: 1
   m_ScaleMode: 0
-  m_Offset: {x: 0, y: 0, z: 0.01}
-  m_Size: {x: 0.04, y: 0.04, z: 0.05}
+  m_Offset: {x: 0, y: 0, z: 0.0059999996}
+  m_Size: {x: 0.025, y: 0.03, z: 0.03}
   m_FadeFactor: 1
 --- !u!1 &7294495212466176919
 GameObject:

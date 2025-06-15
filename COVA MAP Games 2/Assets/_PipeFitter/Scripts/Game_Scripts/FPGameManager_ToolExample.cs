@@ -63,7 +63,6 @@ namespace FuzzPhyte.Game.Samples
         public UnityEvent TurnOffOnStart;
         protected bool useUnityEventsPlane;
 
-
         [SerializeField]protected PipeFitterGameState pfGameState;
         public PipeFitterGameState ReturnGameState { get { return pfGameState; } }
        

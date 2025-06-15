@@ -6,7 +6,7 @@ namespace FuzzPhyte.Game.Samples
     public class FPGame_BootStrap_ToolExample:FPBootStrapper<FPGameManagerExampleData>
     {
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
-        public static new void InitializeAfterAwake()
+        public static void InitializeExampleAfterAwake()
         {
             Debug.LogWarning($"Running the FPGame Bootstrap Example! {Time.time} and {Time.frameCount}");
             var gameManagerSystems = Object.FindObjectsByType<FPGameManager_ToolExample>(FindObjectsSortMode.None).ToList();
