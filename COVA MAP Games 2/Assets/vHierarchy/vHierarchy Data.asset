@@ -55,6 +55,10 @@ MonoBehaviour:
         - globalObjectIdString: GlobalObjectId_V1-2-15648cc8bef080847be50f436df88b49-634968252-0
         - globalObjectIdString: GlobalObjectId_V1-2-15648cc8bef080847be50f436df88b49-670279715-0
         - globalObjectIdString: GlobalObjectId_V1-2-15648cc8bef080847be50f436df88b49-310877630-0
+        - globalObjectIdString: GlobalObjectId_V1-2-15648cc8bef080847be50f436df88b49-818891865-0
+        - globalObjectIdString: GlobalObjectId_V1-2-15648cc8bef080847be50f436df88b49-1571243621-0
+        - globalObjectIdString: GlobalObjectId_V1-2-15648cc8bef080847be50f436df88b49-1343502626-0
+        - globalObjectIdString: GlobalObjectId_V1-2-15648cc8bef080847be50f436df88b49-707780990-0
         values:
         - colorIndex: 8
           iconNameOrGuid: 
@@ -199,6 +203,22 @@ MonoBehaviour:
         - colorIndex: 0
           iconNameOrGuid: Canvas Icon
           isIconRecursive: 1
+          isColorRecursive: 0
+        - colorIndex: 0
+          iconNameOrGuid: CapsuleCollider Icon
+          isIconRecursive: 1
+          isColorRecursive: 0
+        - colorIndex: 8
+          iconNameOrGuid: 
+          isIconRecursive: 0
+          isColorRecursive: 1
+        - colorIndex: 0
+          iconNameOrGuid: AudioSource Icon
+          isIconRecursive: 0
+          isColorRecursive: 0
+        - colorIndex: 7
+          iconNameOrGuid: 
+          isIconRecursive: 0
           isColorRecursive: 0
     - goDatas_byGlobalId:
         keys:

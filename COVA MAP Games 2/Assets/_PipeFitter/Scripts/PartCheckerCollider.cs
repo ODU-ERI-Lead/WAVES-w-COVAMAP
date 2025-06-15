@@ -1,5 +1,6 @@
 using FuzzPhyte.Tools.Connections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PartCheckerCollider : PartChecker
 {
@@ -11,45 +12,64 @@ public class PartCheckerCollider : PartChecker
     public PartCheckerSystem CorrectPart;
     public PartCheckerSystem CorrectLength;
     public PartCheckerSystem CorrectlyWelded;
+    public UnityEvent OnFirstCorrectPartPlacedEvent;
+    /// <summary>
+    /// this is a way for us to temp cache if we have the right part, if we do we kick out other trigger enters if we don't we accept other trigger enters
+    /// </summary>
+    [SerializeField] protected bool tempCorrectPartType = false;
+    private bool unityFiredEvent = false;
     [Range(0,1f)][Tooltip("Percentage of error allowed in length check, 0.1 = 10%")]
     public float ErrorRange = 0.1f;
     public bool IsPartRightLength = false;
+    public bool IsPartCorrect = false;
     [Header("Auto Adjust Box Collider")]
     public bool DynamicAdjust = false;
+    [Tooltip("3 Works for most of our pipe settings-change to 1 for elbow/adapters")]
+    public float WidthScaleValue = 3f;
     public bool UseX = false;
     public bool UseY = false;
     public bool UseZ = false;
-    
-    public void SetupColliderByScale()
-    {
-        var box = this.GetComponent<BoxCollider>();
-        if(box == null)
-        {
-            return;
-        }
-        if (UseX)
-        {
-            box.size = new Vector3(this.Length * MeterInchScale, MeterInchScale * 3, MeterInchScale * 3);
-            return;
-        }
-        if (UseY)
-        {
-            box.size = new Vector3(MeterInchScale * 3, this.Length * MeterInchScale, MeterInchScale * 3);
-            return;
-        }
-        if (UseZ)
-        {
-            box.size = new Vector3(MeterInchScale * 3, MeterInchScale * 3, this.Length * MeterInchScale);
-            return;
-        }
-    }
-   
+    [SerializeField] protected int connectionsWelded = 0;
+
+
+
     public void Start()
     {
         if (DynamicAdjust)
         {
             SetupColliderByScale();
         }
+    }
+    public void SetupColliderByScale()
+    {
+        var box = this.GetComponent<BoxCollider>();
+        if (box == null)
+        {
+            return;
+        }
+        if(UseX && UseY)
+        {
+            box.size = new Vector3(this.Length * MeterInchScale, this.Length * MeterInchScale, MeterInchScale * WidthScaleValue);
+        }
+        else
+        {
+            if (UseX)
+            {
+                box.size = new Vector3(this.Length * MeterInchScale, MeterInchScale * WidthScaleValue, MeterInchScale * WidthScaleValue);
+                return;
+            }
+            if (UseY)
+            {
+                box.size = new Vector3(MeterInchScale * WidthScaleValue, this.Length * MeterInchScale, MeterInchScale * WidthScaleValue);
+                return;
+            }
+            if (UseZ)
+            {
+                box.size = new Vector3(MeterInchScale * WidthScaleValue, MeterInchScale * WidthScaleValue, this.Length * MeterInchScale);
+                return;
+            }
+        }
+        
     }
     /// <summary>
     /// Called for Part Confirmation as well as Weld checks
@@ -65,6 +85,13 @@ public class PartCheckerCollider : PartChecker
         if (OtherDetails.PipeType == this.PipeType)
         {
             CorrectPart?.Invoke(this);
+            IsPartCorrect = true;
+            if (!unityFiredEvent)
+            {
+                OnFirstCorrectPartPlacedEvent.Invoke();
+                unityFiredEvent = true;
+
+            }
             switch (this.PipeType)
             {
                 case PartType.StraightPipe:
@@ -94,8 +121,19 @@ public class PartCheckerCollider : PartChecker
                     break;
             }
         }
+        else
+        {
+            IsPartCorrect = false;
+        }
 
-
+        //WeldCheck();
+       
+    }
+    /// <summary>
+    /// Called on Inspection for Weld Check by Part Collider
+    /// </summary>
+    public bool WeldCheck()
+    {
         //weld checks here
         if (PartDataReference != null)
         {
@@ -111,25 +149,35 @@ public class PartCheckerCollider : PartChecker
                     {
                         //IsPartiallyConnected
                         //ConnectionPairs
-                        int connectionsWelded = 0;
+                        connectionsWelded = 0;
                         //hows our left look - are we somewhat welded?
-                        if (PartDataReference.ConnectionPairs.ContainsKey(leftEdge))
+                        if (PartDataReference.MyConnectionPoints.Contains(leftEdge))
                         {
-                            if (PartDataReference.ConnectionPairs[leftEdge].IsPartiallyConnected)
+                            //get left edge out of my lsit
+                            //get edge state of parent ConnectionPart
+                            var alignedPoint = PartDataReference.MyConnectionPoints[PartDataReference.MyConnectionPoints.IndexOf(leftEdge)].OtherAlignedPoint;
+                            if(alignedPoint != null)
                             {
-                                connectionsWelded += 1;
+                                if (alignedPoint.TheConnectionPart.CurrentState == FuzzPhyte.Utility.FPToolState.Locked)
+                                {
+                                    connectionsWelded += 1;
+                                }
                             }
                         }
                         //hows our right look are we somewhat welded?
-                        if (PartDataReference.ConnectionPairs.ContainsKey(rightEdge))
+                        if (PartDataReference.MyConnectionPoints.Contains(rightEdge))
                         {
-                            if (PartDataReference.ConnectionPairs[rightEdge].IsPartiallyConnected)
+                            var alignedPoint = PartDataReference.MyConnectionPoints[PartDataReference.MyConnectionPoints.IndexOf(rightEdge)].OtherAlignedPoint;
+                            if (alignedPoint != null)
                             {
-                                connectionsWelded += 1;
+                                if (alignedPoint.TheConnectionPart.CurrentState == FuzzPhyte.Utility.FPToolState.Locked)
+                                {
+                                    connectionsWelded += 1;
+                                }
                             }
                         }
                         //is the part we have on us somewhat welded?
-                        if (PartDataReference.IsPartiallyConnected)
+                        if (PartDataReference.CurrentState == FuzzPhyte.Utility.FPToolState.Locked)
                         {
                             connectionsWelded += 1;
                         }
@@ -138,33 +186,19 @@ public class PartCheckerCollider : PartChecker
                             ///basically we are welded except for one extreme case
 
                             CorrectlyWelded?.Invoke(this);
+                            return true;
                         }
                     }
                 }
             }
         }
+        return false;
     }
-    /*
-    public void OnCollisionEnter(Collision collision)
-    {
-        Debug.LogWarning($"Collision information  {collision.collider.name}");
-        if (this.PartDataReference != null)
-        {
-            return;
-        }
-        if (collision.gameObject.GetComponent<PartChecker>())
-        {
-            OtherDetails = collision.gameObject.GetComponent<PartChecker>();
-            this.PartDataReference = collision.gameObject.GetComponent<PartChecker>().PartDataReference;
-        }
-        Debug.LogWarning("Part has entered an answer collider.");
-        UserEvaluatePart();
-    }
-    */
+    
     public void OnTriggerEnter(Collider other)
     {
         
-        if (this.PartDataReference != null)
+        if (this.PartDataReference != null&&tempCorrectPartType)
         {
             return;
         }
@@ -177,10 +211,15 @@ public class PartCheckerCollider : PartChecker
             //Debug.LogError($"Trigger information  {other.gameObject.name}");
             OtherDetails = other.gameObject.GetComponent<PartChecker>();
             this.PartDataReference = other.gameObject.GetComponent<PartChecker>().PartDataReference;
-            Debug.LogWarning($"Part has entered an answer collider, {OtherDetails.gameObject.name} with {other.gameObject.name} ");
+            //Debug.LogWarning($"Part has entered an answer collider, {OtherDetails.gameObject.name} with {other.gameObject.name} ");
             if (OtherDetails.PipeType == this.PipeType)
             {
                 UserEvaluatePart();
+                tempCorrectPartType = true;
+            }
+            else
+            {
+                tempCorrectPartType = false;
             }
             
         }
@@ -193,36 +232,8 @@ public class PartCheckerCollider : PartChecker
             {
                 OtherDetails = null;
                 this.PartDataReference = null;
-                Debug.LogWarning("Part has left an answer collider.");
+                //Debug.LogWarning("Part has left an answer collider.");
             }
         }
-        
     }
-/*
-    public void OnCollisionExit(Collision collision)
-    {
-        if (this.PartDataReference != null && collision.gameObject.GetComponent<PartChecker>())
-        {
-            if (collision.gameObject.GetComponent<PartChecker>().PartDataReference == this.PartDataReference)
-            {
-                OtherDetails = null;
-                this.PartDataReference = null;
-            }
-        }
-        Debug.LogWarning("Part has left an answer collider.");
-    }
-*/
-
-    public void OnCollisionStay(Collision collision)
-    {
-
-
-
-
-
-
-       // Debug.LogWarning("Part is within a answer collider.");
-    }
-
-
 }

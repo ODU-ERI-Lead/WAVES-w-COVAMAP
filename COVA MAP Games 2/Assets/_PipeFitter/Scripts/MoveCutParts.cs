@@ -16,6 +16,7 @@ public class MoveCutParts : MonoBehaviour
     [SerializeField]
     protected bool partsOnBench = false;
     public bool SendMainPartOnly = true;
+    public AudioSource CantMoveAudio;
 
 
     public void OnEnable()
@@ -124,7 +125,16 @@ public class MoveCutParts : MonoBehaviour
         if (OtherPart != null)
         {
             //other part
-            MovePart(OtherPart.transform, OtherPartsSpawner);
+            var status = MovePart(OtherPart.transform, OtherPartsSpawner);
+            if (!status)
+            {
+                //destroy it
+                Destroy(OtherPart.gameObject);
+                if (CantMoveAudio != null)
+                {
+                    CantMoveAudio.Play();
+                }
+            }
             partsOnBench = false;
             OtherPart = null;
         }
@@ -138,10 +148,23 @@ public class MoveCutParts : MonoBehaviour
             {
                 Transform root1 = GetRoot(CutPart1.transform);
                 Transform root2 = GetRoot(CutPart2.transform);
-                MovePart(root1, OtherPartsSpawner);
+                var status =MovePart(root1, OtherPartsSpawner);
+                if (!status)
+                {
+                    Destroy(root1.gameObject);
+                    if (CantMoveAudio != null)
+                    {
+                        CantMoveAudio.Play();
+                    }
+                }
                 if (!SendMainPartOnly)
                 {
-                    MovePart(root2, OtherPartsSpawner);
+                    var statusSecond = MovePart(root2, OtherPartsSpawner);
+                    if (!statusSecond)
+                    {
+                        Destroy(root2.gameObject);
+                        
+                    }
                 }
                 else
                 {
@@ -174,7 +197,7 @@ public class MoveCutParts : MonoBehaviour
     /// </summary>
     /// <param name="partToMove"></param>
     /// <param name="spawner"></param>
-    protected void MovePart(Transform partToMove, Partspawnerscript spawner)
+    protected bool MovePart(Transform partToMove, Partspawnerscript spawner)
     {
         //john using new grid system
         if (spawner.MyGridSystem != null)
@@ -184,17 +207,18 @@ public class MoveCutParts : MonoBehaviour
             {
                 partToMove.position = movedLocation;
                 StartCoroutine(DelayClearConnectionPart(partToMove));
+                return true;
             }
             else
             {
                 Debug.LogWarning($"Could not move {partToMove.name} to the grid system, no available bin found.");
-                return;
+                return false;
             }
         }
         else
         {
             Debug.LogError($"Missing a grid System referenced for the spawner");
-            return;
+            return false;
         }
         /*
             AssemblyAreaSpawn.transform.position = spawner.GetSpawnLocation();
