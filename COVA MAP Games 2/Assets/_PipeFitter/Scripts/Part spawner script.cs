@@ -30,6 +30,8 @@ public class Partspawnerscript : MonoBehaviour
     public event PartSpawned FAdapterSpawned;
     public event PartSpawned PipeSpawned;
     public GridSpawnSystem MyGridSystem;
+    protected GameObject lastSpawnedItem;
+    public GameObject ReturnLastSpawnedItem { get => lastSpawnedItem; }
 
     public void Start()
     {
@@ -45,32 +47,32 @@ public class Partspawnerscript : MonoBehaviour
     public void SpawnElbow()
     {
         //someValue = condition ? newValue : someOtherValue;
-        var item = Instantiate(ElbowPrefab, TestHorizontalChange ? GetSpawnLocation() : SpawnPoint.position, Quaternion.identity);
-        ElbowSpawned?.Invoke(item);
+        lastSpawnedItem = Instantiate(ElbowPrefab, TestHorizontalChange ? GetSpawnLocation() : SpawnPoint.position, Quaternion.identity);
+        ElbowSpawned?.Invoke(lastSpawnedItem);
     }
 
     public void SpawnValve()
     {
-        var item = Instantiate(ValvePrefab, TestHorizontalChange ? GetSpawnLocation() : SpawnPoint.position, Quaternion.identity);
-        ValveSpawned?.Invoke(item);
+        lastSpawnedItem = Instantiate(ValvePrefab, TestHorizontalChange ? GetSpawnLocation() : SpawnPoint.position, Quaternion.identity);
+        ValveSpawned?.Invoke(lastSpawnedItem);
     }
 
     public void SpawnPipe()
     {
-        var item = Instantiate(PipePrefab, TestHorizontalChange ? GetSpawnLocation() : SpawnPoint.position, Quaternion.identity);
-        PipeSpawned?.Invoke(item);
+        lastSpawnedItem = Instantiate(PipePrefab, TestHorizontalChange ? GetSpawnLocation() : SpawnPoint.position, Quaternion.identity);
+        PipeSpawned?.Invoke(lastSpawnedItem);
     }
 
     public void SpawnFemaleAdapter()
     {
-        var item = Instantiate(FemaleAdapterPrefab, TestHorizontalChange ? GetSpawnLocation() : SpawnPoint.position, Quaternion.identity);
-        FAdapterSpawned?.Invoke(item);
+        lastSpawnedItem = Instantiate(FemaleAdapterPrefab, TestHorizontalChange ? GetSpawnLocation() : SpawnPoint.position, Quaternion.identity);
+        FAdapterSpawned?.Invoke(lastSpawnedItem);
     }
 
     public void SpawnMaleAdapter()
     {
-        var item = Instantiate(MaleAdapterPrefab, TestHorizontalChange ? GetSpawnLocation() : SpawnPoint.position, Quaternion.identity);
-        MAdapterSpawned?.Invoke(item);
+        lastSpawnedItem = Instantiate(MaleAdapterPrefab, TestHorizontalChange ? GetSpawnLocation() : SpawnPoint.position, Quaternion.identity);
+        MAdapterSpawned?.Invoke(lastSpawnedItem);
     }
     [Obsolete("We shouldn't use this anymore")]
     public Vector3 GetSpawnLocation()
