@@ -4,12 +4,14 @@ using System.Collections;
 using UnityEngine;
 using System;
 using System.Collections.Generic;
-using UnityEngine.AI;
-using JetBrains.Annotations;
+using System.Linq;
 using UnityEngine.Events;
+
 public class PipeFitterMouseCutter : CutterBehaviour
 {
     public LineRenderer LR => GetComponent<LineRenderer>();
+    public Partspawnerscript ThePartSpawner;
+    //protected Scene thisScene;
     public float BladeLength = 2;
     public float BladeWidth = 0.002f;
     public float ZForwardDistanceLineRendererOffCam;
@@ -34,6 +36,7 @@ public class PipeFitterMouseCutter : CutterBehaviour
     public GameObject EmptyParentShell;
     public Camera CutCam;
     public Transform CutpartspawnTransform;
+    [SerializeField] protected GameObject partToCut;
     // delegate attempt one for getting children to be moved
     public delegate void CutStateEvents();
     public event CutStateEvents OnFininshedCutting;
@@ -44,7 +47,9 @@ public class PipeFitterMouseCutter : CutterBehaviour
 
     public void Start()
     {
-      
+#if UNITY_WEBGL
+        UseAsync = false;
+#endif
     }
     protected override void Update()
     {
@@ -55,15 +60,6 @@ public class PipeFitterMouseCutter : CutterBehaviour
         {
             _isDragging = true;
         }
-            /*
-            if (Input.GetMouseButtonDown(0))
-            {
-                _isDragging = true;
-
-                var mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane + 0.05f);
-                _from = Camera.main.ScreenToWorldPoint(mousePos);
-            }
-            */
         if (_isDragging)
         {
             DrawCutTool(ToolAboutToCutColor);
@@ -85,6 +81,22 @@ public class PipeFitterMouseCutter : CutterBehaviour
     {
         base.OnEnable();
         _isDragging = false;
+        //force it to null
+        partToCut = null;
+        FindPartToCut();
+        //thisScene = SceneManager.GetActiveScene();
+        //UnityEngine.SceneManagement.SceneManager.SetActiveScene(thisScene);
+    }
+    
+    protected void PartSpawnedForMeToCut(GameObject passedPart)
+    {
+        partToCut = passedPart;
+    }
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+        _isDragging = false;
+        DrawCutTool(ToolOnColor, false);
     }
     protected override void CreateGameObjects(Info info)
     {
@@ -372,7 +384,7 @@ public class PipeFitterMouseCutter : CutterBehaviour
             }
         }
     }
-    private void DrawCutTool(Color currentColor)
+    private void DrawCutTool(Color currentColor, bool visualStatus=true)
     {
         var mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, CutCam.nearClipPlane + ZForwardDistanceLineRendererOffCam);
         _to = CutCam.ScreenToWorldPoint(mousePos);
@@ -380,35 +392,85 @@ public class PipeFitterMouseCutter : CutterBehaviour
         //assuming we are facing Z here with this one
         _topOfBladePt = _to + new Vector3(0, 0, -1f);
 
-        VisualizeLine(true, _to, _endBladePt,currentColor);
+        VisualizeLine(visualStatus, _to, _endBladePt,currentColor);
     }
 
     private void Cut()
     {
         Plane plane = new Plane(_endBladePt, _to, _topOfBladePt);
         cachedCuttingPlane = plane;
-        var roots = UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects();
-        foreach (var root in roots)
+        //Debug.LogError($"Cached cutting plane information, End Blade Pt: {_endBladePt.ToString()}, To Point: {_to.ToString()} and the top of the blade pt {_topOfBladePt.ToString()}");
+        if (partToCut == null)
         {
-            if (!root.activeInHierarchy)
-                continue;
-            var targets = root.GetComponentsInChildren<MeshTarget>();
-            foreach (var target in targets)
+            FindPartToCut();
+        }
+        if (partToCut != null)
+        {
+            //Debug.LogError($"Part to cut isn't null! {partToCut.gameObject.name} was found");
+            
+            var targets = partToCut.GetComponentsInChildren<MeshTarget>();
+            //Debug.LogError($"Target Size Return = {targets.Length}");
+            for (int i = 0; i < targets.Length; i++) 
             {
+                var target = targets[i];
                 Cut(target, _to, plane.normal, null, OnCreated);
+            }
+
+                //set it to null no matter what the outcome is here
+                partToCut = null;
+        }
+        else
+        {
+            Debug.LogError($"Part to Cut was null");
+        }
+
+    }
+    /// <summary>
+    /// way to identify our part to cut, that it's straight pipe 
+    /// </summary>
+    private void FindPartToCut()
+    {
+        if (partToCut == null)
+        {
+            //go to the source
+            var tempPartToCut = ThePartSpawner.ReturnLastSpawnedItem;
+            if (tempPartToCut.GetComponent<ConnectionPart>())
+            {
+                if (tempPartToCut.GetComponent<ConnectionPart>().ColliderParent.GetChild(0) != null)
+                {
+                    if (tempPartToCut.GetComponent<ConnectionPart>().ColliderParent.GetChild(0).GetComponent<PartChecker>() != null)
+                    {
+                        if (tempPartToCut.GetComponent<ConnectionPart>().ColliderParent.GetChild(0).GetComponent<PartChecker>().PipeType == PartType.StraightPipe)
+                        {
+                            partToCut = tempPartToCut;
+                        }
+                    }
+                }
             }
         }
     }
-
+    //OLD CUT SEARCH STUFF
+    //var roots = UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects();
+    /*foreach (var root in roots)
+    //{
+     //   if (!root.activeInHierarchy)
+     //       continue;
+     //   var targets = root.GetComponentsInChildren<MeshTarget>();
+     //   foreach (var target in targets)
+      //  {
+      //      Cut(target, _to, plane.normal, null, OnCreated);
+      //  }
+    }
+    */
     void OnCreated(Info info, MeshCreationData cData)
     {
-        //see if it works here delete if need be, postcut tht is.
-        //post cut does work here but same issue as before, collider and connection do not move on cut. unslash if need be
-      //  GameObject CutPartLeft = cData.CreatedObjects[0];
-      //  GameObject CutPartRight = cData.CreatedObjects[1];
+    //see if it works here delete if need be, postcut tht is.
+    //post cut does work here but same issue as before, collider and connection do not move on cut. unslash if need be
+    //  GameObject CutPartLeft = cData.CreatedObjects[0];
+    //  GameObject CutPartRight = cData.CreatedObjects[1];
         MeshCreation.TranslateCreatedObjects(info, cData.CreatedObjects, cData.CreatedTargets, Separation);
-      //  PostCut(CutPartLeft, CutPartRight);
-      //  Debug.Log("Should have ran and invked post cut parts should be assigned");
+    //  PostCut(CutPartLeft, CutPartRight);
+    //  Debug.Log("Should have ran and invked post cut parts should be assigned");
     }
     private void VisualizeLine(bool value, Vector3 startPt,Vector3 endPt, Color lineColor )
     {
@@ -442,7 +504,7 @@ public class PipeFitterMouseCutter : CutterBehaviour
         OnFininshedCutting?.Invoke();
     }
 
-   
+
     //delete right side of cut pipe then transform to assembly area 
     public void PostCutMove(Info info, int childIndex)
     {
@@ -450,8 +512,6 @@ public class PipeFitterMouseCutter : CutterBehaviour
         // childIndex           ;
         // GeneratePipeFromPart
         // StartCoroutine(GeneratePipeFromPart())
-      //  var cutpipepart = GetComponent < childIndex(0) >;
+        //  var cutpipepart = GetComponent < childIndex(0) >;
     }
-
-
 }
