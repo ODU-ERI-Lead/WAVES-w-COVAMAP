@@ -232,6 +232,8 @@ public class PartCheckerCollider : PartChecker
             {
                 OtherDetails = null;
                 this.PartDataReference = null;
+                tempCorrectPartType = false;
+                IsPartCorrect = false;
                 //Debug.LogWarning("Part has left an answer collider.");
             }
         }
